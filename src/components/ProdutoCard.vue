@@ -1,8 +1,10 @@
 <template>
   <div class="produto-card">
-    <div class="nome">{{produto.nome}}</div>
-    <div class="fabricante">by {{produto.fabricante}}</div>
-    <div class="preco">{{precoProcessado}}</div>
+    <img :src="categoriaImage" :alt="produto.categoria" :title="produto.categoria" class="logo">
+    <div class="title">{{produto.nome}}</div>
+    <div class="subtitle">by {{produto.fabricante}}</div>
+    <div v-if="produto.disponivel" class="footer">{{`R$ ${produto.preco.toFixed(2)}`}}</div>
+    <div v-else class="footer discreet">Produto não disponível</div>
   </div>
 </template>
 
@@ -13,30 +15,46 @@ export default {
     produto: Object
   },
   computed: {
-    precoProcessado () {
-      return `R\$ ${this.produto.preco.toFixed(2)}`
+    categoriaImage () {
+      if (this.produto.categoria === 'Medicamentos') return require('../assets/medicamentos.png')
+      if (this.produto.categoria === 'Cosméticos') return require('../assets/cosmeticos.png')
+      if (this.produto.categoria === 'Alimentos') return require('../assets/alimentos.png')
+      if (this.produto.categoria === 'Higiene pessoal') return require('../assets/higiene-pessoal.png')
     }
   }
-}    
+}
 </script>
 
 <style lang="scss" scoped>
 .produto-card {
-  border: 1px solid #eee;
-  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #ddd;
+  margin-bottom: 1rem;
+  padding: .5rem;
   font-size: 1.3rem;
   width: 23%;
-}
-.nome {
-  color: #06b1d3;
-}
-.fabricante {
-  color: #999;
-  font-size: .9rem;
-}
-.preco {
-  font-size: 1.3rem;
-  color: #555;
-  margin-top: 1rem;
+  .logo {
+    margin: auto;
+    margin-bottom: 1rem;
+  }
+  .title {
+    color: #06b1d3;
+  }
+  .subtitle {
+    color: #999;
+    font-size: .9rem;
+  }
+  .footer {
+    font-size: 1.3rem;
+    color: #555;
+    margin-top: 1rem;
+    align-self: flex-end;
+  }
+  .discreet {
+    font-size: 1rem;
+    color: #bbb;
+  }
 }
 </style>
