@@ -31,6 +31,7 @@ nav button {
 	font-size: 1rem;
 	border-radius: 5px;
 	outline: none;
+	cursor: pointer;
 }
 </style>
 
