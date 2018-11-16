@@ -1,0 +1,84 @@
+* {
+    box-sizing: border-box;
+}
+
+body{
+    margin: 0;
+}
+
+input {
+    width: 100%;
+}
+
+input[type=text], input[type=password]{
+    padding: 12px;
+    border: 1px llL  solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+input[type=text]:focus {
+    border: 3px solid rgb(44, 117, 165);
+}
+
+input[type=submit] {
+    background-color: rgb(106, 131, 214);
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+}
+
+input[type=submit]:hover {
+    background-color: rgb(87, 108, 177);
+}
+
+.col-25 {
+    float: left;
+    width: 25%;
+    margin-top: 6px;
+}
+
+.col-75 {
+    float: left;
+    width: 75%;
+    margin-top: 6px;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.loginForm{
+    grid-area: loginForm;
+    background-color: brown;
+    
+}
+
+.header{
+    grid-area: header;
+    background-color: gray;
+}
+.footer{
+    grid-area: footer;
+    background-color: yellowgreen;
+}
+
+.container{
+    display: grid;
+    grid-template-columns: [left-column] 25% [mid-column-1] 50% [mid-column-2] 25% [right-column];
+    grid-template-rows: [top-row] 12.5% [row-1] 22.5% [row-2] 30% [row-3] 22.5% [row-4] 12.5% [botton-row];
+    align-content: stretch;
+    grid-template-areas: 
+        "header header header"
+        ". . ."
+        ". loginForm ."
+        ". . ."
+        "footer footer footer"
+}
+
+
