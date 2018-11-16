@@ -1,2 +1,1 @@
-release: npm install --only=dev
-release: npm run build
+release: npm install --only=dev; npm run build
