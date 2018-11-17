@@ -1,39 +1,25 @@
 <template>
-  <div id="modal" class="modal">
+  <div id="lotForm" class="modal">
     <div class="modal-content">
       <div class="form-cadastro">
         <form>
           <fieldset>
-            <legend>Dados do produto</legend>
-            <label>Preencha os dados a seguir para cadastrar um novo produto:</label>
-            <label for="field1">
-              <span>Nome <span class="required">*</span></span>
+            <legend>Dados do lote</legend>
+            <label>Preencha os dados a seguir para cadastrar um novo lote:</label>
+            <label for="nome">
+              <span>Produto <span class="required">*</span></span>
               <input type="text" class="input-field" name="nome" value=""/>
             </label>
-            <label for="field2">
-              <span>Código de barras <span class="required">*</span></span>
-              <input type="number" class="input-field" name="codigo" value=""/>
+            <label for="validade">
+              <span>Data de validade <span class="required">*</span></span>
+              <input type="date" class="input-field" name="validade" value=""/>
             </label>
-            <label for="field3">
-              <span>Fabricante <span class="required">*</span></span>
-              <input type="text" class="input-field" name="field3" value=""/>
+            <label for="qtdItens">
+              <span>Quantidade de itens <span class="required">*</span></span>
+              <input type="number" class="input-field" name="qtdItens" value=""/>
             </label>
-            <label for="field4">
-              <span>Categoria <span class="required">*</span></span>
-              <select name="categorias" class="select-field">
-                <option value="medicamento">Medicamentos</option>
-                <option value="higiene">Higiene pessoal</option>
-                <option value="comestico">Cosméticos</option>
-                <option value="alimento">Alimentos</option>
-              </select>
-            </label>
-            <label for="field5">
-              <span>Disponível em estoque? </span>
-              <input type="radio" name="disponivel" value="sim" checked>Sim
-              <input type="radio" name="disponivel" value="nao">Não
-            </label>
-            <button @click="cadastrarProduto()" class="btn-confirmar">Adicionar</button>
-            <p @click="fecharModal()" class="cancel">Cancelar</p>
+            <button @click="registerLot()" class="btn-confirm">Adicionar</button>
+            <p @click="closeForm()" class="btn-cancel">Cancelar</p>
           </fieldset>
         </form>
       </div>
@@ -43,14 +29,15 @@
 
 <script>
 export default {
-  name: 'FormProduct',
+  name: 'LotsForm',
   methods: {
-    cadastrarProduto () {
+    registerLot () {
       alert('Cadastrado com sucesso')
+      closeForm()
     },
 
-    fecharModal () {
-      var modal = document.getElementById('modal')
+    closeForm () {
+      var modal = document.getElementById('lotForm')
       modal.style.display = 'none'
     }
   }
@@ -103,10 +90,11 @@ div {
   }
   label {
     display: block;
-    margin-bottom: 10px;
+    margin-top: 15px;
     & > span {
       float: left;
-      width: 170px;
+      width: 30%;
+      min-width: 150px;
       color: var(--principal-color);
       font-weight: 600;
     }
@@ -115,20 +103,16 @@ div {
 
 .form-cadastro input[type="text"],
 .form-cadastro input[type="number"],
-.form-cadastro select {
+.form-cadastro input[type="date"] {
   border-radius: 5px;
   border: 1px solid var(--principal-color);
   outline: none;
   background: #fff;
   padding: 5px 10px;
-  width: 100%;
+  width: 70%;
 }
 
-.form-cadastro input[type="radio"] {
-  margin: 0 10px;
-}
-
-.btn-confirmar {
+.btn-confirm {
   background: var(--principal-color);
   border: 1px solid var(--principal-color);
   margin-top: 30px;
@@ -144,7 +128,7 @@ div {
   }
 }
 
-.cancel {
+.btn-cancel {
   color: #999;
   float: right;
   text-decoration: underline;
