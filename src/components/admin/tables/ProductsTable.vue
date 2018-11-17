@@ -8,7 +8,6 @@
           <th>#</th>
           <th>Nome</th>
           <th>Fabricante</th>
-          <th>Disponível</th>
           <th>Categoria</th>
           <th>Preço (R$)</th>
         </tr>
@@ -18,7 +17,6 @@
           <td>{{ produto.codigo }}</td>
           <td>{{ produto.nome }}</td>
           <td>{{ produto.fabricante }}</td>
-          <td>{{ produto.disponivel ? 'Em estoque' : 'Em falta'}}</td>
           <td>{{ produto.categoria }}</td>
           <td>{{ produto.preco }}</td>
         </tr>
@@ -38,10 +36,9 @@ export default {
       icons,
       produtos: [
         {
-          nome: 'Produto1qwepworpowieroiopiwpro',
+          nome: 'Produto1',
           codigo: 1234,
           fabricante: 'Fab1',
-          disponivel: false,
           categoria: 'Medicamentos',
           preco: 20.0
         },
@@ -49,7 +46,6 @@ export default {
           nome: 'Produto2',
           codigo: 1235,
           fabricante: 'Fab3',
-          disponivel: true,
           categoria: 'Higiene pessoal',
           preco: 30.0
         },
@@ -57,7 +53,6 @@ export default {
           nome: 'Produto3',
           codigo: 1236,
           fabricante: 'Fab1',
-          disponivel: false,
           categoria: 'Cosméticos',
           preco: 10.0
         }
