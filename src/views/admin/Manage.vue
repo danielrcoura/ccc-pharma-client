@@ -57,6 +57,8 @@ export default {
   color: #888;
   font-size: .9rem;
   font-weight: bold;
+  cursor: pointer;
+  outline: none;
 }
 
 .icon {

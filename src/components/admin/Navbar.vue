@@ -5,6 +5,7 @@
       <ul>
         <a href="#"><li>Dashboard</li></a>
         <a href="#"><li>Produtos</li></a>
+        <a href="#"><li>Lotes</li></a>
         <a href="#"><li>Vendas</li></a>
       </ul>
     </nav>

@@ -1,6 +1,7 @@
 <template>
   <div class="navbar">
     <img src="../../assets/logo.svg" alt="" class="logo">
+    <div style="font-family: monospace; font-size: 1.5rem; color: #999;">Saúde e sustentabilidade</div>
     <nav>
       <a href=""><button>Login</button></a>
     </nav>

@@ -71,25 +71,27 @@ div {
 table {
   border-collapse: collapse;
   width: 100%;
-  margin: 0 30px;
   thead {
-    border-bottom: 1px solid #999;
+    border-bottom: 1px solid #ddd;
   }
   th {
     font-weight: normal;
     color: #999;
+    padding: .5rem 0;
+    font-size: .9rem;
   }
   td {
     color: #666;
+    padding: 1rem 0;
+  }
+  tbody tr:hover {
+    cursor: pointer;
+    background: #e4e4e4;
   }
 }
 
 table th, table td {
   text-align: left;
-  padding: 1rem 0;
 }
 
-tr:nth-child(even) {
-  background: var(--light-blue);
-}
 </style>
