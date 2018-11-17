@@ -1,5 +1,8 @@
  <template>
   <div>
+    <header>
+      <navbar/>
+    </header>
     <form-product/>
     <button class="btn-cadastrar" @click="mostrarFormCadastrar()">{{icons.plus}} Adicionar produto</button>
     <products-table/>
@@ -7,6 +10,7 @@
 </template>
 
 <script>
+import Navbar from '@/components/admin/Navbar'
 import FormProduct from '@/components/admin/FormProduct'
 import ProductsTable from '@/components/admin/ProductsTable'
 import icons from 'glyphicons'
@@ -20,7 +24,8 @@ export default {
   },
   components: {
     FormProduct,
-    ProductsTable
+    ProductsTable,
+    Navbar
   },
   methods: {
     mostrarFormCadastrar () {
