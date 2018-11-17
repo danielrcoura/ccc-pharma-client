@@ -12,6 +12,7 @@
     "postinstall": "npm run build"
   },
   "dependencies": {
+    "glyphicons": "^0.2.0",
     "express": "^4.16.4",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
