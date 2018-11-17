@@ -17,7 +17,7 @@
             <label for="field3">
               <span>Fabricante <span class="required">*</span></span>
               <input type="text" class="input-field" name="field3" value=""/>
-            </label> 
+            </label>
             <label for="field4">
               <span>Categoria <span class="required">*</span></span>
               <select name="categorias" class="select-field">
@@ -26,7 +26,7 @@
                 <option value="comestico">Cosméticos</option>
                 <option value="alimento">Alimentos</option>
               </select>
-            </label> 
+            </label>
             <label for="field5">
               <span>Disponível em estoque? </span>
               <input type="radio" name="disponivel" value="sim" checked>Sim
@@ -43,18 +43,18 @@
 
 <script>
 export default {
-  name: "FormProduct",
+  name: 'FormProduct',
   methods: {
-    cadastrarProduto() {
-      alert("Cadastrado com sucesso");
+    cadastrarProduto () {
+      alert('Cadastrado com sucesso')
     },
 
-    fecharModal() {
-      var modal = document.getElementById("modal");
-      modal.style.display = "none";
+    fecharModal () {
+      var modal = document.getElementById('modal')
+      modal.style.display = 'none'
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -113,7 +113,6 @@ div {
   }
 }
 
-
 .form-cadastro input[type="text"],
 .form-cadastro input[type="number"],
 .form-cadastro select {
@@ -163,5 +162,3 @@ div {
   font-weight: normal;
 }
 </style>
-
-
