@@ -12,7 +12,7 @@ export default new Router({
       component: ProdutosCliente
     },
     {
-      path: '/admin/Manage',
+      path: '/admin/manage',
       name: 'Manage',
       component: Manage
     }

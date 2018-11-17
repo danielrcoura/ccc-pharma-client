@@ -4,17 +4,23 @@
       <navbar/>
     </header>
     <main>
-      <form-product/>
-      <button class="btn-cadastrar" @click="mostrarFormCadastrar()"><span class="icon">{{icons.plus}}</span>  Novo</button>
+      <button class="btn-cadastrar" @click="productForm()"><span class="icon">{{icons.plus}}</span>  Novo</button>
+      <product-form/>
       <products-table/>
+      <br>
+      <button class="btn-cadastrar" @click="lotForm()"><span class="icon">{{icons.plus}}</span>  Novo</button>
+      <lots-form/>
+      <lots-table/>
     </main>
   </div>
 </template>
 
 <script>
 import Navbar from '@/components/admin/Navbar'
-import FormProduct from '@/components/admin/FormProduct'
-import ProductsTable from '@/components/admin/ProductsTable'
+import ProductForm from '@/components/admin/forms/ProductForm'
+import ProductsTable from '@/components/admin/tables/ProductsTable'
+import LotsForm from '@/components/admin/forms/LotsForm'
+import LotsTable from '@/components/admin/tables/LotsTable'
 import icons from 'glyphicons'
 
 export default {
@@ -25,14 +31,20 @@ export default {
     }
   },
   components: {
-    FormProduct,
+    ProductForm,
     ProductsTable,
+    LotsForm,
+    LotsTable,
     Navbar
   },
   methods: {
-    mostrarFormCadastrar () {
-      var modal = document.getElementById('modal')
-      modal.style.display = 'block'
+    productForm () {
+      var form = document.getElementById('productForm')
+      form.style.display = 'block'
+    },
+    lotForm () {
+      var form = document.getElementById('lotForm')
+      form.style.display = 'block'
     }
   }
 }
