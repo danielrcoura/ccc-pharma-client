@@ -60,7 +60,7 @@ export default {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css?family=Nunito'); 
+@import url('https://fonts.googleapis.com/css?family=Nunito');
 
 div {
   font-family: 'Nunito', sans-serif;
