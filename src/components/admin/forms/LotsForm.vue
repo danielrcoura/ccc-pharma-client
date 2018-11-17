@@ -10,10 +10,6 @@
               <span>Produto <span class="required">*</span></span>
               <input type="text" class="input-field" name="nome" value=""/>
             </label>
-            <label for="codigo">
-              <span>Código <span class="required">*</span></span>
-              <input type="number" class="input-field" name="codigo" value=""/>
-            </label>
             <label for="validade">
               <span>Data de validade <span class="required">*</span></span>
               <input type="date" class="input-field" name="validade" value=""/>
@@ -94,7 +90,7 @@ div {
   }
   label {
     display: block;
-    margin-bottom: 10px;
+    margin-top: 15px;
     & > span {
       float: left;
       width: 30%;

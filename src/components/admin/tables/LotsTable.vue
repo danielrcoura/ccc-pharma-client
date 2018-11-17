@@ -2,7 +2,6 @@
   <table class="table">
     <thead>
       <tr>
-        <th>#</th>
         <th>Produto</th>
         <th>Qtd em estoque</th>
         <th>Data de validade</th>
@@ -10,7 +9,6 @@
     </thead>
     <tbody>
       <tr v-for="(lote, index) in lotes" :key="index">
-        <td>{{ lote.codigo }}</td>
         <td>{{ lote.produto }}</td>
         <td>{{ lote.quantidade }}</td>
         <td>{{ lote.data_validade }}</td>
@@ -26,19 +24,16 @@ export default {
     return {
       lotes: [
         {
-          codigo: 1234,
           produto: 'Paracetamol',
           quantidade: 15,
           data_validade: '12/09/2020'
         },
         {
-          codigo: 1236,
           produto: 'Buscopan',
           quantidade: 30,
           data_validade: '11/04/2020'
         },
         {
-          codigo: 1237,
           produto: 'Benegrip',
           quantidade: 10,
           data_validade: '05/10/2020'
