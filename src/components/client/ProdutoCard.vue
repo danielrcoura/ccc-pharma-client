@@ -33,6 +33,7 @@ export default {
   border: 1px solid #ddd;
   padding: .5rem;
   font-size: 1.3rem;
+  background: #fff;
   .logo {
     margin: auto;
     margin-bottom: 1rem;

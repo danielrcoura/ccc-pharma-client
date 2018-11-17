@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="produtos-cliente">
     <header>
       <navbar/>
     </header>
@@ -85,6 +85,9 @@ export default {
 </script>
 
 <style scoped>
+.produtos-cliente {
+  background: #eee;
+}
 .produtos {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;

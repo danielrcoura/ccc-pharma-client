@@ -1,7 +1,7 @@
 <template>
   <div class="navbar">
     <img src="../../assets/logo.svg" alt="" class="logo">
-    <div style="font-family: monospace; font-size: 1.5rem; color: #999;">Saúde e sustentabilidade</div>
+    
     <nav>
       <a href=""><button>Login</button></a>
     </nav>
@@ -17,14 +17,15 @@ export default {
 <style lang="scss" scoped>
 .navbar {
   display: flex;
-  padding: 1.3rem 2rem;
+  padding: .7rem 2rem;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 5px 0 1rem #999;
+  box-shadow: 0 2px 5px #ccc;
   margin-bottom: 3rem;
+  background: #fff;
 }
 nav button {
-  padding: .7rem 2rem;
+  padding: .5rem 2rem;
   border: 2px solid #06b1d3;
   background: #fff;
   color: #06b1d3;
