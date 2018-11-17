@@ -1,12 +1,16 @@
 <template>
-  <div class="navbar">
-    <img src="../../assets/logo-admin.svg" alt="">
+  <div class='navbar'>
+    <img src='../../assets/logo-admin.svg' alt=''>
     <nav>
       <ul>
-        <a href="#"><li>Dashboard</li></a>
-        <a href="#"><li>Produtos</li></a>
-        <a href="#"><li>Lotes</li></a>
-        <a href="#"><li>Vendas</li></a>
+        <a href='#'><li>Dashboard</li></a>
+        <router-link to='/admin/manage/products'>
+          <a href='#'><li>Produtos</li></a>
+        </router-link>
+        <router-link to='/admin/manage/lots'>
+          <a href='#'><li>Lotes</li></a>
+        </router-link>
+        <a href='#'><li>Vendas</li></a>
       </ul>
     </nav>
   </div>
@@ -18,7 +22,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang='scss' scoped>
 .navbar {
   display: flex;
   justify-content: space-between;

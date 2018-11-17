@@ -1,27 +1,35 @@
 <template>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Produto</th>
-        <th>Qtd em estoque</th>
-        <th>Data de validade</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="(lote, index) in lotes" :key="index">
-        <td>{{ lote.produto }}</td>
-        <td>{{ lote.quantidade }}</td>
-        <td>{{ lote.data_validade }}</td>
-      </tr>
-    </tbody>
-  </table>
+  <div>
+    <button class='btn-cadastrar' @click='lotForm()'><span class='icon'>{{icons.plus}}</span>  Novo</button>
+    <lots-form/>
+    <table class='table'>
+      <thead>
+        <tr>
+          <th>Produto</th>
+          <th>Qtd em estoque</th>
+          <th>Data de validade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for='(lote, index) in lotes' :key='index'>
+          <td>{{ lote.produto }}</td>
+          <td>{{ lote.quantidade }}</td>
+          <td>{{ lote.data_validade }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </template>
 
 <script>
+import LotsForm from '@/components/admin/forms/LotsForm'
+import icons from 'glyphicons'
+
 export default {
   name: 'LotsTable',
   data () {
     return {
+      icons,
       lotes: [
         {
           produto: 'Paracetamol',
@@ -40,17 +48,39 @@ export default {
         }
       ]
     }
+  },
+  components: {
+    LotsForm
+  },
+  methods: {
+    lotForm () {
+      var form = document.getElementById('lotForm')
+      form.style.display = 'block'
+    }
   }
 }
 </script>
 
-<style lang="scss" scoped>
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+<style lang='scss' scoped>
 
-div {
-  font-family: 'Nunito', sans-serif;
-  --principal-color: #06b1d3;
-  --light-blue: #d2eff4;
+.btn-cadastrar {
+  background-color: #fff;
+  border: none;
+  box-shadow: 0 1px 7px #aaa;
+  border-radius: 24px;
+  padding: .8rem 1.2rem;
+  margin: 2rem 0 1rem 0;
+  color: #888;
+  font-size: .9rem;
+  font-weight: bold;
+  cursor: pointer;
+  outline: none;
+}
+
+.icon {
+  margin-right: .7rem;
+  color: #55b42f;
+  font-size: 1rem;
 }
 
 table {
