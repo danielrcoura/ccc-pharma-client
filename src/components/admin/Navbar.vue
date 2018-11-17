@@ -4,7 +4,7 @@
     <nav>
       <ul>
         <a href="#"><li>Dashboard</li></a>
-        <a href="#"><li>Gerenciamento</li></a>
+        <a href="#"><li>Produtos</li></a>
         <a href="#"><li>Vendas</li></a>
       </ul>
     </nav>
@@ -28,7 +28,7 @@ export default {
     list-style: none;
     color: #fff;
     a{
-      color: inherit;      
+      color: inherit;
     }
     li {
       display: inline-block;

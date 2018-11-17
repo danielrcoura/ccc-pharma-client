@@ -1,11 +1,13 @@
  <template>
-  <div>
+  <div class="manage">
     <header>
       <navbar/>
     </header>
-    <form-product/>
-    <button class="btn-cadastrar" @click="mostrarFormCadastrar()">{{icons.plus}} Adicionar produto</button>
-    <products-table/>
+    <main>
+      <form-product/>
+      <button class="btn-cadastrar" @click="mostrarFormCadastrar()"><span class="icon">{{icons.plus}}</span>  Novo</button>
+      <products-table/>
+    </main>
   </div>
 </template>
 
@@ -39,18 +41,32 @@ export default {
 <style scoped>
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
-div {
+.manage {
   font-family: 'Nunito', sans-serif;
   --principal-color: #06b1d3;
   --normal-size: 15px;
 }
+
 .btn-cadastrar {
-  background-color: #00ff00;
-  border: 1px solid #00ff00;
-  border-radius: 5px;
-  padding: 10px 20px;
-  margin: 30px 0 30px 30px;
-  font-family: 'Nunito', sans-serif;
-  font-size: var(--normal-size);
+  background-color: #fff;
+  border: none;
+  box-shadow: 0 1px 7px #aaa;
+  border-radius: 24px;
+  padding: .8rem 1.2rem;
+  margin: 2rem 0 1rem 0;
+  color: #888;
+  font-size: .9rem;
+  font-weight: bold;
+}
+
+.icon {
+  margin-right: .7rem;
+  color: #55b42f;
+  font-size: 1rem;
+}
+
+main {
+  width: 80%;
+  margin: auto;
 }
 </style>

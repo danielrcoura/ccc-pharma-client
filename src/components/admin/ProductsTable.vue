@@ -1,13 +1,13 @@
 <template>
   <table class="table">
-    <thead class="thead-dark">
+    <thead>
       <tr>
         <th>#</th>
         <th>Nome</th>
         <th>Fabricante</th>
         <th>Disponível</th>
         <th>Categoria</th>
-        <th>Preço</th>
+        <th>Preço (R$)</th>
       </tr>
     </thead>
     <tbody>
@@ -59,7 +59,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
 div {
@@ -70,21 +70,23 @@ div {
 
 table {
   border-collapse: collapse;
-  width: 800px;
+  width: 100%;
   margin: 0 30px;
-  border: 1px solid #f2f2f2;
+  thead {
+    border-bottom: 1px solid #999;
+  }
+  th {
+    font-weight: normal;
+    color: #999;
+  }
+  td {
+    color: #666;
+  }
 }
 
-table th,table td {
+table th, table td {
   text-align: left;
-  padding: 8px;
-  font-size: 15px;
-}
-
-table th {
-  background-color: var(--principal-color);
-  color: #fff;
-  font-weight: 800;
+  padding: 1rem 0;
 }
 
 tr:nth-child(even) {
