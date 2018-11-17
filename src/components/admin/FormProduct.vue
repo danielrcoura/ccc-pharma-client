@@ -33,7 +33,7 @@
               <input type="radio" name="disponivel" value="nao">Não
             </label>
             <button @click="cadastrarProduto()" class="btn-confirmar">Adicionar</button>
-            <p @click="fecharModal()" class="close">Cancelar</p>
+            <p @click="fecharModal()" class="cancel">Cancelar</p>
           </fieldset>
         </form>
       </div>
@@ -79,7 +79,7 @@ div {
 
 .modal-content {
   background-color: #fefefe;
-  margin: 10% 25%;
+  margin: 5% 25%;
   padding: 20px;
   border: 1px solid #888;
 }
@@ -106,7 +106,7 @@ div {
     margin-bottom: 10px;
     & > span {
       float: left;
-      width: 150px;
+      width: 170px;
       color: var(--principal-color);
       font-weight: 600;
     }
@@ -145,11 +145,11 @@ div {
   }
 }
 
-.close {
+.cancel {
   color: #999;
   float: right;
   text-decoration: underline;
-  margin: 30px 20px 0 0;
+  margin: 40px 20px 0 0;
   &:hover, &:focus {
     color: black;
     text-decoration: none;
