@@ -78,10 +78,9 @@ table {
     font-weight: normal;
     color: #999;
     padding: .5rem 0;
-    font-size: .9rem;
   }
   td {
-    color: #666;
+    color: #5a9cb6;
     padding: 1rem 0;
   }
   tbody tr:hover {
