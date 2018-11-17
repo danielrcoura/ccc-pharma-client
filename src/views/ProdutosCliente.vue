@@ -1,13 +1,17 @@
 <template>
   <div>
-    <div class="produtos">
+    <header>
+      <navbar/>
+    </header>
+    <main class="produtos">
       <produto-card v-for="(produto, index) in produtos" :key="index" :produto="produto"/>
-    </div>
+    </main>
   </div>
 </template>
 
 <script>
-import ProdutoCard from '@/components/ProdutoCard'
+import ProdutoCard from '@/components/client/ProdutoCard'
+import Navbar from '@/components/client/Navbar'
 
 export default {
   name: 'ProdutosCliente',
@@ -74,16 +78,17 @@ export default {
     }
   },
   components: {
-    ProdutoCard
+    ProdutoCard,
+    Navbar
   }
 }
 </script>
 
 <style scoped>
 .produtos {
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 1rem;
   width: 80%;
   margin: auto;
 }

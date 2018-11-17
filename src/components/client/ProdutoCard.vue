@@ -16,10 +16,10 @@ export default {
   },
   computed: {
     categoriaImage () {
-      if (this.produto.categoria === 'Medicamentos') return require('../assets/medicamentos.png')
-      if (this.produto.categoria === 'Cosméticos') return require('../assets/cosmeticos.png')
-      if (this.produto.categoria === 'Alimentos') return require('../assets/alimentos.png')
-      if (this.produto.categoria === 'Higiene pessoal') return require('../assets/higiene-pessoal.png')
+      if (this.produto.categoria === 'Medicamentos') return require('../../assets/medicamentos.png')
+      if (this.produto.categoria === 'Cosméticos') return require('../../assets/cosmeticos.png')
+      if (this.produto.categoria === 'Alimentos') return require('../../assets/alimentos.png')
+      if (this.produto.categoria === 'Higiene pessoal') return require('../../assets/higiene-pessoal.png')
     }
   }
 }
@@ -31,10 +31,8 @@ export default {
   flex-direction: column;
   align-items: center;
   border: 1px solid #ddd;
-  margin-bottom: 1rem;
   padding: .5rem;
   font-size: 1.3rem;
-  width: 23%;
   .logo {
     margin: auto;
     margin-bottom: 1rem;
