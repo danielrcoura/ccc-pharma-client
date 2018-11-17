@@ -46,8 +46,8 @@ export default {
   name: 'ProductForm',
   methods: {
     registerProduct () {
-      alert('Cadastrado com sucesso');
-      closeForm();
+      alert('Cadastrado com sucesso')
+      closeForm()
     },
 
     closeForm () {

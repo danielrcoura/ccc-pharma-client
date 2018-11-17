@@ -33,7 +33,7 @@ export default {
   methods: {
     registerLot () {
       alert('Cadastrado com sucesso')
-      closeForm();
+      closeForm()
     },
 
     closeForm () {
