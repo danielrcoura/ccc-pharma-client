@@ -2,31 +2,13 @@
   <div>
     <button class='btn-cadastrar' @click='productForm()'><span class='icon'>{{icons.plus}}</span>  Novo</button>
     <product-form/>
-    <table class='table'>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Nome</th>
-          <th>Fabricante</th>
-          <th>Categoria</th>
-          <th>Preço (R$)</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for='(produto, index) in produtos' :key='index'>
-          <td>{{ produto.codigo }}</td>
-          <td>{{ produto.nome }}</td>
-          <td>{{ produto.fabricante }}</td>
-          <td>{{ produto.categoria }}</td>
-          <td>{{ produto.preco }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <items-table :titles="headTable" :data="produtos"/>
   </div>
 </template>
 
 <script>
 import ProductForm from '@/components/admin/forms/ProductForm'
+import ItemsTable from '@/components/admin/ItemsTable'
 import icons from 'glyphicons'
 
 export default {
@@ -34,6 +16,13 @@ export default {
   data () {
     return {
       icons,
+      headTable: [
+        { label: 'Cód. Barras', property: 'codigo' },
+        { label: 'Nome', property: 'nome' },
+        { label: 'Fabricante', property: 'fabricante' },
+        { label: 'Categoria', property: 'categoria' },
+        { label: 'Preço (R$)', property: 'preco' }
+      ],
       produtos: [
         {
           nome: 'Produto1',
@@ -51,16 +40,17 @@ export default {
         },
         {
           nome: 'Produto3',
-          codigo: 1236,
-          fabricante: 'Fab1',
-          categoria: 'Cosméticos',
-          preco: 10.0
+          codigo: 123523,
+          fabricante: 'Fab3',
+          categoria: 'Higiene pessoal',
+          preco: 30.0
         }
       ]
     }
   },
   components: {
-    ProductForm
+    ProductForm,
+    ItemsTable
   },
   methods: {
     productForm () {

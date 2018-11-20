@@ -1,28 +1,14 @@
 <template>
   <div>
-    <button class='btn-cadastrar' @click='lotForm()'><span class='icon'>{{icons.plus}}</span>  Novo</button>
+    <button class="btn-cadastrar" @click="lotForm()"><span class="icon">{{icons.plus}}</span>  Novo</button>
     <lots-form/>
-    <table class='table'>
-      <thead>
-        <tr>
-          <th>Produto</th>
-          <th>Qtd em estoque</th>
-          <th>Data de validade</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for='(lote, index) in lotes' :key='index'>
-          <td>{{ lote.produto }}</td>
-          <td>{{ lote.quantidade }}</td>
-          <td>{{ lote.data_validade }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <items-table :titles="headTable" :data="lotes"/>
   </div>
 </template>
 
 <script>
 import LotsForm from '@/components/admin/forms/LotsForm'
+import ItemsTable from '@/components/admin/ItemsTable'
 import icons from 'glyphicons'
 
 export default {
@@ -30,27 +16,33 @@ export default {
   data () {
     return {
       icons,
+      headTable: [
+        { label: 'Produto', property: 'produto' },
+        { label: 'Quantidade', property: 'quantidade' },
+        { label: 'Validade', property: 'dataValidade' }
+      ],
       lotes: [
         {
           produto: 'Paracetamol',
           quantidade: 15,
-          data_validade: '12/09/2020'
+          dataValidade: '12/09/2020'
         },
         {
           produto: 'Buscopan',
           quantidade: 30,
-          data_validade: '11/04/2020'
+          dataValidade: '11/04/2020'
         },
         {
           produto: 'Benegrip',
           quantidade: 10,
-          data_validade: '05/10/2020'
+          dataValidade: '05/10/2020'
         }
       ]
     }
   },
   components: {
-    LotsForm
+    LotsForm,
+    ItemsTable
   },
   methods: {
     lotForm () {
@@ -62,7 +54,6 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-
 .btn-cadastrar {
   background-color: #fff;
   border: none;
@@ -76,36 +67,9 @@ export default {
   cursor: pointer;
   outline: none;
 }
-
 .icon {
   margin-right: .7rem;
   color: #55b42f;
   font-size: 1rem;
 }
-
-table {
-  border-collapse: collapse;
-  width: 60%;
-  thead {
-    border-bottom: 1px solid #ddd;
-  }
-  th {
-    font-weight: normal;
-    color: #999;
-    padding: .5rem 0;
-  }
-  td {
-    color: #5a9cb6;
-    padding: 1rem 0;
-  }
-  tbody tr:hover {
-    cursor: pointer;
-    background: #e4e4e4;
-  }
-}
-
-table th, table td {
-  text-align: left;
-}
-
 </style>
