@@ -86,7 +86,8 @@ export default {
 
 <style scoped>
 .produtos-cliente {
-  background: #eee;
+  background: #f5f5f5;
+  height: 100vh;
 }
 .produtos {
   display: grid;

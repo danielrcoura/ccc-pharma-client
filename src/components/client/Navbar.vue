@@ -1,7 +1,6 @@
 <template>
   <div class="navbar">
     <img src="../../assets/logo.svg" alt="" class="logo">
-    
     <nav>
       <a href=""><button>Login</button></a>
     </nav>
