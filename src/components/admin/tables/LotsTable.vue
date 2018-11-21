@@ -85,7 +85,7 @@ export default {
 
 table {
   border-collapse: collapse;
-  width: 60%;
+  width: 100%;
   thead {
     border-bottom: 1px solid #ddd;
   }
@@ -99,8 +99,7 @@ table {
     padding: 1rem 0;
   }
   tbody tr:hover {
-    cursor: pointer;
-    background: #e4e4e4;
+    background: #f1f1f1;
   }
 }
 
