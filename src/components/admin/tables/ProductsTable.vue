@@ -6,7 +6,7 @@
       <thead>
         <tr>
           <th>#</th>
-          <th v-for="title in dinamicTitles" :key="title.property" 
+          <th v-for="title in dinamicTitles" :key="title.property"
           @click="sortProperty=title.property">
             {{ title.label }}
             <span v-if="sortProperty === title.property">{{ icons.arrowTriD }}</span>
@@ -67,6 +67,9 @@ export default {
         }
       ]
     }
+  },
+  mounted () {
+    this.sort()
   },
   watch: {
     sortProperty () {

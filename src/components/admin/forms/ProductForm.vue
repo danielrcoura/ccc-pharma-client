@@ -47,9 +47,8 @@ export default {
   methods: {
     registerProduct () {
       alert('Cadastrado com sucesso')
-      closeForm()
+      this.closeForm()
     },
-
     closeForm () {
       var modal = document.getElementById('productForm')
       modal.style.display = 'none'

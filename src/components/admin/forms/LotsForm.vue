@@ -33,9 +33,8 @@ export default {
   methods: {
     registerLot () {
       alert('Cadastrado com sucesso')
-      closeForm()
+      this.closeForm()
     },
-
     closeForm () {
       var modal = document.getElementById('lotForm')
       modal.style.display = 'none'
