@@ -18,6 +18,7 @@
           <td>{{ lote.produto }}</td>
           <td>{{ lote.quantidade }}</td>
           <td>{{ lote.validade }}</td>
+          <td><span class='icon' @click="editRow(lote, index)">{{icons.pencil}}</span></td>
         </tr>
       </tbody>
     </table>
@@ -80,6 +81,14 @@ export default {
         else if (a[this.sortProperty] > b[this.sortProperty]) return 1
         else return 0
       })
+    },
+    editRow(lote) {
+      let form = document.getElementById('lotForm')
+      let date = new Date(lote.validade);
+      document.getElementById('name').value = lote.produto
+      document.getElementById('validade').value = date.toISOString().slice(0, 10)
+      document.getElementById('quantidade').value = lote.quantidade
+      form.style.display = 'block'
     }
   }
 }
