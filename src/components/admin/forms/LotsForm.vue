@@ -8,7 +8,7 @@
             <label>Preencha os dados a seguir para cadastrar um novo lote:</label>
             <label for="nome">
               <span>Produto <span class="required">*</span></span>
-              <input type="text" id="name" class="input-field" name="nome" value=""/>
+              <input type="text" id="nome" class="input-field" name="nome" value=""/>
             </label>
             <label for="validade">
               <span>Data de validade <span class="required">*</span></span>
@@ -47,7 +47,6 @@ export default {
 div {
   font-family: "Nunito", sans-serif;
   --principal-color: #06b1d3;
-  --light-blue: #d2eff4;
   font-size: 15px;
 }
 
@@ -109,6 +108,8 @@ div {
   background: #fff;
   padding: 5px 10px;
   width: 70%;
+  font-family: "Nunito", sans-serif;
+  font-size: var(--normal-size);
 }
 
 .btn-confirm {

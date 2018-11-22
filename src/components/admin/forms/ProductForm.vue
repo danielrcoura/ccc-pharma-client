@@ -8,22 +8,26 @@
             <label>Preencha os dados a seguir para cadastrar um novo produto:</label>
             <label for="nome">
               <span>Nome <span class="required">*</span></span>
-              <input type="text" class="input-field" name="nome" value=""/>
+              <input type="text" id="nome" class="input-field" name="nome" value=""/>
             </label>
             <label for="codigo">
               <span>Código de barras <span class="required">*</span></span>
-              <input type="number" class="input-field" name="codigo" value=""/>
+              <input type="number" id="codigo" class="input-field" name="codigo" value=""/>
             </label>
             <label for="fabricante">
               <span>Fabricante <span class="required">*</span></span>
-              <input type="text" class="input-field" name="fabricante" value=""/>
+              <input type="text" id="fabricante" class="input-field" name="fabricante" value=""/>
+            </label>
+            <label for="preco" id="field-preco">
+              <span>Preço (R$) <span class="required">*</span></span>
+              <input type="number" id="preco" class="input-field" name="preco" value=""/>
             </label>
             <label for="categorias">
               <span>Categoria <span class="required">*</span></span>
-              <select name="categorias" class="select-field">
+              <select name="categorias" id="categoria" class="select-field">
                 <option value="medicamento">Medicamentos</option>
                 <option value="higiene">Higiene pessoal</option>
-                <option value="comestico">Cosméticos</option>
+                <option value="cosmetico">Cosméticos</option>
                 <option value="alimento">Alimentos</option>
               </select>
             </label>
@@ -61,7 +65,6 @@ export default {
 div {
   font-family: "Nunito", sans-serif;
   --principal-color: #06b1d3;
-  --light-blue: #d2eff4;
   font-size: 15px;
 }
 
@@ -123,6 +126,8 @@ div {
   background: #fff;
   padding: 5px 10px;
   width: 70%;
+  font-family: "Nunito", sans-serif;
+  font-size: var(--normal-size);
 }
 
 .form-cadastro input[type="radio"] {
@@ -161,5 +166,9 @@ div {
 .required {
   color: red;
   font-weight: normal;
+}
+
+#field-preco {
+  display: none;
 }
 </style>

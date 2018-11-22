@@ -6,11 +6,11 @@
       <thead>
         <tr>
           <th>#</th>
-          <th v-for="title in dinamicTitles" :key="title.property"
-          @click="sortProperty=title.property">
+          <th v-for='title in dinamicTitles' :key='title.property'
+          @click='sortProperty=title.property'>
             {{ title.label }}
-            <span v-if="sortProperty === title.property">{{ icons.arrowTriD }}</span>
-            <span v-else style="color: #ddd">{{ icons.arrowTriU }}</span>
+            <span v-if='sortProperty === title.property'>{{ icons.arrowTriD }}</span>
+            <span v-else style='color: #ddd'>{{ icons.arrowTriU }}</span>
           </th>
         </tr>
       </thead>
@@ -21,6 +21,8 @@
           <td>{{ produto.fabricante }}</td>
           <td>{{ produto.categoria }}</td>
           <td>{{ produto.preco }}</td>
+          <td class='small'><span class='icon clickable' @click='editRow(produto)'>{{icons.pencil}}</span></td>
+          <td class='small'><span class='icon clickable cross' @click='removeRow(index)'>{{icons.cross}}</span></td>
         </tr>
       </tbody>
     </table>
@@ -90,6 +92,36 @@ export default {
         else if (a[this.sortProperty] > b[this.sortProperty]) return 1
         else return 0
       })
+    },
+    editRow (produto) {
+      let form = document.getElementById('productForm')
+
+      let categoria = ''
+      switch (produto.categoria) {
+        case 'Medicamentos':
+          categoria = 'medicamento'
+          break
+        case 'Higiene pessoal':
+          categoria = 'higiene'
+          break
+        case 'Cosméticos':
+          categoria = 'cosmetico'
+          break
+        case 'Alimentos':
+          categoria = 'alimento'
+          break
+      }
+
+      document.getElementById('nome').value = produto.nome
+      document.getElementById('codigo').value = produto.codigo
+      document.getElementById('fabricante').value = produto.fabricante
+      document.getElementById('preco').value = produto.preco
+      document.getElementById('categoria').value = categoria
+      document.getElementById('field-preco').style.display = 'block'
+      form.style.display = 'block'
+    },
+    removeRow (index) {
+      this.produtos.splice(index, 1)
     }
   }
 }
@@ -114,7 +146,17 @@ export default {
 .icon {
   margin-right: .7rem;
   color: #55b42f;
-  font-size: 1rem;
+  font-size: 15px;
+}
+
+.small {
+  width: 40px;
+}
+
+.cross {
+  color: #dd1818;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 table {
@@ -135,6 +177,7 @@ table {
   td {
     color: #5a9cb6;
     padding: 1rem 0;
+    cursor: default;
   }
   tbody tr:hover {
     background: #f1f1f1;
@@ -143,6 +186,10 @@ table {
 
 table th, table td {
   text-align: left;
+}
+
+.clickable {
+  cursor: pointer;
 }
 
 </style>

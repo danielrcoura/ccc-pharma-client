@@ -18,8 +18,8 @@
           <td>{{ lote.produto }}</td>
           <td>{{ lote.quantidade }}</td>
           <td>{{ lote.validade }}</td>
-          <td><span class='icon small' @click="editRow(lote)">{{icons.pencil}}</span></td>
-          <td><span class='icon small cross' @click="removeRow(index)">{{icons.cross}}</span></td>
+          <td class='small'><span class='icon clickable' @click="editRow(lote)">{{icons.pencil}}</span></td>
+          <td class='small'><span class='icon clickable cross' @click="removeRow(index)">{{icons.cross}}</span></td>
         </tr>
       </tbody>
     </table>
@@ -83,18 +83,16 @@ export default {
         else return 0
       })
     },
-    editRow(lote) {
+    editRow (lote) {
       let form = document.getElementById('lotForm')
-      let date = new Date(lote.validade);
-      document.getElementById('name').value = lote.produto
+      let date = new Date(lote.validade)
+      document.getElementById('nome').value = lote.produto
       document.getElementById('validade').value = date.toISOString().slice(0, 10)
       document.getElementById('quantidade').value = lote.quantidade
       form.style.display = 'block'
     },
-    removeRow(index) {
-      console.log(this.lotes)
-      console.log(this.icons)
-      this.lotes.splice(index, 1);
+    removeRow (index) {
+      this.lotes.splice(index, 1)
     }
   }
 }
@@ -123,8 +121,7 @@ export default {
 }
 
 .small {
-  margin-right: 0;
-  cursor: pointer;
+  width: 40px;
 }
 
 .cross {
@@ -160,6 +157,10 @@ table {
 
 table th, table td {
   text-align: left;
+}
+
+.clickable {
+  cursor: pointer;
 }
 
 </style>
