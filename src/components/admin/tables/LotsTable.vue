@@ -18,7 +18,8 @@
           <td>{{ lote.produto }}</td>
           <td>{{ lote.quantidade }}</td>
           <td>{{ lote.validade }}</td>
-          <td><span class='icon' @click="editRow(lote, index)">{{icons.pencil}}</span></td>
+          <td><span class='icon small' @click="editRow(lote)">{{icons.pencil}}</span></td>
+          <td><span class='icon small cross' @click="removeRow(index)">{{icons.cross}}</span></td>
         </tr>
       </tbody>
     </table>
@@ -89,6 +90,11 @@ export default {
       document.getElementById('validade').value = date.toISOString().slice(0, 10)
       document.getElementById('quantidade').value = lote.quantidade
       form.style.display = 'block'
+    },
+    removeRow(index) {
+      console.log(this.lotes)
+      console.log(this.icons)
+      this.lotes.splice(index, 1);
     }
   }
 }
@@ -113,7 +119,18 @@ export default {
 .icon {
   margin-right: .7rem;
   color: #55b42f;
-  font-size: 1rem;
+  font-size: 15px;
+}
+
+.small {
+  margin-right: 0;
+  cursor: pointer;
+}
+
+.cross {
+  color: #dd1818;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 table {
@@ -134,6 +151,7 @@ table {
   td {
     color: #5a9cb6;
     padding: 1rem 0;
+    cursor: default;
   }
   tbody tr:hover {
     background: #f1f1f1;
