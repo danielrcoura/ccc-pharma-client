@@ -1,7 +1,8 @@
 <template>
   <div>
-    <button class='btn-cadastrar' @click='productForm()'><span class='icon'>{{icons.plus}}</span>  Novo</button>
-    <product-form/>
+    <button class='btn-cadastrar' @click="showForm = true">
+      <span class='icon'>{{ icons.plus }}</span>Novo
+    </button>
     <table class='table'>
       <thead>
         <tr>
@@ -26,6 +27,9 @@
         </tr>
       </tbody>
     </table>
+    <transition name="modal">
+      <product-form @close="showForm = false" v-if="showForm"/>
+    </transition>
   </div>
 </template>
 
@@ -38,6 +42,7 @@ export default {
   data () {
     return {
       icons,
+      showForm: false,
       dinamicTitles: [
         { label: 'Nome', property: 'nome' },
         { label: 'Fabricante', property: 'fabricante' },
@@ -192,4 +197,7 @@ table th, table td {
   cursor: pointer;
 }
 
+.modal-enter, .modal-leave-active {
+  opacity: 0;
+}
 </style>
