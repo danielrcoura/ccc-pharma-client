@@ -2,16 +2,20 @@
   <div class="modal">
     <div class="modal-content">
       <form>
-        <input ref="name" type="text" placeholder="Nome"/> 
-        <input type="number" placeholder="Código de barras"/>
-        <input type="text" placeholder="Fabricante"/>
-        <input type="number" step="0.01" placeholder="Preço"/>
+        <input class="title" ref="name" type="text" :value="produto.nome" placeholder="Nome"/>
+        <label>Código de barras</label>
+        <input type="number" :value="produto.codigo"/>
+        <label>Fabricante</label>
+        <input type="text" :value="produto.fabricante"/>
+        <label>Preço</label>
+        <input type="number" :value="produto.preco" step="0.01"/>
+        <label>Categoria</label>
         <select class="select-field">
-          <option selected disabled hidden>Selecione a categoria</option>
-          <option value="medicamento">Medicamentos</option>
-          <option value="higiene">Higiene pessoal</option>
-          <option value="cosmetico">Cosméticos</option>
-          <option value="alimento">Alimentos</option>
+          <option selected disabled hidden></option>
+          <option :selected="produto.categoria === 'Medicamentos'" value="medicamento">Medicamentos</option>
+          <option :selected="produto.categoria === 'Higiene pessoal'" value="higiene">Higiene pessoal</option>
+          <option :selected="produto.categoria === 'Cosméticos'" value="cosmetico">Cosméticos</option>
+          <option :selected="produto.categoria === 'Alimentos'" value="alimento">Alimentos</option>
         </select>
         <div class="btn-group">
           <button @click="$emit('close')" class="btn-cancel">Cancelar</button>
@@ -30,6 +34,9 @@ export default {
       alert('Cadastrado com sucesso')
       this.closeForm()
     }
+  },
+  props: {
+    produto: {}
   },
   mounted () {
     this.$refs.name.focus()
@@ -65,6 +72,12 @@ export default {
 form {
   display: flex;
   flex-direction: column;
+  label {
+    font-size: .8rem;
+    color: #aaa;
+    margin-top: 1rem;
+    margin-bottom: 5px;
+  }
   button, input, select {
     border: none;
     outline: none;
@@ -72,18 +85,19 @@ form {
     font-size: 1rem;
   }
   input, select {
-    color: #444;
-    margin: 1rem 0;
+    color: #333;
+    margin-bottom: 1rem;
     border-bottom: 1px solid #ddd;
     &:focus {
       border-bottom: 2px solid #62dcf5;
     }
   }
   input {
-    padding: .4rem 1rem;
+    padding: .3rem 0;
   }
   select {
-    padding: .4rem .7rem;
+    padding: .5rem 0;
+    border: 1px solid #ddd;
   }
   .btn-group {
     margin-top: 2rem;
@@ -110,5 +124,24 @@ form {
       }
     }
   }
+}
+.title {
+  display: inline;
+  margin-top: 0;
+  padding-left: 0;
+  font-size: 1.6rem;
+  color:#008eaa;
+}
+*::-webkit-input-placeholder {
+  color: #aaa;
+}
+*::-moz-placeholder {
+  color: #aaa;
+}
+*:-ms-input-placeholder {
+  color: #aaa;
+}
+*:-moz-placeholder {
+  color: #aaa;
 }
 </style>

@@ -1,40 +1,33 @@
 <template>
   <div>
-    <button class='btn-cadastrar' @click="showForm = true">
-      <span class='icon'>{{ icons.plus }}</span>Novo
+    <button class="btn-cadastrar" @click="showForm = true">
+      <span class="icon">{{ icons.plus }}</span>Novo
     </button>
-    <table class='table'>
+    <table class="table">
       <thead>
         <tr>
           <th>#</th>
-          <th v-for='title in dinamicTitles' :key='title.property'
-          @click='sortProperty=title.property'>
+          <th v-for="title in dinamicTitles" :key="title.property"
+          @click="sortProperty=title.property">
             {{ title.label }}
-            <span v-if='sortProperty === title.property'>{{ icons.arrowTriD }}</span>
-            <span v-else style='color: #ddd'>{{ icons.arrowTriU }}</span>
+            <span v-if="sortProperty === title.property">{{ icons.arrowTriD }}</span>
+            <span v-else style="color: #ddd">{{ icons.arrowTriU }}</span>
           </th>
         </tr>
       </thead>
-      <tbody>
-        <tr v-for='(produto, index) in produtos' :key='index'>
-          <td>{{ produto.codigo }}</td>
-          <td>{{ produto.nome }}</td>
-          <td>{{ produto.fabricante }}</td>
-          <td>{{ produto.categoria }}</td>
-          <td>{{ produto.preco }}</td>
-          <td class='small'><span class='icon clickable' @click='editRow(produto)'>{{icons.pencil}}</span></td>
-          <td class='small'><span class='icon clickable cross' @click='removeRow(index)'>{{icons.cross}}</span></td>
-        </tr>
+      <tbody v-for="(produto, index) in produtos" :key="index">
+        <product-row :produto="produto"/>
       </tbody>
     </table>
     <transition name="modal">
-      <product-form @close="showForm = false" v-if="showForm"/>
+      <product-form :produto="{}" @close="showForm = false" v-if="showForm"/>
     </transition>
   </div>
 </template>
 
 <script>
 import ProductForm from '@/components/admin/forms/ProductForm'
+import ProductRow from '@/components/admin/tables/ProductRow'
 import icons from 'glyphicons'
 
 export default {
@@ -84,7 +77,8 @@ export default {
     }
   },
   components: {
-    ProductForm
+    ProductForm,
+    ProductRow
   },
   methods: {
     productForm () {
@@ -148,22 +142,6 @@ export default {
   outline: none;
 }
 
-.icon {
-  margin-right: .7rem;
-  color: #55b42f;
-  font-size: 15px;
-}
-
-.small {
-  width: 40px;
-}
-
-.cross {
-  color: #dd1818;
-  font-size: 18px;
-  font-weight: bold;
-}
-
 table {
   border-collapse: collapse;
   width: 100%;
@@ -179,22 +157,18 @@ table {
       color: #777;
     }
   }
-  td {
-    color: #5a9cb6;
-    padding: 1rem 0;
-    cursor: default;
-  }
   tbody tr:hover {
     background: #f1f1f1;
   }
 }
-
-table th, table td {
+table th {
   text-align: left;
 }
 
-.clickable {
-  cursor: pointer;
+.icon {
+  margin-right: .7rem;
+  color: #55b42f;
+  font-size: 1rem;
 }
 
 .modal-enter, .modal-leave-active {
