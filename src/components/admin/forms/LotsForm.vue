@@ -8,15 +8,15 @@
             <label>Preencha os dados a seguir para cadastrar um novo lote:</label>
             <label for="nome">
               <span>Produto <span class="required">*</span></span>
-              <input type="text" class="input-field" name="nome" value=""/>
+              <input type="text" id="nome" class="input-field" name="nome" value=""/>
             </label>
             <label for="validade">
               <span>Data de validade <span class="required">*</span></span>
-              <input type="date" class="input-field" name="validade" value=""/>
+              <input type="date" id="validade" class="input-field" name="validade" value=""/>
             </label>
             <label for="qtdItens">
               <span>Quantidade de itens <span class="required">*</span></span>
-              <input type="number" class="input-field" name="qtdItens" value=""/>
+              <input type="number" id="quantidade" class="input-field" name="qtdItens" value=""/>
             </label>
             <button @click="registerLot()" class="btn-confirm">Adicionar</button>
             <p @click="closeForm()" class="btn-cancel">Cancelar</p>
@@ -47,7 +47,6 @@ export default {
 div {
   font-family: "Nunito", sans-serif;
   --principal-color: #06b1d3;
-  --light-blue: #d2eff4;
   font-size: 15px;
 }
 
@@ -109,6 +108,8 @@ div {
   background: #fff;
   padding: 5px 10px;
   width: 70%;
+  font-family: "Nunito", sans-serif;
+  font-size: var(--normal-size);
 }
 
 .btn-confirm {

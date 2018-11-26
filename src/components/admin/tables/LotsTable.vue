@@ -18,6 +18,8 @@
           <td>{{ lote.produto }}</td>
           <td>{{ lote.quantidade }}</td>
           <td>{{ lote.validade }}</td>
+          <td class='small'><span class='icon clickable' @click="editRow(lote)">{{icons.pencil}}</span></td>
+          <td class='small'><span class='icon clickable cross' @click="removeRow(index)">{{icons.cross}}</span></td>
         </tr>
       </tbody>
     </table>
@@ -80,6 +82,17 @@ export default {
         else if (a[this.sortProperty] > b[this.sortProperty]) return 1
         else return 0
       })
+    },
+    editRow (lote) {
+      let form = document.getElementById('lotForm')
+      let date = new Date(lote.validade)
+      document.getElementById('nome').value = lote.produto
+      document.getElementById('validade').value = date.toISOString().slice(0, 10)
+      document.getElementById('quantidade').value = lote.quantidade
+      form.style.display = 'block'
+    },
+    removeRow (index) {
+      this.lotes.splice(index, 1)
     }
   }
 }
@@ -104,7 +117,17 @@ export default {
 .icon {
   margin-right: .7rem;
   color: #55b42f;
-  font-size: 1rem;
+  font-size: 15px;
+}
+
+.small {
+  width: 40px;
+}
+
+.cross {
+  color: #dd1818;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 table {
@@ -125,6 +148,7 @@ table {
   td {
     color: #5a9cb6;
     padding: 1rem 0;
+    cursor: default;
   }
   tbody tr:hover {
     background: #f1f1f1;
@@ -133,6 +157,10 @@ table {
 
 table th, table td {
   text-align: left;
+}
+
+.clickable {
+  cursor: pointer;
 }
 
 </style>

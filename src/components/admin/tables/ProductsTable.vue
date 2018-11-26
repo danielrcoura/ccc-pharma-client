@@ -1,8 +1,9 @@
 <template>
   <div>
-    <button class='btn-cadastrar' @click='productForm()'><span class='icon'>{{icons.plus}}</span>  Novo</button>
-    <product-form/>
-    <table class='table'>
+    <button class="btn-cadastrar" @click="showForm = true">
+      <span class="icon">{{ icons.plus }}</span>Novo
+    </button>
+    <table class="table">
       <thead>
         <tr>
           <th>#</th>
@@ -14,21 +15,19 @@
           </th>
         </tr>
       </thead>
-      <tbody>
-        <tr v-for='(produto, index) in produtos' :key='index'>
-          <td>{{ produto.codigo }}</td>
-          <td>{{ produto.nome }}</td>
-          <td>{{ produto.fabricante }}</td>
-          <td>{{ produto.categoria }}</td>
-          <td>{{ produto.preco }}</td>
-        </tr>
+      <tbody v-for="(produto, index) in produtos" :key="index">
+        <product-row :produto="produto"/>
       </tbody>
     </table>
+    <transition name="modal">
+      <product-form :produto="{}" @close="showForm = false" v-if="showForm"/>
+    </transition>
   </div>
 </template>
 
 <script>
 import ProductForm from '@/components/admin/forms/ProductForm'
+import ProductRow from '@/components/admin/tables/ProductRow'
 import icons from 'glyphicons'
 
 export default {
@@ -36,6 +35,7 @@ export default {
   data () {
     return {
       icons,
+      showForm: false,
       dinamicTitles: [
         { label: 'Nome', property: 'nome' },
         { label: 'Fabricante', property: 'fabricante' },
@@ -77,7 +77,8 @@ export default {
     }
   },
   components: {
-    ProductForm
+    ProductForm,
+    ProductRow
   },
   methods: {
     productForm () {
@@ -90,6 +91,36 @@ export default {
         else if (a[this.sortProperty] > b[this.sortProperty]) return 1
         else return 0
       })
+    },
+    editRow (produto) {
+      let form = document.getElementById('productForm')
+
+      let categoria = ''
+      switch (produto.categoria) {
+        case 'Medicamentos':
+          categoria = 'medicamento'
+          break
+        case 'Higiene pessoal':
+          categoria = 'higiene'
+          break
+        case 'Cosméticos':
+          categoria = 'cosmetico'
+          break
+        case 'Alimentos':
+          categoria = 'alimento'
+          break
+      }
+
+      document.getElementById('nome').value = produto.nome
+      document.getElementById('codigo').value = produto.codigo
+      document.getElementById('fabricante').value = produto.fabricante
+      document.getElementById('preco').value = produto.preco
+      document.getElementById('categoria').value = categoria
+      document.getElementById('field-preco').style.display = 'block'
+      form.style.display = 'block'
+    },
+    removeRow (index) {
+      this.produtos.splice(index, 1)
     }
   }
 }
@@ -111,12 +142,6 @@ export default {
   outline: none;
 }
 
-.icon {
-  margin-right: .7rem;
-  color: #55b42f;
-  font-size: 1rem;
-}
-
 table {
   border-collapse: collapse;
   width: 100%;
@@ -132,17 +157,21 @@ table {
       color: #777;
     }
   }
-  td {
-    color: #5a9cb6;
-    padding: 1rem 0;
-  }
   tbody tr:hover {
     background: #f1f1f1;
   }
 }
-
-table th, table td {
+table th {
   text-align: left;
 }
 
+.icon {
+  margin-right: .7rem;
+  color: #55b42f;
+  font-size: 1rem;
+}
+
+.modal-enter, .modal-leave-active {
+  opacity: 0;
+}
 </style>

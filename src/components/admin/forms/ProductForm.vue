@@ -1,42 +1,27 @@
 <template>
-  <div id="productForm" class="modal">
+  <div class="modal">
     <div class="modal-content">
-      <div class="form-cadastro">
-        <form>
-          <fieldset>
-            <legend>Dados do produto</legend>
-            <label>Preencha os dados a seguir para cadastrar um novo produto:</label>
-            <label for="nome">
-              <span>Nome <span class="required">*</span></span>
-              <input type="text" class="input-field" name="nome" value=""/>
-            </label>
-            <label for="codigo">
-              <span>Código de barras <span class="required">*</span></span>
-              <input type="number" class="input-field" name="codigo" value=""/>
-            </label>
-            <label for="fabricante">
-              <span>Fabricante <span class="required">*</span></span>
-              <input type="text" class="input-field" name="fabricante" value=""/>
-            </label>
-            <label for="categorias">
-              <span>Categoria <span class="required">*</span></span>
-              <select name="categorias" class="select-field">
-                <option value="medicamento">Medicamentos</option>
-                <option value="higiene">Higiene pessoal</option>
-                <option value="comestico">Cosméticos</option>
-                <option value="alimento">Alimentos</option>
-              </select>
-            </label>
-            <label for="disponivel">
-              <span>Disponível em estoque? </span>
-              <input type="radio" name="disponivel" value="sim" checked>Sim
-              <input type="radio" name="disponivel" value="nao">Não
-            </label>
-            <button @click="registerProduct()" class="btn-confirm">Adicionar</button>
-            <p @click="closeForm()" class="btn-cancel">Cancelar</p>
-          </fieldset>
-        </form>
-      </div>
+      <form>
+        <input class="title" ref="name" type="text" :value="produto.nome" placeholder="Nome"/>
+        <label>Código de barras</label>
+        <input type="number" :value="produto.codigo"/>
+        <label>Fabricante</label>
+        <input type="text" :value="produto.fabricante"/>
+        <label>Preço</label>
+        <input type="number" :value="produto.preco" step="0.01"/>
+        <label>Categoria</label>
+        <select class="select-field">
+          <option selected disabled hidden></option>
+          <option :selected="produto.categoria === 'Medicamentos'" value="medicamento">Medicamentos</option>
+          <option :selected="produto.categoria === 'Higiene pessoal'" value="higiene">Higiene pessoal</option>
+          <option :selected="produto.categoria === 'Cosméticos'" value="cosmetico">Cosméticos</option>
+          <option :selected="produto.categoria === 'Alimentos'" value="alimento">Alimentos</option>
+        </select>
+        <div class="btn-group">
+          <button @click="$emit('close')" class="btn-cancel">Cancelar</button>
+          <button @click="registerProduct()" class="btn-confirm">Cadastrar produto</button>
+        </div>
+      </form>
     </div>
   </div>
 </template>
@@ -48,118 +33,115 @@ export default {
     registerProduct () {
       alert('Cadastrado com sucesso')
       this.closeForm()
-    },
-    closeForm () {
-      var modal = document.getElementById('productForm')
-      modal.style.display = 'none'
     }
+  },
+  props: {
+    produto: {}
+  },
+  mounted () {
+    this.$refs.name.focus()
   }
 }
 </script>
 
 <style lang="scss" scoped>
-div {
-  font-family: "Nunito", sans-serif;
-  --principal-color: #06b1d3;
-  --light-blue: #d2eff4;
-  font-size: 15px;
-}
-
 .modal {
-  display: none;
+  font-family: Helvetica, Arial, sans-serif;
+  --principal-color: #06b1d3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: fixed;
   z-index: 1;
   left: 0;
-  top: 0px;
+  top: 0;
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0, 0, 0, 0.4);
-}
-
-.modal-content {
-  background-color: #fefefe;
-  margin: 5% 25%;
-  padding: 20px;
-  border: 1px solid #888;
-}
-
-.form-cadastro {
-  max-width: 100%;
-  fieldset {
-    border-radius: 15px;
-    border: 1px solid var(--principal-color);
-    padding: 20px;
-    float: center;
-    align-self: center;
-    justify-self: center;
-    legend {
-      color: var(--principal-color);
-      border: 1px solid var(--principal-color);
-      border-radius: 5px;
-      padding: 10px;
-      font-weight: 900;
-    }
+  background-color: rgba(0, 0, 0, 0.6);
+  transition: opacity .3s ease;
+  .modal-content {
+    transition: all .3s ease;
+    background-color: #fff;
+    width: 35vw;
+    padding: 1.5rem 3rem;
+    border-top: .6rem solid var(--principal-color);
+    box-shadow: 0 0 1rem #666;
   }
+}
+form {
+  display: flex;
+  flex-direction: column;
   label {
-    display: block;
-    margin-bottom: 10px;
-    & > span {
-      float: left;
-      width: 30%;
-      min-width: 150px;
-      color: var(--principal-color);
-      font-weight: 600;
+    font-size: .8rem;
+    color: #aaa;
+    margin-top: 1rem;
+    margin-bottom: 5px;
+  }
+  button, input, select {
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 1rem;
+  }
+  input, select {
+    color: #333;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #ddd;
+    &:focus {
+      border-bottom: 2px solid #62dcf5;
+    }
+  }
+  input {
+    padding: .3rem 0;
+  }
+  select {
+    padding: .5rem 0;
+    border: 1px solid #ddd;
+  }
+  .btn-group {
+    margin-top: 2rem;
+    margin-bottom: .5rem;
+    display: flex;
+    justify-content: flex-end;
+    .btn-confirm {
+      box-shadow: 0 0 1rem #bbb;
+      background: var(--principal-color);
+      padding: .5rem 1.2rem;
+      color: #fff;
+      transition: background .3s;
+      cursor: pointer;
+      &:hover, &:focus {
+        background: #2fd1f1;
+      }
+    }
+    .btn-cancel {
+      color: #999;
+      margin-right: 1.5rem;
+      cursor: pointer;
+      &:hover, &:focus {
+        text-decoration: underline;
+      }
     }
   }
 }
-
-.form-cadastro input[type="text"],
-.form-cadastro input[type="number"],
-.form-cadastro select {
-  border-radius: 5px;
-  border: 1px solid var(--principal-color);
-  outline: none;
-  background: #fff;
-  padding: 5px 10px;
-  width: 70%;
+.title {
+  display: inline;
+  margin-top: 0;
+  padding-left: 0;
+  font-size: 1.6rem;
+  color:#008eaa;
 }
-
-.form-cadastro input[type="radio"] {
-  margin: 0 10px;
+*::-webkit-input-placeholder {
+  color: #aaa;
 }
-
-.btn-confirm {
-  background: var(--principal-color);
-  border: 1px solid var(--principal-color);
-  margin-top: 30px;
-  padding: 10px 25px;
-  border-radius: 5px;
-  outline: none;
-  font-weight: bold;
-  color: #fff;
-  float: right;
-  &:hover, &:focus {
-    background: #fff;
-    color: var(--principal-color);
-  }
+*::-moz-placeholder {
+  color: #aaa;
 }
-
-.btn-cancel {
-  color: #999;
-  float: right;
-  text-decoration: underline;
-  margin: 40px 20px 0 0;
-  &:hover, &:focus {
-    color: black;
-    text-decoration: none;
-    background: #fff;
-    cursor: pointer;
-  }
+*:-ms-input-placeholder {
+  color: #aaa;
 }
-
-.required {
-  color: red;
-  font-weight: normal;
+*:-moz-placeholder {
+  color: #aaa;
 }
 </style>
