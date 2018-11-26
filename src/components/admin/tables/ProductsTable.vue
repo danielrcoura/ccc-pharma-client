@@ -127,51 +127,5 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-
-.btn-cadastrar {
-  background-color: #fff;
-  border: none;
-  box-shadow: 0 1px 7px #aaa;
-  border-radius: 24px;
-  padding: .8rem 1.2rem;
-  margin: 2rem 0;
-  color: #888;
-  font-size: .9rem;
-  font-weight: bold;
-  cursor: pointer;
-  outline: none;
-}
-
-table {
-  border-collapse: collapse;
-  width: 100%;
-  thead {
-    border-bottom: 1px solid #ddd;
-  }
-  th {
-    font-weight: normal;
-    color: #999;
-    padding: .5rem 0;
-    cursor: pointer;
-    &:hover {
-      color: #777;
-    }
-  }
-  tbody tr:hover {
-    background: #f1f1f1;
-  }
-}
-table th {
-  text-align: left;
-}
-
-.icon {
-  margin-right: .7rem;
-  color: #55b42f;
-  font-size: 1rem;
-}
-
-.modal-enter, .modal-leave-active {
-  opacity: 0;
-}
+  @import 'src/assets/css/tables.scss';
 </style>
