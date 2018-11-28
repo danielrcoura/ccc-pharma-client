@@ -45,5 +45,101 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  @import 'src/assets/css/tables.scss';
+.modal {
+  font-family: Helvetica, Arial, sans-serif;
+  --principal-color: #06b1d3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6);
+  transition: opacity .3s ease;
+  .modal-content {
+    transition: all .3s ease;
+    background-color: #fff;
+    padding: 1.5rem 3rem;
+    box-shadow: 0 0 1rem #666;
+  }
+}
+form {
+  display: flex;
+  flex-direction: column;
+  label {
+    font-size: .8rem;
+    color: #999;
+    margin-top: 1rem;
+    margin-bottom: 5px;
+  }
+  button, input, select {
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 1rem;
+  }
+  input, select {
+    color: #333;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #ddd;
+    &:focus {
+      border-bottom: 2px solid #62dcf5;
+    }
+  }
+  input {
+    padding: .3rem 0;
+  }
+  select {
+    padding: .5rem 0;
+    border: 1px solid #ddd;
+  }
+  .btn-group {
+    margin-top: 2rem;
+    margin-bottom: .5rem;
+    display: flex;
+    justify-content: flex-end;
+    .btn-confirm {
+      box-shadow: 0 0 1rem #bbb;
+      background: var(--principal-color);
+      padding: .5rem 1.2rem;
+      color: #fff;
+      transition: background .3s;
+      cursor: pointer;
+      &:hover, &:focus {
+        background: #2fd1f1;
+      }
+    }
+    .btn-cancel {
+      color: #999;
+      margin-right: 1.5rem;
+      cursor: pointer;
+      &:hover, &:focus {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+.title {
+  display: inline;
+  margin-top: 0;
+  padding-left: 0;
+  font-size: 1.6rem;
+  color:#008eaa;
+}
+*::-webkit-input-placeholder {
+  color: #999;
+}
+*::-moz-placeholder {
+  color: #999;
+}
+*:-ms-input-placeholder {
+  color: #999;
+}
+*:-moz-placeholder {
+  color: #999;
+}
 </style>

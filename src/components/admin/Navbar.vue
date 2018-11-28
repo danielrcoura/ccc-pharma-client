@@ -3,14 +3,14 @@
     <img src='../../assets/logo-admin.svg' alt=''>
     <nav>
       <ul>
-        <a href='#'><li>Dashboard</li></a>
+        <li @click="active = 'dashboard'" :class="{active: active === 'dashboard'}">Dashboard</li>
         <router-link to='/admin/manage/products'>
-          <a href='#'><li>Produtos</li></a>
+          <li @click="active = 'produtos'" :class="{active: active === 'produtos'}">Produtos</li>
         </router-link>
         <router-link to='/admin/manage/lots'>
-          <a href='#'><li>Lotes</li></a>
+          <li @click="active = 'estoque'" :class="{active: active === 'estoque'}">Estoque</li>
         </router-link>
-        <a href='#'><li>Vendas</li></a>
+        <li @click="active = 'vendas'" :class="{active: active === 'vendas'}">Vendas</li>
       </ul>
     </nav>
   </div>
@@ -18,7 +18,12 @@
 
 <script>
 export default {
-  name: 'Navbar'
+  name: 'Navbar',
+  data () {
+    return {
+      active: 'dashboard'
+    }
+  }
 }
 </script>
 
@@ -28,7 +33,7 @@ export default {
   justify-content: space-between;
   padding: 0 1rem;
   box-shadow: 0 3px 5px #ccc;
-  background: #06b1d3;
+  background-image: linear-gradient(90deg, #4fc5dd, #06b1d3, #4fc5dd);
   ul {
     list-style: none;
     color: #fff;
@@ -38,7 +43,12 @@ export default {
     li {
       display: inline-block;
       padding: 1rem;
+      cursor: pointer;
     }
   }
+}
+.active {
+  background: #fff;
+  color: #0395b3;
 }
 </style>
