@@ -5,8 +5,10 @@
     <td>{{ produto.fabricante }}</td>
     <td>{{ produto.categoria }}</td>
     <td>{{ produto.preco }}</td>
-    <td class="small"><span class="icon clickable" @click="showForm = true">{{icons.memo}}</span></td>
-    <td class="small"><span class="icon clickable cross" @click="removeRow(index)">{{icons.cross}}</span></td>
+    <td class="small">
+      <span class="icon clickable" @click="showForm = true">{{icons.memo}}</span>
+      <span class="icon clickable cross" @click="removeRow(index)">{{icons.cross}}</span>
+    </td>
     <transition name="modal">
       <product-form :produto="produto" @close="showForm = false" v-if="showForm"/>
     </transition>
@@ -42,10 +44,11 @@ export default {
   margin-right: .7rem;
   color: #247e00;
   font-size: 1rem;
+  cursor: pointer;
 }
 
 .small {
-  width: 3%;
+  width: 100px;
 }
 .cross {
   color: #dd1818;
@@ -53,11 +56,12 @@ export default {
   font-weight: bold;
 }
 td {
-  color: #5a9cb6;
-  padding: 1rem 0;
+  color: #777;
+  padding: 1rem;
+  border-right: 1px solid #ccc;
   cursor: default;
-}
-.clickable {
-  cursor: pointer;
+  &:last-child {
+    border-right: none;
+  }
 }
 </style>

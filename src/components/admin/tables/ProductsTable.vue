@@ -1,23 +1,31 @@
 <template>
   <div>
+    <header>
+      <h1>Produtos</h1>
+    </header>
+    <div style="padding: 0 3rem">
     <button class="btn-cadastrar" @click="showForm = true">
-      <span class="icon">{{ icons.plus }}</span>Novo
+      <span class="icon">{{ icons.plus }}</span>Cadastrar novo produto
     </button>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th v-for="title in dinamicTitles" :key="title.property"
-          @click="changeSort(title.property)">
-            <span>{{ title.label }}</span>
-            <span class="sort-arrow" :class="arrowDirection(title.property)"></span>
-          </th>
-        </tr>
-      </thead>
-      <tbody v-for="(produto, index) in produtos" :key="index">
-        <product-row :produto="produto"/>
-      </tbody>
-    </table>
+    <div class="table-container">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th v-for="title in dinamicTitles" :key="title.property"
+            @click="changeSort(title.property)">
+              <span>{{ title.label }}</span>
+              <span class="sort-arrow" :class="arrowDirection(title.property)"></span>
+            </th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody v-for="(produto, index) in produtos" :key="index">
+          <product-row :produto="produto"/>
+        </tbody>
+      </table>
+    </div>
+    </div>
     <transition name="modal">
       <product-form :produto="{}" @close="showForm = false" v-if="showForm"/>
     </transition>
@@ -43,6 +51,90 @@ export default {
       ],
       sortConfig: { property: null, order: null },
       produtos: [
+        {
+          nome: 'Produto2',
+          codigo: 1235,
+          fabricante: 'Fab3',
+          categoria: 'Higiene pessoal',
+          preco: 30.0
+        },
+        {
+          nome: 'Produto1',
+          codigo: 1234,
+          fabricante: 'Fab1',
+          categoria: 'Medicamentos',
+          preco: 20.0
+        },
+        {
+          nome: 'Produto3',
+          codigo: 1236,
+          fabricante: 'Fab1',
+          categoria: 'Cosméticos',
+          preco: 10.0
+        },
+        {
+          nome: 'Produto2',
+          codigo: 1235,
+          fabricante: 'Fab3',
+          categoria: 'Higiene pessoal',
+          preco: 30.0
+        },
+        {
+          nome: 'Produto1',
+          codigo: 1234,
+          fabricante: 'Fab1',
+          categoria: 'Medicamentos',
+          preco: 20.0
+        },
+        {
+          nome: 'Produto3',
+          codigo: 1236,
+          fabricante: 'Fab1',
+          categoria: 'Cosméticos',
+          preco: 10.0
+        },
+        {
+          nome: 'Produto2',
+          codigo: 1235,
+          fabricante: 'Fab3',
+          categoria: 'Higiene pessoal',
+          preco: 30.0
+        },
+        {
+          nome: 'Produto1',
+          codigo: 1234,
+          fabricante: 'Fab1',
+          categoria: 'Medicamentos',
+          preco: 20.0
+        },
+        {
+          nome: 'Produto3',
+          codigo: 1236,
+          fabricante: 'Fab1',
+          categoria: 'Cosméticos',
+          preco: 10.0
+        },
+        {
+          nome: 'Produto2',
+          codigo: 1235,
+          fabricante: 'Fab3',
+          categoria: 'Higiene pessoal',
+          preco: 30.0
+        },
+        {
+          nome: 'Produto1',
+          codigo: 1234,
+          fabricante: 'Fab1',
+          categoria: 'Medicamentos',
+          preco: 20.0
+        },
+        {
+          nome: 'Produto3',
+          codigo: 1236,
+          fabricante: 'Fab1',
+          categoria: 'Cosméticos',
+          preco: 10.0
+        },
         {
           nome: 'Produto2',
           codigo: 1235,
@@ -127,4 +219,17 @@ export default {
 
 <style lang='scss' scoped>
 @import 'src/assets/css/tables.scss';
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+header {
+  h1 {
+    font-family: 'Roboto', sans-serif;  
+    border-bottom: 1px solid #ccc;
+    padding-bottom: .3rem;
+    padding-left: 1rem;
+    margin-top: 2rem;
+    color: #777;
+    font-weight: normal;
+  }
+}
 </style>
