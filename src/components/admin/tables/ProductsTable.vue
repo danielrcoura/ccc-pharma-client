@@ -1,10 +1,7 @@
 <template>
   <div>
     <page-title title="Produtos"/>
-    <div style="padding: 0 3rem">
-    <button class="btn-cadastrar" @click="showForm = true">
-      <span class="icon">{{ icons.plus }}</span>Cadastrar novo produto
-    </button>
+    <tools-bar/>
     <div class="table-container">
       <table class="table">
         <thead>
@@ -23,7 +20,6 @@
         </tbody>
       </table>
     </div>
-    </div>
     <transition name="modal">
       <product-form :produto="{}" @close="showForm = false" v-if="showForm"/>
     </transition>
@@ -34,6 +30,8 @@
 import ProductForm from '@/components/admin/forms/ProductForm'
 import ProductRow from '@/components/admin/tables/ProductRow'
 import PageTitle from '@/components/admin/PageTitle'
+import ToolsBar from '@/components/admin/ToolsBar'
+
 import icons from 'glyphicons'
 
 export default {
@@ -172,7 +170,8 @@ export default {
   components: {
     ProductForm,
     ProductRow,
-    PageTitle
+    PageTitle,
+    ToolsBar
   },
   methods: {
     productForm () {
@@ -219,5 +218,4 @@ export default {
 
 <style lang='scss' scoped>
 @import 'src/assets/css/tables.scss';
-@import url('https://fonts.googleapis.com/css?family=Roboto');
 </style>

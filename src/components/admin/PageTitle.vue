@@ -14,6 +14,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
 h1 {
   font-family: 'Roboto', sans-serif;
   border-bottom: 1px solid #ccc;
