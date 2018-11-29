@@ -12,55 +12,69 @@
     outline: none;
   }
   
-  table {
-    border-collapse: collapse;
-    width: 100%;
-    thead {
-      border-bottom: 1px solid #ddd;
-    }
-    th {
-      font-weight: normal;
-      color: #999;
-      padding: .5rem 0;
-      cursor: pointer;
-      &:hover {
-        color: #777;
-      }
-    }
-    td {
-      color: #5a9cb6;
-      padding: 1rem 0;
-      cursor: default;
-    }
-    tbody tr:hover {
-      background: #f1f1f1;
-    }
-  }
+.sort-arrow {
+  display: inline-block;
+  height: 10px;
+  width: 10px;
+  background-image: url('../../../assets/sort-arrow.png');
+  background-repeat: no-repeat;
+}
+.arrow-down {
+  background-position: 0 -10px;
+}
+.arrow-up {
+  background-position: 0 -20px;
+}
 
-  table th, table td {
-    text-align: left;
+table {
+  border-collapse: collapse;
+  width: 100%;
+  thead {
+    border-bottom: 1px solid #ddd;
   }
-  
-  .icon {
-    margin-right: .7rem;
-    color: #55b42f;
-    font-size: 15px;
-  }
-
-  .small {
-    width: 40px;
-  }
-  
-  .cross {
-    color: #dd1818;
-    font-size: 18px;
-    font-weight: bold;
-  }
-
-  .clickable {
+  th {
+    font-weight: normal;
+    color: #999;
+    padding: .5rem 0;
     cursor: pointer;
+    &:hover {
+      color: #777;
+    }
   }
-  
-  .modal-enter, .modal-leave-active {
-    opacity: 0;
+  td {
+    color: #5a9cb6;
+    padding: 1rem 0;
+    cursor: default;
   }
+  tbody tr:hover {
+    background: #f1f1f1;
+  }
+}
+
+table th, table td {
+  text-align: left;
+}
+
+.icon {
+  margin-right: .7rem;
+  color: #55b42f;
+  font-size: 15px;
+}
+
+.small {
+  width: 40px;
+}
+
+.cross {
+  color: #dd1818;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.modal-enter, .modal-leave-active {
+  opacity: 0;
+}
