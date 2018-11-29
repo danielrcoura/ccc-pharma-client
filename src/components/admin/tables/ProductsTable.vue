@@ -1,8 +1,6 @@
 <template>
   <div>
-    <header>
-      <h1>Produtos</h1>
-    </header>
+    <page-title title="Produtos"/>
     <div style="padding: 0 3rem">
     <button class="btn-cadastrar" @click="showForm = true">
       <span class="icon">{{ icons.plus }}</span>Cadastrar novo produto
@@ -35,6 +33,7 @@
 <script>
 import ProductForm from '@/components/admin/forms/ProductForm'
 import ProductRow from '@/components/admin/tables/ProductRow'
+import PageTitle from '@/components/admin/PageTitle'
 import icons from 'glyphicons'
 
 export default {
@@ -172,7 +171,8 @@ export default {
   },
   components: {
     ProductForm,
-    ProductRow
+    ProductRow,
+    PageTitle
   },
   methods: {
     productForm () {
@@ -220,16 +220,4 @@ export default {
 <style lang='scss' scoped>
 @import 'src/assets/css/tables.scss';
 @import url('https://fonts.googleapis.com/css?family=Roboto');
-
-header {
-  h1 {
-    font-family: 'Roboto', sans-serif;
-    border-bottom: 1px solid #ccc;
-    padding-bottom: .3rem;
-    padding-left: 1rem;
-    margin-top: 2rem;
-    color: #777;
-    font-weight: normal;
-  }
-}
 </style>
