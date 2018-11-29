@@ -223,7 +223,7 @@ export default {
 
 header {
   h1 {
-    font-family: 'Roboto', sans-serif;  
+    font-family: 'Roboto', sans-serif;
     border-bottom: 1px solid #ccc;
     padding-bottom: .3rem;
     padding-left: 1rem;

@@ -6,8 +6,8 @@
     <td>{{ produto.categoria }}</td>
     <td>{{ produto.preco }}</td>
     <td class="small">
-      <span class="icon clickable" @click="showForm = true">{{icons.memo}}</span>
-      <span class="icon clickable cross" @click="removeRow(index)">{{icons.cross}}</span>
+      <span class="btn edit" @click="showForm = true">{{icons.edit}}</span>
+      <span class="btn remove" @click="removeRow(index)">{{icons.cancel}}</span>
     </td>
     <transition name="modal">
       <product-form :produto="produto" @close="showForm = false" v-if="showForm"/>
@@ -40,15 +40,9 @@ export default {
 .modal-enter, .modal-leave-active {
   opacity: 0;
 }
-.icon {
-  margin-right: .7rem;
-  color: #247e00;
-  font-size: 1rem;
-  cursor: pointer;
-}
 
 .small {
-  width: 100px;
+  width: 110px;
 }
 .cross {
   color: #dd1818;
@@ -63,5 +57,21 @@ td {
   &:last-child {
     border-right: none;
   }
+}
+
+.btn {
+  padding: .3rem .5rem;
+  color: #fff;
+  cursor: pointer;
+  border-radius: 5px;
+  &:first-child {
+    margin-right: 5px;
+  }
+}
+.edit {
+  background: #7cb8d4;
+}
+.remove {
+  background: #d65353;
 }
 </style>
