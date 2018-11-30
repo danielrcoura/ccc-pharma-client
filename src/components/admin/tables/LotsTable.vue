@@ -72,10 +72,6 @@ export default {
     LotsForm
   },
   methods: {
-    lotForm () {
-      var form = document.getElementById('lotForm')
-      form.style.display = 'block'
-    },
     sort () {
       this.lotes.sort((a, b) => {
         if (a[this.sortProperty] < b[this.sortProperty]) return -1
@@ -83,16 +79,12 @@ export default {
         else return 0
       })
     },
-    editRow (lote) {
-      let form = document.getElementById('lotForm')
-      let date = new Date(lote.validade)
-      document.getElementById('nome').value = lote.produto
-      document.getElementById('validade').value = date.toISOString().slice(0, 10)
-      document.getElementById('quantidade').value = lote.quantidade
-      form.style.display = 'block'
-    },
-    removeRow (index) {
-      this.lotes.splice(index, 1)
+    closeToValidity() {
+      const lotsByValidity = lotes.filter((lote) => {
+        const currentDate = new Date();
+        const lotDate = new Date(lote.validade);
+        return currentDate > lotDate && lote.quantidade > 0;
+      })
     }
   }
 }
