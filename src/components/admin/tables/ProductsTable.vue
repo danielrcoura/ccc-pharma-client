@@ -1,8 +1,5 @@
 <template>
   <div>
-    <button class="btn-cadastrar" @click="showForm = true">
-      <span class="icon">{{ icons.plus }}</span>Novo
-    </button>
     <table class="table">
       <thead>
         <tr>
@@ -12,20 +9,17 @@
             <span>{{ title.label }}</span>
             <span class="sort-arrow" :class="arrowDirection(title.property)"></span>
           </th>
+          <th>Ações</th>
         </tr>
       </thead>
       <tbody v-for="(produto, index) in produtos" :key="index">
         <product-row :produto="produto"/>
       </tbody>
     </table>
-    <transition name="modal">
-      <product-form :produto="{}" @close="showForm = false" v-if="showForm"/>
-    </transition>
   </div>
 </template>
 
 <script>
-import ProductForm from '@/components/admin/forms/ProductForm'
 import ProductRow from '@/components/admin/tables/ProductRow'
 import icons from 'glyphicons'
 
@@ -63,6 +57,90 @@ export default {
           fabricante: 'Fab1',
           categoria: 'Cosméticos',
           preco: 10.0
+        },
+        {
+          nome: 'Produto2',
+          codigo: 1235,
+          fabricante: 'Fab3',
+          categoria: 'Higiene pessoal',
+          preco: 30.0
+        },
+        {
+          nome: 'Produto1',
+          codigo: 1234,
+          fabricante: 'Fab1',
+          categoria: 'Medicamentos',
+          preco: 20.0
+        },
+        {
+          nome: 'Produto3',
+          codigo: 1236,
+          fabricante: 'Fab1',
+          categoria: 'Cosméticos',
+          preco: 10.0
+        },
+        {
+          nome: 'Produto2',
+          codigo: 1235,
+          fabricante: 'Fab3',
+          categoria: 'Higiene pessoal',
+          preco: 30.0
+        },
+        {
+          nome: 'Produto1',
+          codigo: 1234,
+          fabricante: 'Fab1',
+          categoria: 'Medicamentos',
+          preco: 20.0
+        },
+        {
+          nome: 'Produto3',
+          codigo: 1236,
+          fabricante: 'Fab1',
+          categoria: 'Cosméticos',
+          preco: 10.0
+        },
+        {
+          nome: 'Produto2',
+          codigo: 1235,
+          fabricante: 'Fab3',
+          categoria: 'Higiene pessoal',
+          preco: 30.0
+        },
+        {
+          nome: 'Produto1',
+          codigo: 1234,
+          fabricante: 'Fab1',
+          categoria: 'Medicamentos',
+          preco: 20.0
+        },
+        {
+          nome: 'Produto3',
+          codigo: 1236,
+          fabricante: 'Fab1',
+          categoria: 'Cosméticos',
+          preco: 10.0
+        },
+        {
+          nome: 'Produto2',
+          codigo: 1235,
+          fabricante: 'Fab3',
+          categoria: 'Higiene pessoal',
+          preco: 30.0
+        },
+        {
+          nome: 'Produto1',
+          codigo: 1234,
+          fabricante: 'Fab1',
+          categoria: 'Medicamentos',
+          preco: 20.0
+        },
+        {
+          nome: 'Produto3',
+          codigo: 1236,
+          fabricante: 'Fab1',
+          categoria: 'Cosméticos',
+          preco: 10.0
         }
       ]
     }
@@ -79,14 +157,9 @@ export default {
     }
   },
   components: {
-    ProductForm,
     ProductRow
   },
   methods: {
-    productForm () {
-      var form = document.getElementById('productForm')
-      form.style.display = 'block'
-    },
     changeSort (property) {
       if (this.sortConfig.property === property) {
         if (this.sortConfig.order === 'asc') {

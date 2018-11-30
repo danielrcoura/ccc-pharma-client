@@ -5,8 +5,10 @@
     <td>{{ produto.fabricante }}</td>
     <td>{{ produto.categoria }}</td>
     <td>{{ produto.preco }}</td>
-    <td class="small"><span class="icon clickable" @click="showForm = true">{{icons.memo}}</span></td>
-    <td class="small"><span class="icon clickable cross" @click="removeRow(index)">{{icons.cross}}</span></td>
+    <td class="small">
+      <span class="btn edit" @click="showForm = true">{{ icons.edit }}</span>
+      <span class="btn remove">{{ icons.cancel }}</span>
+    </td>
     <transition name="modal">
       <product-form :produto="produto" @close="showForm = false" v-if="showForm"/>
     </transition>
@@ -38,14 +40,9 @@ export default {
 .modal-enter, .modal-leave-active {
   opacity: 0;
 }
-.icon {
-  margin-right: .7rem;
-  color: #247e00;
-  font-size: 1rem;
-}
 
 .small {
-  width: 3%;
+  width: 110px;
 }
 .cross {
   color: #dd1818;
@@ -53,11 +50,28 @@ export default {
   font-weight: bold;
 }
 td {
-  color: #5a9cb6;
-  padding: 1rem 0;
+  color: #777;
+  padding: 1rem;
+  border-right: 1px solid #ccc;
   cursor: default;
+  &:last-child {
+    border-right: none;
+  }
 }
-.clickable {
+
+.btn {
+  padding: .3rem .5rem;
+  color: #fff;
   cursor: pointer;
+  border-radius: 5px;
+  &:first-child {
+    margin-right: 5px;
+  }
+}
+.edit {
+  background: #7cb8d4;
+}
+.remove {
+  background: #d65353;
 }
 </style>
