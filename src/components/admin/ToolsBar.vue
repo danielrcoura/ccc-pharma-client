@@ -1,8 +1,10 @@
 <template>
-  <button class="btn-cadastrar" @click="showForm = true">
-    <span class="icon">{{ plus }}</span>
-    Cadastrar novo produto
-  </button>
+  <div class="tools-bar">
+    <button @click="$emit('create')">
+      <span class="icon">{{ plus }}</span>
+      Cadastrar novo produto
+    </button>
+  </div>
 </template>
 
 <script>
@@ -19,7 +21,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.btn-cadastrar {
+.tools-bar {
+  margin-bottom: .5rem;
+}
+button {
   background-color: #42db8f;
   border: none;
   padding: .8rem 1rem;

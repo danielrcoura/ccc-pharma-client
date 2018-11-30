@@ -6,10 +6,10 @@
 
 <script>
 export default {
-    name: 'PageTitle',
-    props: {
-      title: String
-    }
+  name: 'PageTitle',
+  props: {
+    title: String
+  }
 }
 </script>
 
@@ -22,6 +22,7 @@ h1 {
   padding-bottom: .3rem;
   padding-left: 1rem;
   margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
   color: #777;
   font-weight: normal;
 }

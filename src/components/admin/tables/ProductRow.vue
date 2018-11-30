@@ -6,8 +6,8 @@
     <td>{{ produto.categoria }}</td>
     <td>{{ produto.preco }}</td>
     <td class="small">
-      <span class="btn edit" @click="showForm = true">{{icons.edit}}</span>
-      <span class="btn remove" @click="removeRow(index)">{{icons.cancel}}</span>
+      <span class="btn edit" @click="showForm = true">{{ icons.edit }}</span>
+      <span class="btn remove">{{ icons.cancel }}</span>
     </td>
     <transition name="modal">
       <product-form :produto="produto" @close="showForm = false" v-if="showForm"/>

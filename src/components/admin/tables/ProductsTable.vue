@@ -1,37 +1,26 @@
 <template>
   <div>
-    <page-title title="Produtos"/>
-    <tools-bar/>
-    <div class="table-container">
-      <table class="table">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th v-for="title in dinamicTitles" :key="title.property"
-            @click="changeSort(title.property)">
-              <span>{{ title.label }}</span>
-              <span class="sort-arrow" :class="arrowDirection(title.property)"></span>
-            </th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody v-for="(produto, index) in produtos" :key="index">
-          <product-row :produto="produto"/>
-        </tbody>
-      </table>
-    </div>
-    <transition name="modal">
-      <product-form :produto="{}" @close="showForm = false" v-if="showForm"/>
-    </transition>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th v-for="title in dinamicTitles" :key="title.property"
+          @click="changeSort(title.property)">
+            <span>{{ title.label }}</span>
+            <span class="sort-arrow" :class="arrowDirection(title.property)"></span>
+          </th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody v-for="(produto, index) in produtos" :key="index">
+        <product-row :produto="produto"/>
+      </tbody>
+    </table>
   </div>
 </template>
 
 <script>
-import ProductForm from '@/components/admin/forms/ProductForm'
 import ProductRow from '@/components/admin/tables/ProductRow'
-import PageTitle from '@/components/admin/PageTitle'
-import ToolsBar from '@/components/admin/ToolsBar'
-
 import icons from 'glyphicons'
 
 export default {
@@ -168,16 +157,9 @@ export default {
     }
   },
   components: {
-    ProductForm,
-    ProductRow,
-    PageTitle,
-    ToolsBar
+    ProductRow
   },
   methods: {
-    productForm () {
-      var form = document.getElementById('productForm')
-      form.style.display = 'block'
-    },
     changeSort (property) {
       if (this.sortConfig.property === property) {
         if (this.sortConfig.order === 'asc') {

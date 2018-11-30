@@ -32,7 +32,7 @@ export default {
   methods: {
     registerProduct () {
       alert('Cadastrado com sucesso')
-      this.closeForm()
+      this.$emit('close')
     }
   },
   props: {
