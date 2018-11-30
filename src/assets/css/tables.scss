@@ -1,17 +1,9 @@
-.btn-cadastrar {
-    background-color: #fff;
-    border: none;
-    box-shadow: 0 1px 7px #aaa;
-    border-radius: 24px;
-    padding: .8rem 1.2rem;
-    margin: 2rem 0;
-    color: #888;
-    font-size: .9rem;
-    font-weight: bold;
-    cursor: pointer;
-    outline: none;
-  }
-  
+div {
+  max-height: 60vh;
+  overflow-x: auto;
+  box-shadow: 0 0 10px #ccc;
+}
+
 .sort-arrow {
   display: inline-block;
   height: 10px;
@@ -34,47 +26,21 @@ table {
   }
   th {
     font-weight: normal;
-    color: #999;
-    padding: .5rem 0;
+    color: #fff;
+    text-align: left;
+    padding: .7rem 1rem;
+    border-right: 1px solid #ccc;
     cursor: pointer;
-    &:hover {
-      color: #777;
+    background: #23aac5;
+    user-select: none;
+    &:last-child {
+      border-right: none;
     }
   }
-  td {
-    color: #5a9cb6;
-    padding: 1rem 0;
-    cursor: default;
+  tbody {
+    border-bottom: 1px solid #ddd;
   }
   tbody tr:hover {
     background: #f1f1f1;
   }
-}
-
-table th, table td {
-  text-align: left;
-}
-
-.icon {
-  margin-right: .7rem;
-  color: #55b42f;
-  font-size: 15px;
-}
-
-.small {
-  width: 40px;
-}
-
-.cross {
-  color: #dd1818;
-  font-size: 18px;
-  font-weight: bold;
-}
-
-.clickable {
-  cursor: pointer;
-}
-
-.modal-enter, .modal-leave-active {
-  opacity: 0;
 }

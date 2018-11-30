@@ -91,5 +91,5 @@ export default {
 </script>
 
 <style lang='scss' scoped>
-  @import 'src/assets/css/tables.scss';
+@import 'src/assets/css/tables.scss';
 </style>
