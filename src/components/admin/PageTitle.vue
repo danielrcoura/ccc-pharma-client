@@ -14,16 +14,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Nunito');
 
 h1 {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Nunito', sans-serif;
   border-bottom: 1px solid #ccc;
   padding-bottom: .3rem;
-  padding-left: 1rem;
+  padding-left: 0rem;
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
-  color: #777;
+  color: #999;
   font-weight: normal;
 }
 </style>

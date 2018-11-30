@@ -22,7 +22,7 @@ export default {
 
 <style lang="scss" scoped>
 .tools-bar {
-  margin-bottom: .5rem;
+  margin-bottom: .8rem;
 }
 button {
   background-color: #42db8f;
