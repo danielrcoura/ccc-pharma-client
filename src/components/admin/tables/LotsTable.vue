@@ -1,6 +1,12 @@
 <template>
   <div>
     <button class='btn-cadastrar' @click='lotForm()'><span class='icon'>{{icons.plus}}</span>  Novo</button>
+    
+    <button v-for="filter in filters" :key="filter.property" 
+      @click="currentFilter=filter.property">
+      <span class='icon'></span> {{ filter.label }}
+    </button>
+
     <lots-form/>
     <table class='table'>
       <thead>
@@ -14,7 +20,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for='(lote, index) in lotes' :key='index'>
+        <tr v-for='(lote, index) in getLots()' :key='index'>
           <td>{{ lote.produto }}</td>
           <td>{{ lote.quantidade }}</td>
           <td>{{ lote.validade }}</td>
@@ -36,6 +42,12 @@ export default {
     return {
       icons,
       sortProperty: 'produto',
+      currentFilter: 'nenhum',
+      filters: [
+        { label: 'Todos', property: 'nenhum'},
+        { label: 'Em falta', property: 'falta'},
+        { label: 'Vencidos', property: 'vencido'}
+      ],
       dinamicTitles: [
         { label: 'Produto', property: 'produto' },
         { label: 'Quantidade', property: 'quantidade' },
@@ -56,6 +68,31 @@ export default {
           produto: 'Benegrip',
           quantidade: 10,
           validade: '2020/05/10'
+        },
+        {
+          produto: 'Neosoro',
+          quantidade: 20,
+          validade: '2016/12/07'
+        },
+        {
+          produto: 'Dipirona',
+          quantidade: 16,
+          validade: '2017/05/26'
+        },
+        {
+          produto: 'Dorflex',
+          quantidade: 5,
+          validade: '2019/11/10'
+        },
+        {
+          produto: 'Ibuprofeno',
+          quantidade: 0,
+          validade: '2022/08/11'
+        },
+        {
+          produto: 'Torsilax',
+          quantidade: 0,
+          validade: '2021/02/15'
         }
       ]
     }
@@ -93,6 +130,21 @@ export default {
     },
     removeRow (index) {
       this.lotes.splice(index, 1)
+    },
+    getLots() {
+      if (this.currentFilter === 'vencido') {
+        const currentDate = new Date();
+        return this.lotes.filter((lote) => {
+          const lotDate = new Date(lote.validade);
+          return lotDate < currentDate && lote.quantidade > 0;
+        });
+      } else if (this.currentFilter === 'falta') {
+        return this.lotes.filter((lote) => {
+          return lote.quantidade <= 0;
+        })
+      } else {
+        return this.lotes;
+      }
     }
   }
 }
@@ -100,4 +152,7 @@ export default {
 
 <style lang='scss' scoped>
 @import 'src/assets/css/tables.scss';
+.btn:focus {
+  background: magenta;
+}
 </style>
