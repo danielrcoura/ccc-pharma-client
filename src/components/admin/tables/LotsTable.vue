@@ -1,33 +1,31 @@
 <template>
   <div>
-    <button class='btn-cadastrar' @click='lotForm()'><span class='icon'>{{icons.plus}}</span>  Novo</button>
-    <lots-form/>
+    <button class="btn-cadastrar" @click="showForm = true">
+      <span class="icon">{{ icons.plus }}</span>Novo
+    </button>
     <table class='table'>
       <thead>
         <tr>
           <th v-for="title in dinamicTitles" :key="title.property"
-          @click="sortProperty=title.property">
-            {{ title.label }}
-            <span v-if="sortProperty === title.property">{{ icons.arrowTriD }}</span>
-            <span v-else style="color: #ddd">{{ icons.arrowTriU }}</span>
+          @click="changeSort(title.property)">
+            <span>{{ title.label }}</span>
+            <span class="sort-arrow" :class="arrowDirection(title.property)"></span>
           </th>
         </tr>
       </thead>
-      <tbody>
-        <tr v-for='(lote, index) in lotes' :key='index'>
-          <td>{{ lote.produto }}</td>
-          <td>{{ lote.quantidade }}</td>
-          <td>{{ lote.validade }}</td>
-          <td class='small'><span class='icon clickable' @click="editRow(lote)">{{icons.pencil}}</span></td>
-          <td class='small'><span class='icon clickable cross' @click="removeRow(index)">{{icons.cross}}</span></td>
-        </tr>
+      <tbody v-for="(lote, index) in lotes" :key="index">
+        <lot-row :lote="lote"/>
       </tbody>
     </table>
+    <transition name="modal">
+      <lot-form :lote="{}" @close="showForm = false" v-if="showForm"/>
+    </transition>
   </div>
 </template>
 
 <script>
-import LotsForm from '@/components/admin/forms/LotsForm'
+import LotForm from '@/components/admin/forms/LotForm'
+import LotRow from '@/components/admin/tables/LotRow'
 import icons from 'glyphicons'
 
 export default {
@@ -35,12 +33,13 @@ export default {
   data () {
     return {
       icons,
-      sortProperty: 'produto',
+      showForm: false,
       dinamicTitles: [
         { label: 'Produto', property: 'produto' },
         { label: 'Quantidade', property: 'quantidade' },
         { label: `Validade`, property: 'validade' }
       ],
+      sortConfig: { property: null, order: null },
       lotes: [
         {
           produto: 'Paracetamol',
@@ -64,22 +63,52 @@ export default {
     this.sort()
   },
   watch: {
-    sortProperty () {
-      this.sort()
+    sortConfig: {
+      handler () {
+        this.sort()
+      },
+      deep: true
     }
   },
   components: {
-    LotsForm
+    LotForm,
+    LotRow
   },
   methods: {
+    changeSort (property) {
+      if (this.sortConfig.property === property) {
+        if (this.sortConfig.order === 'asc') {
+          this.sortConfig.order = 'desc'
+        } else {
+          this.sortConfig.property = null
+          this.sortConfig.order = null
+        }
+      } else {
+        this.sortConfig.property = property
+        this.sortConfig.order = 'asc'
+      }
+    },
     sort () {
+      let property = this.sortConfig.property || 'nome'
       this.lotes.sort((a, b) => {
-        if (a[this.sortProperty] < b[this.sortProperty]) return -1
-        else if (a[this.sortProperty] > b[this.sortProperty]) return 1
+        if (this.sortConfig.order === 'desc') {
+          let temp = a
+          a = b
+          b = temp
+        }
+
+        if (a[property] < b[property]) return -1
+        else if (a[property] > b[property]) return 1
         else return 0
       })
     },
-    closeToValidity() {
+    arrowDirection (property) {
+      return {
+        'arrow-down': this.sortConfig.property === property && this.sortConfig.order === 'desc',
+        'arrow-up': this.sortConfig.property === property && this.sortConfig.order === 'asc'
+      }
+    },
+    closeToValidity () {
       const lotsByValidity = lotes.filter((lote) => {
         const currentDate = new Date();
         const lotDate = new Date(lote.validade);
