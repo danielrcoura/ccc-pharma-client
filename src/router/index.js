@@ -3,7 +3,7 @@ import Router from 'vue-router'
 import ProdutosCliente from '@/views/ProdutosCliente'
 import Manage from '@/views/admin/Manage'
 import ProductsPage from '@/components/admin/pages/ProductsPage'
-import LotsTable from '@/components/admin/tables/LotsTable'
+import LotsPage from '@/components/admin/pages/LotsPage'
 Vue.use(Router)
 
 export default new Router({
@@ -19,7 +19,7 @@ export default new Router({
       component: Manage,
       children: [
         { path: 'products', component: ProductsPage },
-        { path: 'lots', component: LotsTable }
+        { path: 'lots', component: LotsPage }
       ]
     }
   ]

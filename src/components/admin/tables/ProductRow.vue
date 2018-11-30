@@ -37,41 +37,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.modal-enter, .modal-leave-active {
-  opacity: 0;
-}
-
-.small {
-  width: 110px;
-}
-.cross {
-  color: #dd1818;
-  font-size: 18px;
-  font-weight: bold;
-}
-td {
-  color: #777;
-  padding: 1rem;
-  border-right: 1px solid #ccc;
-  cursor: default;
-  &:last-child {
-    border-right: none;
-  }
-}
-
-.btn {
-  padding: .3rem .5rem;
-  color: #fff;
-  cursor: pointer;
-  border-radius: 5px;
-  &:first-child {
-    margin-right: 5px;
-  }
-}
-.edit {
-  background: #7cb8d4;
-}
-.remove {
-  background: #d65353;
-}
+@import 'src/assets/css/tables.scss';
 </style>

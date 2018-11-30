@@ -1,9 +1,6 @@
 <template>
   <div>
-    <button class="btn-cadastrar" @click="showForm = true">
-      <span class="icon">{{ icons.plus }}</span>Novo
-    </button>
-    <table class='table'>
+    <table class="table">
       <thead>
         <tr>
           <th v-for="title in dinamicTitles" :key="title.property"
@@ -11,20 +8,17 @@
             <span>{{ title.label }}</span>
             <span class="sort-arrow" :class="arrowDirection(title.property)"></span>
           </th>
+          <th>Ações</th>
         </tr>
       </thead>
       <tbody v-for="(lote, index) in lotes" :key="index">
         <lot-row :lote="lote"/>
       </tbody>
     </table>
-    <transition name="modal">
-      <lot-form :lote="{}" @close="showForm = false" v-if="showForm"/>
-    </transition>
   </div>
 </template>
 
 <script>
-import LotForm from '@/components/admin/forms/LotForm'
 import LotRow from '@/components/admin/tables/LotRow'
 import icons from 'glyphicons'
 
@@ -33,7 +27,6 @@ export default {
   data () {
     return {
       icons,
-      showForm: false,
       dinamicTitles: [
         { label: 'Produto', property: 'produto' },
         { label: 'Quantidade', property: 'quantidade' },
@@ -71,7 +64,6 @@ export default {
     }
   },
   components: {
-    LotForm,
     LotRow
   },
   methods: {

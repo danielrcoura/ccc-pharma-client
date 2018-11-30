@@ -1,31 +1,31 @@
 <template>
   <div>
-    <page-title title="Produtos"/>
+    <page-title title="Lotes"/>
     <tools-bar @create="showForm = true"/>
-    <products-table/>
+    <lots-table/>
     <transition name="modal">
-      <product-form :produto="{}" @close="showForm = false" v-if="showForm"/>
+      <lot-form :lote="{}" @close="showForm = false" v-if="showForm"/>
     </transition>
   </div>
 </template>
 
 <script>
-import ProductForm from '@/components/admin/forms/ProductForm'
+import LotForm from '@/components/admin/forms/LotForm'
 import PageTitle from '@/components/admin/PageTitle'
-import ProductsTable from '@/components/admin/tables/ProductsTable'
-import ToolsBar from '@/components/admin/toolsbar/ProdToolsBar'
+import LotsTable from '@/components/admin/tables/LotsTable'
+import ToolsBar from '@/components/admin/toolsbar/LotsToolsBar'
 
 export default {
-  name: 'ProductsPage',
+  name: 'LotsPage',
   data () {
     return {
       showForm: false
     }
   },
   components: {
-    ProductForm,
+    LotForm,
     PageTitle,
-    ProductsTable,
+    LotsTable,
     ToolsBar
   }
 }

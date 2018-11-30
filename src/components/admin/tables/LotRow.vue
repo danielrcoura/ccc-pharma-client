@@ -3,8 +3,10 @@
     <td>{{ lote.produto }}</td>
     <td>{{ lote.quantidade }}</td>
     <td>{{ lote.validade }}</td>
-    <td class="small"><span class="icon clickable" @click="showForm = true">{{icons.memo}}</span></td>
-    <td class="small"><span class="icon clickable cross" @click="removeRow(index)">{{icons.cross}}</span></td>
+    <td class="small">
+      <span class="btn edit" @click="showForm = true">{{ icons.edit }}</span>
+      <span class="btn remove">{{ icons.cancel }}</span>
+    </td>
     <transition name="modal">
       <lot-form :lote="lote" @close="showForm = false" v-if="showForm"/>
     </transition>
