@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="scroll">
     <table class="table">
       <thead>
         <tr>

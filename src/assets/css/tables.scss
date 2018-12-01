@@ -1,3 +1,9 @@
+.scroll {
+  max-height: 60vh;
+  overflow-x: auto;
+  box-shadow: 0 0 10px #ccc;
+}
+
 .sort-arrow {
   display: inline-block;
   height: 10px;
