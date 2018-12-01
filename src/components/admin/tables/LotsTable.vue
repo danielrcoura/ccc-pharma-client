@@ -11,7 +11,7 @@
           <th>Ações</th>
         </tr>
       </thead>
-      <tbody v-for="(lote, index) in lotes" :key="index">
+      <tbody v-for="(lote, index) in getLots()" :key="index">
         <lot-row :lote="lote"/>
       </tbody>
     </table>
@@ -27,6 +27,7 @@ export default {
   data () {
     return {
       icons,
+      sortProperty: 'produto',
       dinamicTitles: [
         { label: 'Produto', property: 'produto' },
         { label: 'Quantidade', property: 'quantidade' },
@@ -48,6 +49,31 @@ export default {
           produto: 'Benegrip',
           quantidade: 10,
           validade: '2020/05/10'
+        },
+        {
+          produto: 'Neosoro',
+          quantidade: 20,
+          validade: '2016/12/07'
+        },
+        {
+          produto: 'Dipirona',
+          quantidade: 16,
+          validade: '2017/05/26'
+        },
+        {
+          produto: 'Dorflex',
+          quantidade: 5,
+          validade: '2019/11/10'
+        },
+        {
+          produto: 'Ibuprofeno',
+          quantidade: 0,
+          validade: '2022/08/11'
+        },
+        {
+          produto: 'Torsilax',
+          quantidade: 0,
+          validade: '2021/02/15'
         }
       ]
     }
@@ -65,6 +91,9 @@ export default {
   },
   components: {
     LotRow
+  },
+  props: {
+    currentFilter: String
   },
   methods: {
     changeSort (property) {
@@ -100,12 +129,20 @@ export default {
         'arrow-up': this.sortConfig.property === property && this.sortConfig.order === 'asc'
       }
     },
-    closeToValidity () {
-      const lotsByValidity = lotes.filter((lote) => {
-        const currentDate = new Date();
-        const lotDate = new Date(lote.validade);
-        return currentDate > lotDate && lote.quantidade > 0;
-      })
+    getLots () {
+      if (this.currentFilter === 'vencido') {
+        const currentDate = new Date()
+        return this.lotes.filter((lote) => {
+          const lotDate = new Date(lote.validade)
+          return lotDate < currentDate && lote.quantidade > 0
+        })
+      } else if (this.currentFilter === 'falta') {
+        return this.lotes.filter((lote) => {
+          return lote.quantidade <= 0
+        })
+      } else {
+        return this.lotes
+      }
     }
   }
 }

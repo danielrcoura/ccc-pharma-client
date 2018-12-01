@@ -2,14 +2,14 @@
   <div class="modal">
     <div class="modal-content">
       <form>
-        <input class="title" ref="name" type="text" :value="lote.produto" placeholder="Nome"/>
+        <input class="title" ref="codigo" type="number" :value="lote.produto" placeholder="Código do Produto"/>
         <label>Data de validade</label>
         <input type="date" :value="lote.validade"/>
         <label>Quantidade de itens</label>
         <input type="number" :value="lote.quantidade"/>
         <div class="btn-group">
           <button @click="$emit('close')" class="btn-cancel">Cancelar</button>
-          <button @click="registerProduct()" class="btn-confirm">Cadastrar produto</button>
+          <button @click="registerProduct()" class="btn-confirm">Cadastrar lote</button>
         </div>
       </form>
     </div>
@@ -28,7 +28,7 @@ export default {
     lote: {}
   },
   mounted () {
-    this.$refs.name.focus()
+    this.$refs.codigo.focus()
   }
 }
 </script>

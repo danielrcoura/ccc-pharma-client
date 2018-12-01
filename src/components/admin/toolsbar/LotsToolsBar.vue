@@ -4,6 +4,13 @@
       <span class="icon">{{ plus }}</span>
       Cadastrar novo lote
     </button>
+    <div class="filters">
+      <button v-for="filter in filters" :key="filter.property"
+        @click="selectFilter(filter.property)"
+        :class="{active: filter.property === currentFilter}">
+        {{ filter.label }}
+      </button>
+    </div>
   </div>
 </template>
 
@@ -11,10 +18,22 @@
 import { plus } from 'glyphicons'
 
 export default {
-  name: 'ToolsBar',
+  name: 'LotsToolsBar',
   data () {
     return {
-      plus
+      plus,
+      currentFilter: 'nenhum',
+      filters: [
+        {label: 'Todos', property: 'nenhum'},
+        {label: 'Em falta', property: 'falta'},
+        {label: 'Vencidos', property: 'vencido'}
+      ]
+    }
+  },
+  methods: {
+    selectFilter (filter) {
+      this.$emit('changeFilter', filter)
+      this.currentFilter = filter
     }
   }
 }
@@ -22,4 +41,18 @@ export default {
 
 <style lang="scss" scoped>
 @import 'src/assets/css/toolsbar.scss';
+.filters {
+  float: right;
+  * {
+    background: #d6d6d6;
+    border-right: 1px solid #ccc;
+    user-select: none;
+    &:last-child {
+      border-right: none;
+    }
+  }
+  .active {
+    background: #23aac5;
+  }
+}
 </style>

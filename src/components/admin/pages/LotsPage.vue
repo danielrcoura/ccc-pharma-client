@@ -1,8 +1,8 @@
 <template>
   <div>
     <page-title title="Lotes"/>
-    <tools-bar @create="showForm = true"/>
-    <lots-table/>
+    <lots-tools-bar @changeFilter="selectedFilter" @create="showForm = true"/>
+    <lots-table :currentFilter="currentFilter"/>
     <transition name="modal">
       <lot-form :lote="{}" @close="showForm = false" v-if="showForm"/>
     </transition>
@@ -13,27 +13,32 @@
 import LotForm from '@/components/admin/forms/LotForm'
 import PageTitle from '@/components/admin/PageTitle'
 import LotsTable from '@/components/admin/tables/LotsTable'
-import ToolsBar from '@/components/admin/toolsbar/LotsToolsBar'
+import LotsToolsBar from '@/components/admin/toolsbar/LotsToolsBar'
 
 export default {
   name: 'LotsPage',
   data () {
     return {
-      showForm: false
+      showForm: false,
+      currentFilter: 'nenhum'
+    }
+  },
+  methods: {
+    selectedFilter (filterName) {
+      this.currentFilter = filterName
     }
   },
   components: {
     LotForm,
     PageTitle,
     LotsTable,
-    ToolsBar
+    LotsToolsBar
   }
 }
 </script>
 
 <style lang='scss' scoped>
-.modal-enter, .modal-leave-active {
-  opacity: 0;
-}
-
+  .modal-enter, .modal-leave-active {
+    opacity: 0;
+  }
 </style>
