@@ -21,20 +21,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.tools-bar {
-  margin-bottom: .8rem;
-}
-button {
-  background-color: #42db8f;
-  border: none;
-  padding: .8rem 1rem;
-  color: #fff;
-  font-size: .9rem;
-  font-weight: bold;
-  cursor: pointer;
-  outline: none;
-  .icon {
-    margin-right: .4rem;
-  }
-}
+@import 'src/assets/css/toolsbar.scss';
 </style>

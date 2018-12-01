@@ -13,7 +13,7 @@
 import ProductForm from '@/components/admin/forms/ProductForm'
 import PageTitle from '@/components/admin/PageTitle'
 import ProductsTable from '@/components/admin/tables/ProductsTable'
-import ToolsBar from '@/components/admin/ToolsBar'
+import ToolsBar from '@/components/admin/toolsbar/ProdToolsBar'
 
 export default {
   name: 'ProductsPage',

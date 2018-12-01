@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="scroll">
     <table class="table">
       <thead>
         <tr>
@@ -28,7 +28,6 @@ export default {
   data () {
     return {
       icons,
-      showForm: false,
       dinamicTitles: [
         { label: 'Nome', property: 'nome' },
         { label: 'Fabricante', property: 'fabricante' },
