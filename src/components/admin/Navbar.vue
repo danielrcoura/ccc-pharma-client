@@ -3,7 +3,9 @@
     <img src='../../assets/logo-admin.svg' alt=''>
     <nav>
       <ul>
-        <li @click="active = 'dashboard'" :class="{active: active === 'dashboard'}">Dashboard</li>
+        <router-link to='/admin/manage/dashboard'>
+          <li @click="active = 'dashboard'" :class="{active: active === 'dashboard'}">Dashboard</li>
+        </router-link>
         <router-link to='/admin/manage/products'>
           <li @click="active = 'produtos'" :class="{active: active === 'produtos'}">Produtos</li>
         </router-link>
