@@ -18,6 +18,14 @@
       </div>
       <div class="notificacoes">
         <header>Notificações</header>
+        <div>
+          <notification-card :info="{produto: 'test', mensagem: 'vencimento'}"/>
+          <notification-card :info="{produto: 'test', mensagem: 'vencimento'}"/>
+          <notification-card :info="{produto: 'test', mensagem: 'vencimento'}"/>
+          <notification-card :info="{produto: 'test', mensagem: 'vencimento'}"/>
+          <notification-card :info="{produto: 'test', mensagem: 'vencimento'}"/>
+          <notification-card :info="{produto: 'test', mensagem: 'vencimento'}"/>
+        </div>
       </div>
       <div class="vendas">
         <header>Registro de Vendas</header>
@@ -30,12 +38,14 @@
 <script>
 import PageTitle from '@/components/admin/PageTitle'
 import VendasGraphic from '@/components/admin/VendasGraphic'
+import NotificationCard from '@/components/admin/NotificationCard'
 
 export default {
   name: 'DashboardPage',
   components: {
     PageTitle,
-    VendasGraphic
+    VendasGraphic,
+    NotificationCard
   }
 }
 </script>
@@ -45,11 +55,11 @@ export default {
   margin-top: 2rem;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: auto auto;
+  grid-template-rows: 1fr 2fr;
   grid-gap: 2rem;
   & > * {
     box-shadow: 0 0 10px #ccc;
-    border-radius: 5px;
+    border-radius: 0px;
     header {
       padding: .5rem 1rem;
       margin-bottom: 0rem;
@@ -89,6 +99,10 @@ export default {
 .notificacoes {
   grid-column: 3/4;
   grid-row: 1/3;
+  overflow: auto;
+  & > div {
+    margin: 0 .5rem;
+  }
 }
 .vendas {
   grid-column: 1/3;
