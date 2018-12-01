@@ -12,8 +12,9 @@
     "postinstall": "npm run build"
   },
   "dependencies": {
-    "glyphicons": "^0.2.0",
+    "chart.js": "^2.7.3",
     "express": "^4.16.4",
+    "glyphicons": "^0.2.0",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },

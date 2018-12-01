@@ -1,6 +1,6 @@
 <template>
   <div>
-    <page-title title="Lotes"/>
+    <page-title title="Estoque"/>
     <lots-tools-bar @changeFilter="selectedFilter" @create="showForm = true"/>
     <lots-table :currentFilter="currentFilter"/>
     <transition name="modal">
