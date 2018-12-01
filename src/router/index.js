@@ -4,6 +4,7 @@ import ProdutosCliente from '@/views/ProdutosCliente'
 import Manage from '@/views/admin/Manage'
 import ProductsTable from '@/components/admin/tables/ProductsTable'
 import LotsTable from '@/components/admin/tables/LotsTable'
+import Login from '@/components/client/LoginForm'
 Vue.use(Router)
 
 export default new Router({
@@ -11,7 +12,10 @@ export default new Router({
     {
       path: '/',
       name: 'Produtos',
-      component: ProdutosCliente
+      component: ProdutosCliente,
+      children: [
+        { path: 'login', component: Login }
+      ]
     },
     {
       path: '/admin/manage',
