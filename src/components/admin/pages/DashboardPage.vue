@@ -9,24 +9,14 @@
         <div class="descricao">A média mensal é R$ 29.000,00</div>
         </div>
       </div>
-      <div class="general-information">
+      <div class="estoque">
         <header>Informações de Estoque</header>
-        <table>
-          <tr>
-            <td>Nº de lotes</td>
-            <td>30</td>
-          </tr>
-          <tr>
-            <td>Nº de itens</td>
-            <td>30</td>
-          </tr>
-          <tr>
-            <td>Nº de lotes</td>
-            <td>30</td>
-          </tr>
-        </table>
+        <div class="content">
+          <div>Nº de lotes: 30</div>
+          <div>Nº de itens: 3000</div>
+        </div>
       </div>
-      <div class="notifications">
+      <div class="notificacoes">
         <header>Notificações</header>
       </div>
       <div class="vendas">
@@ -58,21 +48,20 @@ export default {
   grid-template-rows: auto auto;
   grid-gap: 2rem;
   & > * {
-    box-shadow: 0 0 10px #bbb;
-    border-radius: 7px;
+    box-shadow: 0 0 10px #ccc;
+    border-radius: 5px;
     header {
-      padding: .3rem 1rem;
-      background: #11b1d4;
+      padding: .5rem 1rem;
+      margin-bottom: 0rem;
+      background: #fff;
       font-size: 1.1rem;
-      color: #fff;
-      border-top-left-radius: 7px;
-      border-top-right-radius: 7px;
+      color: #469fb6;
     }
   }
 }
 .receita {
   .valor {
-    padding: 1rem;
+    padding: .5rem 1rem;
     padding-bottom: .3rem;
     font-size: 2rem;
     color: #13c078;
@@ -84,7 +73,20 @@ export default {
     margin-bottom: 1rem;
   }
 }
-.notifications {
+.estoque {
+  .content {
+    color: #666;
+    text-align: center;
+    margin: 0 5rem;
+    & > * {
+      padding: .5rem;
+    }
+    & > div:first-child {
+      border-bottom: 1px solid #e1e1e1;
+    }
+  }
+}
+.notificacoes {
   grid-column: 3/4;
   grid-row: 1/3;
 }
