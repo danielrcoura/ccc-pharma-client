@@ -10,7 +10,9 @@
         <router-link to='/admin/manage/lots'>
           <li @click="active = 'estoque'" :class="{active: active === 'estoque'}">Estoque</li>
         </router-link>
-        <li @click="active = 'vendas'" :class="{active: active === 'vendas'}">Vendas</li>
+        <router-link to='/admin/manage/sales'>
+          <li @click="active = 'vendas'" :class="{active: active === 'vendas'}">Vendas</li>
+        </router-link>
       </ul>
     </nav>
   </div>
