@@ -5,8 +5,8 @@
       <div class="receita">
         <header>Receita Arrecadada</header>
         <div class="content">
-        <div class="valor">R$ 19.000,00</div>
-        <div class="descricao">A média mensal é R$ 29.000,00</div>
+          <div class="valor">R$ 19.000,00</div>
+          <div class="descricao">A média mensal é R$ 29.000,00</div>
         </div>
       </div>
       <div class="estoque">
@@ -48,6 +48,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@keyframes fade {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
 .dashboard {
   margin-top: 2rem;
   display: grid;
@@ -73,11 +84,13 @@ export default {
     font-size: 2rem;
     color: #13c078;
     text-align: center;
+    animation: fade .5s 1;
   }
   .descricao {
     color: #bbb;
     text-align: center;
     margin-bottom: 1rem;
+    animation: fade .5s 1;
   }
 }
 .estoque {
@@ -86,6 +99,7 @@ export default {
     color: #666;
     text-align: center;
     margin: 0 5rem;
+    animation: fade .5s 1;
     & > * {
       padding: .5rem;
       &:first-child {
