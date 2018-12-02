@@ -22,14 +22,11 @@
           <notification-card :info="{produto: 'test', mensagem: 'vencimento'}"/>
           <notification-card :info="{produto: 'test', mensagem: 'vencimento'}"/>
           <notification-card :info="{produto: 'test', mensagem: 'vencimento'}"/>
-          <notification-card :info="{produto: 'test', mensagem: 'vencimento'}"/>
-          <notification-card :info="{produto: 'test', mensagem: 'vencimento'}"/>
-          <notification-card :info="{produto: 'test', mensagem: 'vencimento'}"/>
         </div>
       </div>
       <div class="vendas">
         <header>Registro de Vendas</header>
-        <vendas-graphic/>
+        <vendas-graphic class="graphic"/>
       </div>
     </div>
   </div>
@@ -62,7 +59,7 @@ export default {
     border-radius: 0px;
     header {
       padding: .5rem 1rem;
-      margin-bottom: 0rem;
+      margin-bottom: .5rem;
       background: #fff;
       font-size: 1.1rem;
       color: #469fb6;
@@ -85,20 +82,22 @@ export default {
 }
 .estoque {
   .content {
+    align-items: center;
     color: #666;
     text-align: center;
     margin: 0 5rem;
     & > * {
       padding: .5rem;
-    }
-    & > div:first-child {
-      border-bottom: 1px solid #e1e1e1;
+      &:first-child {
+        border-bottom: 1px solid #e1e1e1;
+      }
     }
   }
 }
 .notificacoes {
   grid-column: 3/4;
   grid-row: 1/3;
+  max-height: 69vh;
   overflow: auto;
   & > div {
     margin: 0 .5rem;
@@ -106,7 +105,7 @@ export default {
 }
 .vendas {
   grid-column: 1/3;
-  & > header + * {
+  .graphic {
     padding: .5rem 0;
   }
 }
