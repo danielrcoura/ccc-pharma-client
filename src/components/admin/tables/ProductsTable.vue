@@ -12,7 +12,7 @@
           <th>Ações</th>
         </tr>
       </thead>
-      <tbody v-for="(produto, index) in produtos" :key="index">
+      <tbody v-for="(produto, index) in listProdutos" :key="index">
         <product-row :produto="produto"/>
       </tbody>
     </table>
@@ -39,7 +39,10 @@ export default {
     }
   },
   computed: {
-    ...mapState(['produtos'])
+    ...mapState(['produtos']),
+    listProdutos () {
+      return Object.values(this.produtos)
+    }
   },
   mounted () {
     this.sort()
@@ -72,7 +75,7 @@ export default {
     sort () {
       let property = this.sortConfig.property || 'nome'
 
-      this.produtos.sort((a, b) => {
+      this.listProdutos.sort((a, b) => {
         if (this.sortConfig.order === 'desc') {
           let temp = a
           a = b

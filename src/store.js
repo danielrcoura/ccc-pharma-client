@@ -5,113 +5,29 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
   state: {
-    produtos: [
-      {
+    produtos: {
+      1235: {
         nome: 'Produto2',
         codigo: 1235,
         fabricante: 'Fab3',
         categoria: 'Higiene pessoal',
         preco: 30.0
       },
-      {
+      1234: {
         nome: 'Produto1',
         codigo: 1234,
         fabricante: 'Fab1',
         categoria: 'Medicamentos',
         preco: 20.0
       },
-      {
-        nome: 'Produto3',
-        codigo: 1236,
-        fabricante: 'Fab1',
-        categoria: 'Cosméticos',
-        preco: 10.0
-      },
-      {
-        nome: 'Produto2',
-        codigo: 1235,
-        fabricante: 'Fab3',
-        categoria: 'Higiene pessoal',
-        preco: 30.0
-      },
-      {
-        nome: 'Produto1',
-        codigo: 1234,
-        fabricante: 'Fab1',
-        categoria: 'Medicamentos',
-        preco: 20.0
-      },
-      {
-        nome: 'Produto3',
-        codigo: 1236,
-        fabricante: 'Fab1',
-        categoria: 'Cosméticos',
-        preco: 10.0
-      },
-      {
-        nome: 'Produto2',
-        codigo: 1235,
-        fabricante: 'Fab3',
-        categoria: 'Higiene pessoal',
-        preco: 30.0
-      },
-      {
-        nome: 'Produto1',
-        codigo: 1234,
-        fabricante: 'Fab1',
-        categoria: 'Medicamentos',
-        preco: 20.0
-      },
-      {
-        nome: 'Produto3',
-        codigo: 1236,
-        fabricante: 'Fab1',
-        categoria: 'Cosméticos',
-        preco: 10.0
-      },
-      {
-        nome: 'Produto2',
-        codigo: 1235,
-        fabricante: 'Fab3',
-        categoria: 'Higiene pessoal',
-        preco: 30.0
-      },
-      {
-        nome: 'Produto1',
-        codigo: 1234,
-        fabricante: 'Fab1',
-        categoria: 'Medicamentos',
-        preco: 20.0
-      },
-      {
-        nome: 'Produto3',
-        codigo: 1236,
-        fabricante: 'Fab1',
-        categoria: 'Cosméticos',
-        preco: 10.0
-      },
-      {
-        nome: 'Produto2',
-        codigo: 1235,
-        fabricante: 'Fab3',
-        categoria: 'Higiene pessoal',
-        preco: 30.0
-      },
-      {
-        nome: 'Produto1',
-        codigo: 1234,
-        fabricante: 'Fab1',
-        categoria: 'Medicamentos',
-        preco: 20.0
-      },
-      {
+      1236: {
         nome: 'Produto3',
         codigo: 1236,
         fabricante: 'Fab1',
         categoria: 'Cosméticos',
         preco: 10.0
       }
-    ],
+    },
     lotes: [
       {
         produto: 'Paracetamol',
