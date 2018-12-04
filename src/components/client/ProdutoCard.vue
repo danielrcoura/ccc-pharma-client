@@ -25,7 +25,7 @@ export default {
     }
   },
   mounted () {
-    axios.get('http://ccc-pharma-api.herokuapp.com').then(res => console.log(res))
+    axios.get('https://ccc-pharma-api.herokuapp.com').then(res => console.log(res))
   }
 }
 </script>
