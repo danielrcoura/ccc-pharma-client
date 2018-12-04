@@ -12,17 +12,18 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Produtos',
+      name: 'ClientPage',
       component: ProdutosCliente
     },
     {
       path: '/admin/manage',
       name: 'Manage',
       component: Manage,
+      redirect: '/admin/manage/dashboard',
       children: [
-        { path: 'products', component: ProductsPage },
-        { path: 'lots', component: LotsPage },
-        { path: 'dashboard', component: DashboardPage }
+        { path: 'produtos', name: 'Produtos', component: ProductsPage },
+        { path: 'estoque', name: 'Estoque', component: LotsPage },
+        { path: 'dashboard', name: 'Dashboard', component: DashboardPage }
       ]
     }
   ]
