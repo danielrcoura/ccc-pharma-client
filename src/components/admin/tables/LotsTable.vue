@@ -28,9 +28,9 @@ export default {
   data () {
     return {
       icons,
-      sortProperty: 'codigoProduto',
+      sortProperty: 'nomeProduto',
       dinamicTitles: [
-        { label: 'Produto', property: 'codigoProduto' },
+        { label: 'Produto', property: 'nomeProduto' },
         { label: 'Quantidade', property: 'quantidade' },
         { label: `Validade`, property: 'validade' }
       ],
@@ -75,18 +75,28 @@ export default {
       }
     },
     sort () {
-      let property = this.sortConfig.property || 'codigoProduto'
+      let property = this.sortConfig.property || 'nomeProduto'
       this.listLotes.sort((a, b) => {
-        if (this.sortConfig.order === 'desc') {
-          let temp = a
-          a = b
-          b = temp
-        }
+        if (this.sortConfig.order === 'desc') [a, b] = [b, a]
 
-        if (a[property] < b[property]) return -1
-        else if (a[property] > b[property]) return 1
-        else return 0
+        if (property === 'nomeProduto') return this.sortByNomeProduto(a, b)
+        else return this.generalSort(a, b)
       })
+    },
+    generalSort (a, b) {
+      const property = this.sortConfig.property
+      return this.compare(a[property], b[property])
+    },
+    sortByNomeProduto (a, b) {
+      const nomeProdutoA = this.produtos[a.codigoProduto].nome
+      const nomeProdutoB = this.produtos[b.codigoProduto].nome
+
+      return this.compare(nomeProdutoA, nomeProdutoB)
+    },
+    compare (a, b) {
+      if (a < b) return -1
+      else if (a > b) return 1
+      else return 0
     },
     arrowDirection (property) {
       return {

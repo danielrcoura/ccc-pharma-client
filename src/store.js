@@ -6,14 +6,14 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     produtos: {
-      1235: {
+      1234: {
         nome: 'Produto2',
         codigo: 1234,
         fabricante: 'Fab3',
         categoria: 'Higiene pessoal',
         preco: 30.0
       },
-      1234: {
+      1235: {
         nome: 'Produto1',
         codigo: 1235,
         fabricante: 'Fab1',
