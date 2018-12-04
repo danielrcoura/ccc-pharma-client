@@ -12,7 +12,7 @@
           <th>Ações</th>
         </tr>
       </thead>
-      <tbody v-for="(produto, index) in produtos" :key="index">
+      <tbody v-for="(produto, index) in listProdutos" :key="index">
         <product-row :produto="produto"/>
       </tbody>
     </table>
@@ -21,6 +21,7 @@
 
 <script>
 import ProductRow from '@/components/admin/tables/ProductRow'
+import { mapState } from 'vuex'
 import icons from 'glyphicons'
 
 export default {
@@ -34,114 +35,13 @@ export default {
         { label: 'Categoria', property: 'categoria' },
         { label: 'Preço (R$)', property: 'preco' }
       ],
-      sortConfig: { property: null, order: null },
-      produtos: [
-        {
-          nome: 'Produto2',
-          codigo: 1235,
-          fabricante: 'Fab3',
-          categoria: 'Higiene pessoal',
-          preco: 30.0
-        },
-        {
-          nome: 'Produto1',
-          codigo: 1234,
-          fabricante: 'Fab1',
-          categoria: 'Medicamentos',
-          preco: 20.0
-        },
-        {
-          nome: 'Produto3',
-          codigo: 1236,
-          fabricante: 'Fab1',
-          categoria: 'Cosméticos',
-          preco: 10.0
-        },
-        {
-          nome: 'Produto2',
-          codigo: 1235,
-          fabricante: 'Fab3',
-          categoria: 'Higiene pessoal',
-          preco: 30.0
-        },
-        {
-          nome: 'Produto1',
-          codigo: 1234,
-          fabricante: 'Fab1',
-          categoria: 'Medicamentos',
-          preco: 20.0
-        },
-        {
-          nome: 'Produto3',
-          codigo: 1236,
-          fabricante: 'Fab1',
-          categoria: 'Cosméticos',
-          preco: 10.0
-        },
-        {
-          nome: 'Produto2',
-          codigo: 1235,
-          fabricante: 'Fab3',
-          categoria: 'Higiene pessoal',
-          preco: 30.0
-        },
-        {
-          nome: 'Produto1',
-          codigo: 1234,
-          fabricante: 'Fab1',
-          categoria: 'Medicamentos',
-          preco: 20.0
-        },
-        {
-          nome: 'Produto3',
-          codigo: 1236,
-          fabricante: 'Fab1',
-          categoria: 'Cosméticos',
-          preco: 10.0
-        },
-        {
-          nome: 'Produto2',
-          codigo: 1235,
-          fabricante: 'Fab3',
-          categoria: 'Higiene pessoal',
-          preco: 30.0
-        },
-        {
-          nome: 'Produto1',
-          codigo: 1234,
-          fabricante: 'Fab1',
-          categoria: 'Medicamentos',
-          preco: 20.0
-        },
-        {
-          nome: 'Produto3',
-          codigo: 1236,
-          fabricante: 'Fab1',
-          categoria: 'Cosméticos',
-          preco: 10.0
-        },
-        {
-          nome: 'Produto2',
-          codigo: 1235,
-          fabricante: 'Fab3',
-          categoria: 'Higiene pessoal',
-          preco: 30.0
-        },
-        {
-          nome: 'Produto1',
-          codigo: 1234,
-          fabricante: 'Fab1',
-          categoria: 'Medicamentos',
-          preco: 20.0
-        },
-        {
-          nome: 'Produto3',
-          codigo: 1236,
-          fabricante: 'Fab1',
-          categoria: 'Cosméticos',
-          preco: 10.0
-        }
-      ]
+      sortConfig: { property: null, order: null }
+    }
+  },
+  computed: {
+    ...mapState(['produtos']),
+    listProdutos () {
+      return Object.values(this.produtos)
     }
   },
   mounted () {
@@ -175,7 +75,7 @@ export default {
     sort () {
       let property = this.sortConfig.property || 'nome'
 
-      this.produtos.sort((a, b) => {
+      this.listProdutos.sort((a, b) => {
         if (this.sortConfig.order === 'desc') {
           let temp = a
           a = b
