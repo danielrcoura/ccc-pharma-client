@@ -12,7 +12,7 @@
         </tr>
       </thead>
       <tbody v-for="(lote, index) in getLots()" :key="index">
-        <lot-row :lote="lote"/>
+        <lot-row :lote="lote" :nomeProduto="produtos[lote.codigoProduto].nome"/>
       </tbody>
     </table>
   </div>
@@ -28,9 +28,9 @@ export default {
   data () {
     return {
       icons,
-      sortProperty: 'produto',
+      sortProperty: 'codigoProduto',
       dinamicTitles: [
-        { label: 'Produto', property: 'produto' },
+        { label: 'Produto', property: 'codigoProduto' },
         { label: 'Quantidade', property: 'quantidade' },
         { label: `Validade`, property: 'validade' }
       ],
@@ -38,7 +38,10 @@ export default {
     }
   },
   computed: {
-    ...mapState(['lotes'])
+    ...mapState(['lotes', 'produtos']),
+    listLotes () {
+      return Object.values(this.lotes)
+    }
   },
   mounted () {
     this.sort()
@@ -72,8 +75,8 @@ export default {
       }
     },
     sort () {
-      let property = this.sortConfig.property || 'nome'
-      this.lotes.sort((a, b) => {
+      let property = this.sortConfig.property || 'codigoProduto'
+      this.listLotes.sort((a, b) => {
         if (this.sortConfig.order === 'desc') {
           let temp = a
           a = b
@@ -94,16 +97,16 @@ export default {
     getLots () {
       if (this.currentFilter === 'vencido') {
         const currentDate = new Date()
-        return this.lotes.filter((lote) => {
+        return this.listLotes.filter((lote) => {
           const lotDate = new Date(lote.validade)
           return lotDate < currentDate && lote.quantidade > 0
         })
       } else if (this.currentFilter === 'falta') {
-        return this.lotes.filter((lote) => {
+        return this.listLotes.filter((lote) => {
           return lote.quantidade <= 0
         })
       } else {
-        return this.lotes
+        return this.listLotes
       }
     }
   }
