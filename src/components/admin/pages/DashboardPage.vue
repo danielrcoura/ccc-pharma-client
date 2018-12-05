@@ -11,10 +11,7 @@
       </div>
       <div class="estoque">
         <header>Informações de Estoque</header>
-        <div class="content">
-          <div>Nº de lotes: 30</div>
-          <div>Nº de itens: 3000</div>
-        </div>
+        <estoque-info/>
       </div>
       <div class="notificacoes">
         <header>Notificações</header>
@@ -32,13 +29,15 @@
 import PageTitle from '@/components/admin/PageTitle'
 import VendasGraphic from '@/components/admin/VendasGraphic'
 import NotificationContainer from '@/components/admin/NotificationContainer'
+import EstoqueInfo from '@/components/admin/EstoqueInfo'
 
 export default {
   name: 'DashboardPage',
   components: {
     PageTitle,
     VendasGraphic,
-    NotificationContainer
+    NotificationContainer,
+    EstoqueInfo
   }
 }
 </script>
@@ -87,21 +86,6 @@ export default {
     text-align: center;
     margin-bottom: 1rem;
     animation: fade .5s 1;
-  }
-}
-.estoque {
-  .content {
-    align-items: center;
-    color: #666;
-    text-align: center;
-    margin: 0 5rem;
-    animation: fade .5s 1;
-    & > * {
-      padding: .5rem;
-      &:first-child {
-        border-bottom: 1px solid #e1e1e1;
-      }
-    }
   }
 }
 .notificacoes {

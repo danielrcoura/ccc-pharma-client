@@ -9,6 +9,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'ProdutoCard',
   props: {
@@ -21,6 +23,9 @@ export default {
       if (this.produto.categoria === 'Alimentos') return require('../../assets/alimentos.png')
       if (this.produto.categoria === 'Higiene pessoal') return require('../../assets/higiene-pessoal.png')
     }
+  },
+  mounted () {
+    axios.get('https://ccc-pharma-api.herokuapp.com').then(res => console.log(res))
   }
 }
 </script>
