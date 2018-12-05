@@ -111,10 +111,6 @@ export default {
           const lotDate = new Date(lote.validade)
           return lotDate < currentDate && lote.quantidade > 0
         })
-      } else if (this.currentFilter === 'falta') {
-        return this.listLotes.filter((lote) => {
-          return lote.quantidade <= 0
-        })
       } else {
         return this.listLotes
       }

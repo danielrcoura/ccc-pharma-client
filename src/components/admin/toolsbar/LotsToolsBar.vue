@@ -25,7 +25,6 @@ export default {
       currentFilter: 'nenhum',
       filters: [
         {label: 'Todos', property: 'nenhum'},
-        {label: 'Em falta', property: 'falta'},
         {label: 'Vencidos', property: 'vencido'}
       ]
     }
