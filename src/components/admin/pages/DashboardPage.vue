@@ -15,11 +15,7 @@
       </div>
       <div class="notificacoes">
         <header>Notificações</header>
-        <div>
-          <notification-card :info="{produto: 'test', mensagem: 'vencimento'}"/>
-          <notification-card :info="{produto: 'test', mensagem: 'vencimento'}"/>
-          <notification-card :info="{produto: 'test', mensagem: 'vencimento'}"/>
-        </div>
+        <notification-container/>
       </div>
       <div class="vendas">
         <header>Registro de Vendas</header>
@@ -32,7 +28,7 @@
 <script>
 import PageTitle from '@/components/admin/PageTitle'
 import VendasGraphic from '@/components/admin/VendasGraphic'
-import NotificationCard from '@/components/admin/NotificationCard'
+import NotificationContainer from '@/components/admin/NotificationContainer'
 import EstoqueInfo from '@/components/admin/EstoqueInfo'
 
 export default {
@@ -40,7 +36,7 @@ export default {
   components: {
     PageTitle,
     VendasGraphic,
-    NotificationCard,
+    NotificationContainer,
     EstoqueInfo
   }
 }
