@@ -1,6 +1,6 @@
 <template>
   <div>
-    <notification-card v-for="(produto, index) in getLotesVencidos()" :key="index" 
+    <notification-card v-for="(produto, index) in notifications" :key="index"
     :info="produto"/>
   </div>
 </template>
@@ -8,6 +8,7 @@
 <script>
 import NotificationCard from '@/components/admin/NotificationCard'
 import { mapState } from 'vuex'
+import moment from 'moment'
 
 export default {
   name: 'NotificationContainer',
@@ -18,30 +19,32 @@ export default {
     ...mapState(['produtos', 'lotes']),
     listLotes () {
       return Object.values(this.lotes)
+    },
+    notifications () {
+      return this.listLotes
+        .map(this.processNotification)
+        .filter(item => item.mensagem)
     }
   },
   methods: {
-    getLotesVencidos () {
-      const currentDate = new Date()
-      const lotesVencidos = this.listLotes.filter((lote) => {
-        const loteDate = new Date(lote.validade)
-        return loteDate < currentDate && lote.quantidade > 0
-      })
-      return lotesVencidos.map(element => {
-        return {
-          produto: this.produtos[element.codigoProduto].nome,
-          mensagem: 'O produto está próximo da validade'
-        }
-      })
+    isCloseToExpire (lote) {
+      const loteDate = new Date(lote.validade)
+      const monthDifference = moment(lote.validade).diff(moment(), 'months', true)
+      return monthDifference < 1 && lote.quantidade > 0
     },
-    getLotesFaltantes () {
-      const currentDate = new Date()
-      return this.listLotes.filter((lote) => {
-        const loteDate = new Date(lote.validade)
-        return lote.quantidade <= 0 && loteDate >= currentDate
-      })
+    isCloseToExhausting (lote) {
+      const loteDate = new Date(lote.validade)
+      return loteDate >= Date.now() && lote.quantidade < 15
+    },
+    processNotification (lote) {
+      const nomeProduto = this.produtos[lote.codigoProduto].nome
+      let notification = { produto: nomeProduto, mensagem: '' }
+
+      if (this.isCloseToExpire(lote)) notification.mensagem = 'O produto está próximo da validade'
+      else if (this.isCloseToExhausting(lote)) notification.mensagem = 'O produto está próximo de esgotar'
+
+      return notification
     }
   }
-
 }
 </script>
