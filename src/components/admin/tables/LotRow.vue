@@ -1,5 +1,6 @@
 <template>
   <tr>
+    <td>{{ lote.id }}</td>
     <td>{{ nomeProduto }}</td>
     <td>{{ lote.quantidade }}</td>
     <td>{{ lote.validade }}</td>
