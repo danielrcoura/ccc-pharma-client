@@ -41,6 +41,18 @@ export default {
     ...mapState(['lotes', 'produtos']),
     listLotes () {
       return Object.values(this.lotes)
+    },
+    lotesVencidos () {
+      return this.listLotes.filter(lote => {
+        const lotDate = new Date(lote.validade)
+        return lotDate < Date.now()
+      })
+    },
+    lotesValidos () {
+      return this.listLotes.filter(lote => {
+        const lotDate = new Date(lote.validade)
+        return lotDate >= Date.now()
+      })
     }
   },
   mounted () {
@@ -105,15 +117,8 @@ export default {
       }
     },
     getLots () {
-      if (this.currentFilter === 'vencido') {
-        const currentDate = new Date()
-        return this.listLotes.filter((lote) => {
-          const lotDate = new Date(lote.validade)
-          return lotDate < currentDate && lote.quantidade > 0
-        })
-      } else {
-        return this.listLotes
-      }
+      if (this.currentFilter === 'vencido') return this.lotesVencidos
+      else return this.lotesValidos
     }
   }
 }

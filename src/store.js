@@ -35,29 +35,17 @@ const store = new Vuex.Store({
         quantidade: 15,
         validade: '2020-12-09'
       },
-      124: {
-        id: 124,
-        codigoProduto: 1236,
-        quantidade: 30,
-        validade: '2020-11-04'
-      },
       125: {
         id: 125,
         codigoProduto: 1234,
         quantidade: 10,
-        validade: '2020-05-10'
-      },
-      126: {
-        id: 126,
-        codigoProduto: 1236,
-        quantidade: 0,
-        validade: '2020-11-04'
+        validade: '2021-05-10'
       },
       127: {
         id: 127,
         codigoProduto: 1234,
         quantidade: 10,
-        validade: '2010-05-10'
+        validade: '2020-05-10'
       }
     }
   }

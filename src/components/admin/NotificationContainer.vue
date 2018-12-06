@@ -35,16 +35,11 @@ export default {
       const loteDate = new Date(lote.validade)
       return loteDate >= Date.now() && lote.quantidade < 15
     },
-    isExhausted (lote) {
-      const loteDate = new Date(lote.validade)
-      return loteDate >= Date.now() && lote.quantidade === 0
-    },
     processNotification (lote) {
       const nomeProduto = this.produtos[lote.codigoProduto].nome
       let notification = { produto: nomeProduto, mensagem: '' }
 
       if (this.isCloseToExpire(lote)) notification.mensagem = 'O produto está próximo da validade'
-      else if (this.isExhausted(lote)) notification.mensagem = 'O produto está esgotado'
       else if (this.isCloseToExhausting(lote)) notification.mensagem = 'O produto está próximo de esgotar'
 
       return notification

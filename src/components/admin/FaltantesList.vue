@@ -15,6 +15,7 @@
 <script>
 import LotForm from '@/components/admin/forms/LotForm'
 import icons from 'glyphicons'
+import moment from 'moment'
 import { mapState } from 'vuex'
 
 export default {
@@ -33,12 +34,15 @@ export default {
     },
     faltantes () {
       let codProdutos = []
-      for (let codProduto in this.produtos) {
-        let isEmpty = this.listLotes
-        .filter(lote => lote.codigoProduto === Number(codProduto))
-        .every(lote => lote.quantidade > 0)
-        
-        !isEmpty && codProdutos.push(codProduto)
+      for (let codigo in this.produtos) {
+        codigo = Number(codigo)
+        const lotes = this.listLotes.filter(lote => lote.codigoProduto === codigo)
+        if (lotes.length === 0) {
+          codProdutos.push(codigo)
+        } else {
+          const isVencido = lotes.every(lote => moment(lote.validade) < moment())
+          isVencido && codProdutos.push(codigo)
+        }
       }
       return codProdutos.map(codigo => this.produtos[codigo])
     }
