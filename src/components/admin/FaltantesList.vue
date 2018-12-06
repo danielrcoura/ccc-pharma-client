@@ -16,7 +16,6 @@
 import LotForm from '@/components/admin/forms/LotForm'
 import estoque from '@/models/estoque'
 import icons from 'glyphicons'
-import moment from 'moment'
 import { mapState } from 'vuex'
 
 export default {

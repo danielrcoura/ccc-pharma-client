@@ -4,7 +4,8 @@
     <td>{{ produto.nome }}</td>
     <td>{{ produto.fabricante }}</td>
     <td>{{ produto.categoria }}</td>
-    <td>{{ produto.preco }}</td>
+    <td>{{ produto.preco.toFixed(2) }}</td>
+    <td>{{ isDisponivel ? 'Disponível' : 'Indisponível' }}</td>
     <td class="small">
       <span class="btn edit" @click="showForm = true">{{ icons.edit }}</span>
       <span class="btn remove">{{ icons.cancel }}</span>
@@ -17,7 +18,9 @@
 
 <script>
 import ProductForm from '@/components/admin/forms/ProductForm'
+import estoque from '@/models/estoque'
 import icons from 'glyphicons'
+import { mapState } from 'vuex'
 
 export default {
   name: 'ProductRow',
@@ -25,6 +28,12 @@ export default {
     return {
       icons,
       showForm: false
+    }
+  },
+  computed: {
+    ...mapState(['lotes']),
+    isDisponivel () {
+      return estoque.isDisponivel(Object.values(this.lotes), this.produto.codigo)
     }
   },
   props: {
