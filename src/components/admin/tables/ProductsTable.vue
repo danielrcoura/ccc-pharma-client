@@ -89,7 +89,7 @@ export default {
     sortBySituacao (a, b) {
       const isDisponivelA = estoque.isDisponivel(this.listLotes, a.codigo)
       const isDisponivelB = estoque.isDisponivel(this.listLotes, b.codigo)
-      
+
       if (isDisponivelA && !isDisponivelB) return -1
       else if (!isDisponivelA && isDisponivelB) return 1
       else return 0

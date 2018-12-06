@@ -1,6 +1,6 @@
 <template>
   <div class="faltantes-list">
-    <div class="title">Produtos em falta</div>
+    <div class="title">Produtos indisponíveis</div>
     <ul>
       <li v-for="produto in faltantes" :key="produto.codigo">
         <span>{{ produto.nome }}</span> <button @click="callForm(produto.codigo)"><b>+</b> Lote</button>
