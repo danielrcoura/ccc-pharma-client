@@ -29,7 +29,7 @@ export default {
   methods: {
     isCloseToExpire (lote) {
       const monthDifference = moment(lote.validade).diff(moment(), 'months', true)
-      return monthDifference <= 12 && lote.quantidade > 0
+      return monthDifference <= 1 && lote.quantidade > 0
     },
     isCloseToExhausting (lote) {
       const loteDate = new Date(lote.validade)
