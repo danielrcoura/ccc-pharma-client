@@ -33,17 +33,7 @@ const store = new Vuex.Store({
         id: 123,
         codigoProduto: 1235,
         quantidade: 15,
-<<<<<<< HEAD
-        validade: '2020/12/09'
-      },
-      124: {
-        id: 124,
-        codigoProduto: 1236,
-        quantidade: 30,
-        validade: '2019/12/04'
-=======
         validade: '2020-12-09'
->>>>>>> 0bdf0e1065b4d104b355d97f641175aa21da472d
       },
       125: {
         id: 125,
