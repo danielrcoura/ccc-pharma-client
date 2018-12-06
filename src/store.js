@@ -39,7 +39,7 @@ const store = new Vuex.Store({
         id: 124,
         codigoProduto: 1236,
         quantidade: 30,
-        validade: '2020/11/04'
+        validade: '2019/12/04'
       },
       125: {
         id: 125,

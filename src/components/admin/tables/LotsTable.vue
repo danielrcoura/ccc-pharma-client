@@ -3,6 +3,7 @@
     <table class="table">
       <thead>
         <tr>
+          <th>#</th>
           <th v-for="title in dinamicTitles" :key="title.property"
           @click="changeSort(title.property)">
             <span>{{ title.label }}</span>
