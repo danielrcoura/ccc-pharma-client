@@ -29,11 +29,11 @@ export default {
   methods: {
     isCloseToExpire (lote) {
       const monthDifference = moment(lote.validade).diff(moment(), 'months', true)
-      return monthDifference >= 0 && monthDifference <= 12 && lote.quantidade > 0
+      return monthDifference <= 1 && lote.quantidade > 0
     },
     isCloseToExhausting (lote) {
       const loteDate = new Date(lote.validade)
-      return loteDate >= Date.now() && lote.quantidade > 0 && lote.quantidade < 15
+      return loteDate >= Date.now() && lote.quantidade < 15
     },
     processNotification (lote) {
       const loteName = 'Lote ' + this.lotes[lote.id].id

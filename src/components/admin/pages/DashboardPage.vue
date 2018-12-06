@@ -61,7 +61,7 @@ export default {
   grid-template-rows: 1fr 2fr;
   grid-gap: 2rem;
   & > * {
-    box-shadow: 0 0 10px #ccc;
+    box-shadow: 0 2px 7px #ccc;
     border-radius: 0px;
     header {
       padding: .5rem 1rem;

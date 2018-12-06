@@ -35,7 +35,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px #ddd;
   padding: .5rem;
   font-size: 1.3rem;
   background: #fff;
