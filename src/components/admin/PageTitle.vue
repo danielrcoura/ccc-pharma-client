@@ -22,7 +22,7 @@ h1 {
   padding-bottom: .3rem;
   padding-left: 0rem;
   margin-top: 1.5rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 2.5rem;
   color: #999;
   font-weight: normal;
 }
