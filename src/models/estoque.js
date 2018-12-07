@@ -26,7 +26,7 @@ function getProdutosIndisponiveis (lotes, produtos) {
 
 function isProximoDaValidade (lote) {
   const intervaloEmMeses = moment(lote.validade).diff(moment(), 'months', true)
-  return intervaloEmMeses <= 1
+  return intervaloEmMeses > 0 && intervaloEmMeses <= 1
 }
 
 function isProximoDeEsgotar (lotes, codigo) {
