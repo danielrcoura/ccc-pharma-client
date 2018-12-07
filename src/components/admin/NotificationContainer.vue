@@ -1,14 +1,16 @@
 <template>
   <div>
-    <notification-card v-for="(lote, index) in notifications" :key="index"
-    :info="lote"/>
+    <notification-card v-for="notificacao in produtosProximosDeEsgotar" :key="notificacao.title"
+    :info="notificacao"/>
+    <notification-card v-for="notificacao in lotesProximosDaValidade" :key="notificacao.title"
+    :info="notificacao"/>
   </div>
 </template>
 
 <script>
 import NotificationCard from '@/components/admin/NotificationCard'
+import estoque from '@/models/estoque'
 import { mapState } from 'vuex'
-import moment from 'moment'
 
 export default {
   name: 'NotificationContainer',
@@ -20,29 +22,28 @@ export default {
     listLotes () {
       return Object.values(this.lotes)
     },
-    notifications () {
+    listProdutos () {
+      return Object.values(this.produtos)
+    },
+    lotesProximosDaValidade () {
       return this.listLotes
-        .map(this.processNotification)
-        .filter(item => item.mensagem)
+        .filter(estoque.isProximoDaValidade)
+        .map(this.loteToNotification)
+    },
+    produtosProximosDeEsgotar () {
+      return this.listProdutos
+        .filter(produto => estoque.isProximoDeEsgotar(this.listLotes, produto.codigo))
+        .map(this.produtoToNotification)
     }
   },
   methods: {
-    isCloseToExpire (lote) {
-      const monthDifference = moment(lote.validade).diff(moment(), 'months', true)
-      return monthDifference <= 1 && lote.quantidade > 0
+    loteToNotification (lote) {
+      const titulo = `${this.produtos[lote.codigoProduto].nome} - Lote #${lote.id}`
+      return { titulo: titulo, mensagem: 'O lote está próximo da validade' }
     },
-    isCloseToExhausting (lote) {
-      const loteDate = new Date(lote.validade)
-      return loteDate >= Date.now() && lote.quantidade < 15
-    },
-    processNotification (lote) {
-      const loteName = 'Lote ' + this.lotes[lote.id].id
-      let notification = { titulo: loteName, mensagem: '' }
-
-      if (this.isCloseToExpire(lote)) notification.mensagem = 'O lote está próximo da validade'
-      else if (this.isCloseToExhausting(lote)) notification.mensagem = 'O lote está próximo de esgotar'
-
-      return notification
+    produtoToNotification (produto) {
+      const titulo = produto.nome
+      return { titulo: titulo, mensagem: 'O produto está próximo de esgotar' }
     }
   }
 }
