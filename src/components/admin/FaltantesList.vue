@@ -1,6 +1,6 @@
 <template>
   <div class="faltantes-list">
-    <div class="title">Produtos em falta</div>
+    <div class="title">Produtos indisponíveis</div>
     <ul>
       <li v-for="produto in faltantes" :key="produto.codigo">
         <span>{{ produto.nome }}</span> <button @click="callForm(produto.codigo)"><b>+</b> Lote</button>
@@ -14,8 +14,8 @@
 
 <script>
 import LotForm from '@/components/admin/forms/LotForm'
+import estoque from '@/models/estoque'
 import icons from 'glyphicons'
-import moment from 'moment'
 import { mapState } from 'vuex'
 
 export default {
@@ -33,18 +33,7 @@ export default {
       return Object.values(this.lotes)
     },
     faltantes () {
-      let codProdutos = []
-      for (let codigo in this.produtos) {
-        codigo = Number(codigo)
-        const lotes = this.listLotes.filter(lote => lote.codigoProduto === codigo)
-        if (lotes.length === 0) {
-          codProdutos.push(codigo)
-        } else {
-          const isVencido = lotes.every(lote => moment(lote.validade) < moment())
-          isVencido && codProdutos.push(codigo)
-        }
-      }
-      return codProdutos.map(codigo => this.produtos[codigo])
+      return estoque.getProdutosIndisponiveis(this.listLotes, this.produtos)
     }
   },
   methods: {
