@@ -110,8 +110,7 @@ export default {
       if (this.currentFilter === 'vencido') {
         return this.listLotes
           .filter(lote => moment(lote.validade).isBefore(moment()))
-      }
-      else {
+      } else {
         return this.listLotes
           .filter(lote => moment(lote.validade).isSameOrAfter(moment()))
       }
