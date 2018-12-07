@@ -65,6 +65,12 @@ const store = new Vuex.Store({
         codigoProduto: 1237,
         quantidade: 20,
         validade: '2019-03-02'
+      },
+      130: {
+        id: 130,
+        codigoProduto: 1237,
+        quantidade: 20,
+        validade: '2014-03-02'
       }
     }
   }
