@@ -22,6 +22,7 @@
 <script>
 import LotRow from '@/components/admin/tables/LotRow'
 import { mapState } from 'vuex'
+import moment from 'moment'
 import icons from 'glyphicons'
 
 export default {
@@ -42,18 +43,6 @@ export default {
     ...mapState(['lotes', 'produtos']),
     listLotes () {
       return Object.values(this.lotes)
-    },
-    lotesVencidos () {
-      return this.listLotes.filter(lote => {
-        const lotDate = new Date(lote.validade)
-        return lotDate < Date.now()
-      })
-    },
-    lotesValidos () {
-      return this.listLotes.filter(lote => {
-        const lotDate = new Date(lote.validade)
-        return lotDate >= Date.now()
-      })
     }
   },
   mounted () {
@@ -118,8 +107,14 @@ export default {
       }
     },
     getLots () {
-      if (this.currentFilter === 'vencido') return this.lotesVencidos
-      else return this.lotesValidos
+      if (this.currentFilter === 'vencido') {
+        return this.listLotes
+          .filter(lote => moment(lote.validade).isBefore(moment()))
+      }
+      else {
+        return this.listLotes
+          .filter(lote => moment(lote.validade).isSameOrAfter(moment()))
+      }
     }
   }
 }
