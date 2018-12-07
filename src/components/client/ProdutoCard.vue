@@ -3,18 +3,17 @@
     <img :src="categoriaImage" :alt="produto.categoria" :title="produto.categoria" class="logo">
     <div class="title">{{produto.nome}}</div>
     <div class="subtitle">by {{produto.fabricante}}</div>
-    <div v-if="produto.disponivel" class="footer">{{`R$ ${produto.preco.toFixed(2)}`}}</div>
+    <div v-if="disponivel" class="footer">{{`R$ ${produto.preco.toFixed(2)}`}}</div>
     <div v-else class="footer discreet">Produto não disponível</div>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
   name: 'ProdutoCard',
   props: {
-    produto: Object
+    produto: Object,
+    disponivel: Boolean
   },
   computed: {
     categoriaImage () {
@@ -23,9 +22,6 @@ export default {
       if (this.produto.categoria === 'Alimentos') return require('../../assets/alimentos.png')
       if (this.produto.categoria === 'Higiene pessoal') return require('../../assets/higiene-pessoal.png')
     }
-  },
-  mounted () {
-    axios.get('https://ccc-pharma-api.herokuapp.com').then(res => console.log(res))
   }
 }
 </script>

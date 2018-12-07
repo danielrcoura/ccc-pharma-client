@@ -4,82 +4,34 @@
       <navbar/>
     </header>
     <main class="produtos">
-      <produto-card v-for="(produto, index) in produtos" :key="index" :produto="produto"/>
+      <produto-card v-for="produto in produtos" :key="produto.codigo"
+      :produto="produto" :disponivel="isDisponivel(produto.codigo)"/>
     </main>
   </div>
 </template>
 
 <script>
 import ProdutoCard from '@/components/client/ProdutoCard'
+import { mapState } from 'vuex'
+import estoque from '@/models/estoque'
 import Navbar from '@/components/client/Navbar'
 
 export default {
   name: 'ProdutosCliente',
-  data () {
-    return {
-      produtos: [
-        {
-          nome: 'Produto1',
-          categoria: 'Medicamentos',
-          fabricante: 'Fab1',
-          disponivel: false,
-          preco: 10.00
-        },
-        {
-          nome: 'Produto2',
-          categoria: 'Higiene pessoal',
-          fabricante: 'Fab2',
-          disponivel: true,
-          preco: 20.00
-        },
-        {
-          nome: 'Produto3',
-          categoria: 'Cosméticos',
-          fabricante: 'Fab3',
-          disponivel: true,
-          preco: 30.00
-        },
-        {
-          nome: 'Produto4',
-          categoria: 'Alimentos',
-          fabricante: 'Fab4',
-          disponivel: false,
-          preco: 40.00
-        },
-        {
-          nome: 'Produto4',
-          categoria: 'Alimentos',
-          fabricante: 'Fab4',
-          disponivel: true,
-          preco: 40.00
-        },
-        {
-          nome: 'Produto3',
-          categoria: 'Cosméticos',
-          fabricante: 'Fab3',
-          disponivel: false,
-          preco: 30.00
-        },
-        {
-          nome: 'Produto2',
-          categoria: 'Higiene pessoal',
-          fabricante: 'Fab2',
-          disponivel: false,
-          preco: 20.00
-        },
-        {
-          nome: 'Produto1',
-          categoria: 'Medicamentos',
-          fabricante: 'Fab1',
-          disponivel: true,
-          preco: 10.00
-        }
-      ]
+  computed: {
+    ...mapState(['lotes', 'produtos']),
+    produtosIndisponiveis () {
+      return estoque.getProdutosIndisponiveis(Object.values(this.lotes), this.produtos)
     }
   },
   components: {
     ProdutoCard,
     Navbar
+  },
+  methods: {
+    isDisponivel (codigoProduto) {
+      return !this.produtosIndisponiveis.find(produto => produto.codigo === codigoProduto)
+    }
   }
 }
 </script>
