@@ -1,15 +1,19 @@
 <template>
   <div class="navbar">
-    <img src="../../assets/logo.svg" alt="" class="logo">
-    <nav>
-      <a href=""><button>Login</button></a>
+    <router-link to='/'><img src="../../assets/logo.svg" alt="" class="logo"></router-link>
+    <nav v-if="$router.currentRoute.name !== 'LoginClient'">
+      <a href="" class="admin">Acessar como admnistrador</a>
+      <router-link to='/login'><button>Login</button></router-link>
     </nav>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'Navbar'
+  name: 'Navbar',
+  mounted () {
+    console.log(this.$router.currentRoute)
+  }
 }
 </script>
 
@@ -32,5 +36,14 @@ nav button {
   border-radius: 5px;
   outline: none;
   cursor: pointer;
+}
+.admin {
+  text-decoration: none;
+  margin-right: 1.3rem;
+  color: #bbb;
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
 }
 </style>
