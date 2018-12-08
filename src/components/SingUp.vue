@@ -1,16 +1,18 @@
 <template>
   <form>
-    <img src="../assets/logo-short.svg" alt="Logo do sistema" class="logo">
-    <input ref="email" type="email" placeholder="email">
-    <input type="password" placeholder="senha">
-    <button>Entrar</button>
-    <div class="singup" @click="$emit('singup')">Criar conta</div>
+    <div class="title">Cadastre-se</div>
+    <label for="email">Email</label>
+    <input ref="email" id="email" type="email" placeholder="user@email.com">
+    <label for="senha">Senha</label>
+    <input id="senha" type="password" placeholder="senha123">
+    <button>Cadastrar</button>
+    <div class="singup" @click="$emit('login')">Voltar para login</div>
   </form>
 </template>
 
 <script>
 export default {
-  name: 'Login',
+  name: 'SingUp',
   mounted () {
     this.$refs.email.focus()
   }
@@ -21,6 +23,11 @@ export default {
 form {
   display: flex;
   flex-direction: column;
+  label {
+    font-size: .8rem;
+    color: #888;
+    margin-bottom: 5px;
+  }
   input, button {
     border: none;
     background: none;
@@ -38,7 +45,7 @@ form {
   }
   button {
     box-shadow: 0 0 1rem #bbb;
-    margin-top: .5rem;
+    margin-top: 1rem;
     background: #06b1d3;
     padding: .6rem 1.2rem;
     color: #fff;
@@ -60,5 +67,22 @@ form {
   cursor: pointer;
   text-decoration: underline;
   margin-top: 1.2rem;
+}
+.title {
+  font-size: 1.6rem;
+  color: #06b1d3;
+  margin-bottom: 1.6rem;
+}
+*::-webkit-input-placeholder {
+  color: #ccc;
+}
+*::-moz-placeholder {
+  color: #ccc;
+}
+*:-ms-input-placeholder {
+  color: #ccc;
+}
+*:-moz-placeholder {
+  color: #ccc;
 }
 </style>

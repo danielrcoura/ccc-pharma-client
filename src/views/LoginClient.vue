@@ -3,7 +3,12 @@
     <navbar class="navbar"/>
     <div class="login">
       <div class="login-box">
-        <login/>
+        <div class="card" :class="{'is-flipped': inSingUp}">
+          <login class="card-face" 
+          @singup="inSingUp = true"/>
+          <sing-up class="card-face back"
+          @login="inSingUp = false"/>
+        </div>
       </div>
     </div>
   </div>
@@ -12,12 +17,19 @@
 <script>
 import Login from '@/components/Login'
 import Navbar from '@/components/client/Navbar'
+import SingUp from '@/components/SingUp'
 
 export default {
   name: 'LoginClient',
+  data () {
+    return {
+      inSingUp: false
+    }
+  },
   components: {
     Login,
-    Navbar
+    Navbar,
+    SingUp
   }
 }
 </script>
@@ -36,9 +48,32 @@ export default {
   align-items: center;
   height: 100vh;
   .login-box {
-    padding: 2rem 2.5rem 3rem 2.5rem;
-    background: #fff;
-    box-shadow: 0 2px 5px #ccc;
+    width: 320px;
+    height: 320px;
+    perspective: 600px;
+    .card {
+      background: #fff;
+      box-shadow: 0 2px 5px #bbb;
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transition: transform 1s;
+      transform-style: preserve-3d;
+      transform-origin: center right;
+      .card-face {
+        padding: 2rem 2.5rem .7rem 2.5rem;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        backface-visibility: hidden;
+      }
+      .back {
+        transform: rotateY(180deg);
+      }
+    }
+    .card.is-flipped {
+      transform: translateX(-100%) rotateY(-180deg);
+    }
   }
 }
 </style>
