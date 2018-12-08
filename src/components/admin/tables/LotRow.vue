@@ -1,6 +1,7 @@
 <template>
   <tr>
-    <td>{{ lote.produto }}</td>
+    <td>{{ lote.id }}</td>
+    <td>{{ nomeProduto }}</td>
     <td>{{ lote.quantidade }}</td>
     <td>{{ lote.validade }}</td>
     <td class="small">
@@ -26,7 +27,8 @@ export default {
     }
   },
   props: {
-    lote: Object
+    lote: Object,
+    nomeProduto: String
   },
   components: {
     LotForm

@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <div class="produto">{{ info.produto }}</div>
+    <div class="titulo">{{ info.titulo }}</div>
     <div class="mensagem">{{ info.mensagem }}</div>
   </div>
 </template>
@@ -31,7 +31,7 @@ export default {
   background: #eee;
   animation: fade .5s 1;
   margin-bottom: 5px;
-  .produto {
+  .titulo {
     font-family: Arial, Helvetica, sans-serif;
     color: #888;
     font-weight: bold;

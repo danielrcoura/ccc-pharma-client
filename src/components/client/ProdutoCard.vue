@@ -3,7 +3,7 @@
     <img :src="categoriaImage" :alt="produto.categoria" :title="produto.categoria" class="logo">
     <div class="title">{{produto.nome}}</div>
     <div class="subtitle">by {{produto.fabricante}}</div>
-    <div v-if="produto.disponivel" class="footer">{{`R$ ${produto.preco.toFixed(2)}`}}</div>
+    <div v-if="disponivel" class="footer">{{`R$ ${produto.preco.toFixed(2)}`}}</div>
     <div v-else class="footer discreet">Produto não disponível</div>
   </div>
 </template>
@@ -12,7 +12,8 @@
 export default {
   name: 'ProdutoCard',
   props: {
-    produto: Object
+    produto: Object,
+    disponivel: Boolean
   },
   computed: {
     categoriaImage () {
@@ -30,7 +31,7 @@ export default {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px #ddd;
   padding: .5rem;
   font-size: 1.3rem;
   background: #fff;

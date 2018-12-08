@@ -2,7 +2,7 @@
   <div class="modal">
     <div class="modal-content">
       <form>
-        <input class="title" ref="codigo" type="number" :value="lote.produto" placeholder="Código do Produto"/>
+        <input class="title" ref="codigo" type="number" :value="lote.codigoProduto" placeholder="Código do Produto"/>
         <label>Data de validade</label>
         <input type="date" :value="lote.validade"/>
         <label>Quantidade de itens</label>

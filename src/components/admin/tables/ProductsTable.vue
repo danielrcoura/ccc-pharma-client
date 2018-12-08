@@ -12,7 +12,7 @@
           <th>Ações</th>
         </tr>
       </thead>
-      <tbody v-for="(produto, index) in produtos" :key="index">
+      <tbody v-for="(produto, index) in listProdutos" :key="index">
         <product-row :produto="produto"/>
       </tbody>
     </table>
@@ -21,6 +21,8 @@
 
 <script>
 import ProductRow from '@/components/admin/tables/ProductRow'
+import { mapState } from 'vuex'
+import estoque from '@/models/estoque'
 import icons from 'glyphicons'
 
 export default {
@@ -32,116 +34,19 @@ export default {
         { label: 'Nome', property: 'nome' },
         { label: 'Fabricante', property: 'fabricante' },
         { label: 'Categoria', property: 'categoria' },
-        { label: 'Preço (R$)', property: 'preco' }
+        { label: 'Preço (R$)', property: 'preco' },
+        { label: 'Situação', property: 'situacao' }
       ],
-      sortConfig: { property: null, order: null },
-      produtos: [
-        {
-          nome: 'Produto2',
-          codigo: 1235,
-          fabricante: 'Fab3',
-          categoria: 'Higiene pessoal',
-          preco: 30.0
-        },
-        {
-          nome: 'Produto1',
-          codigo: 1234,
-          fabricante: 'Fab1',
-          categoria: 'Medicamentos',
-          preco: 20.0
-        },
-        {
-          nome: 'Produto3',
-          codigo: 1236,
-          fabricante: 'Fab1',
-          categoria: 'Cosméticos',
-          preco: 10.0
-        },
-        {
-          nome: 'Produto2',
-          codigo: 1235,
-          fabricante: 'Fab3',
-          categoria: 'Higiene pessoal',
-          preco: 30.0
-        },
-        {
-          nome: 'Produto1',
-          codigo: 1234,
-          fabricante: 'Fab1',
-          categoria: 'Medicamentos',
-          preco: 20.0
-        },
-        {
-          nome: 'Produto3',
-          codigo: 1236,
-          fabricante: 'Fab1',
-          categoria: 'Cosméticos',
-          preco: 10.0
-        },
-        {
-          nome: 'Produto2',
-          codigo: 1235,
-          fabricante: 'Fab3',
-          categoria: 'Higiene pessoal',
-          preco: 30.0
-        },
-        {
-          nome: 'Produto1',
-          codigo: 1234,
-          fabricante: 'Fab1',
-          categoria: 'Medicamentos',
-          preco: 20.0
-        },
-        {
-          nome: 'Produto3',
-          codigo: 1236,
-          fabricante: 'Fab1',
-          categoria: 'Cosméticos',
-          preco: 10.0
-        },
-        {
-          nome: 'Produto2',
-          codigo: 1235,
-          fabricante: 'Fab3',
-          categoria: 'Higiene pessoal',
-          preco: 30.0
-        },
-        {
-          nome: 'Produto1',
-          codigo: 1234,
-          fabricante: 'Fab1',
-          categoria: 'Medicamentos',
-          preco: 20.0
-        },
-        {
-          nome: 'Produto3',
-          codigo: 1236,
-          fabricante: 'Fab1',
-          categoria: 'Cosméticos',
-          preco: 10.0
-        },
-        {
-          nome: 'Produto2',
-          codigo: 1235,
-          fabricante: 'Fab3',
-          categoria: 'Higiene pessoal',
-          preco: 30.0
-        },
-        {
-          nome: 'Produto1',
-          codigo: 1234,
-          fabricante: 'Fab1',
-          categoria: 'Medicamentos',
-          preco: 20.0
-        },
-        {
-          nome: 'Produto3',
-          codigo: 1236,
-          fabricante: 'Fab1',
-          categoria: 'Cosméticos',
-          preco: 10.0
-        }
-      ]
+      sortConfig: { property: null, order: null }
+    }
+  },
+  computed: {
+    ...mapState(['lotes', 'produtos']),
+    listProdutos () {
+      return Object.values(this.produtos)
+    },
+    listLotes () {
+      return Object.values(this.lotes)
     }
   },
   mounted () {
@@ -173,19 +78,28 @@ export default {
       }
     },
     sort () {
-      let property = this.sortConfig.property || 'nome'
+      let property = this.sortConfig.property
+      this.listProdutos.sort((a, b) => {
+        if (this.sortConfig.order === 'desc') [a, b] = [b, a]
 
-      this.produtos.sort((a, b) => {
-        if (this.sortConfig.order === 'desc') {
-          let temp = a
-          a = b
-          b = temp
-        }
-
-        if (a[property] < b[property]) return -1
-        else if (a[property] > b[property]) return 1
-        else return 0
+        if (property === 'situacao') return this.sortBySituacao(a, b)
+        else return this.generalSort(a, b)
       })
+    },
+    sortBySituacao (a, b) {
+      const isDisponivelA = estoque.isDisponivel(this.listLotes, a.codigo)
+      const isDisponivelB = estoque.isDisponivel(this.listLotes, b.codigo)
+
+      if (isDisponivelA && !isDisponivelB) return -1
+      else if (!isDisponivelA && isDisponivelB) return 1
+      else return 0
+    },
+    generalSort (a, b) {
+      const property = this.sortConfig.property || 'nome'
+
+      if (a[property] < b[property]) return -1
+      else if (a[property] > b[property]) return 1
+      else return 0
     },
     arrowDirection (property) {
       return {

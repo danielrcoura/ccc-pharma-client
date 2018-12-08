@@ -22,10 +22,9 @@ export default {
   data () {
     return {
       plus,
-      currentFilter: 'nenhum',
+      currentFilter: 'disponiveis',
       filters: [
-        {label: 'Todos', property: 'nenhum'},
-        {label: 'Em falta', property: 'falta'},
+        {label: 'Disponíveis', property: 'disponiveis'},
         {label: 'Vencidos', property: 'vencido'}
       ]
     }
@@ -43,16 +42,18 @@ export default {
 @import 'src/assets/css/toolsbar.scss';
 .filters {
   float: right;
-  * {
-    background: #d6d6d6;
-    border-right: 1px solid #ccc;
+  button {
+    background: #fff;
     user-select: none;
-    &:last-child {
+    color: #62b6c7;
+    border: 1px solid #23a7c2;
+    &:first-child {
       border-right: none;
     }
   }
   .active {
-    background: #23aac5;
+    background: #23a7c2;
+    color: #fff;
   }
 }
 </style>

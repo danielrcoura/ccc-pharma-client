@@ -4,15 +4,15 @@
     <nav>
       <ul>
         <router-link to='/admin/manage/dashboard'>
-          <li @click="active = 'dashboard'" :class="{active: active === 'dashboard'}">Dashboard</li>
+          <li @click="active = 'Dashboard'" :class="{active: active === 'Dashboard'}">Dashboard</li>
         </router-link>
-        <router-link to='/admin/manage/products'>
-          <li @click="active = 'produtos'" :class="{active: active === 'produtos'}">Produtos</li>
+        <router-link to='/admin/manage/produtos'>
+          <li @click="active = 'Produtos'" :class="{active: active === 'Produtos'}">Produtos</li>
         </router-link>
-        <router-link to='/admin/manage/lots'>
-          <li @click="active = 'estoque'" :class="{active: active === 'estoque'}">Estoque</li>
+        <router-link to='/admin/manage/estoque'>
+          <li @click="active = 'Estoque'" :class="{active: active === 'Estoque'}">Estoque</li>
         </router-link>
-        <router-link to='/admin/manage/sales'>
+        <router-link to='/admin/manage/vendas'>
           <li @click="active = 'vendas'" :class="{active: active === 'vendas'}">Vendas</li>
         </router-link>
       </ul>
@@ -25,7 +25,7 @@ export default {
   name: 'Navbar',
   data () {
     return {
-      active: 'dashboard'
+      active: this.$router.currentRoute.name
     }
   }
 }
