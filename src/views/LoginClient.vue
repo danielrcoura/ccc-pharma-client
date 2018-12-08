@@ -5,9 +5,11 @@
       <div class="login-box">
         <div class="card" :class="{'is-flipped': inSingUp}">
           <login class="card-face"
-          @singup="inSingUp = true"/>
+          @singup="inSingUp = true"
+          v-if="!inSingUp"/>
           <sing-up class="card-face back"
-          @login="inSingUp = false"/>
+          @login="inSingUp = false"
+          v-else/>
         </div>
       </div>
     </div>
