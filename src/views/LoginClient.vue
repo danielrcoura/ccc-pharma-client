@@ -4,7 +4,7 @@
     <div class="login">
       <div class="login-box">
         <div class="card" :class="{'is-flipped': inSingUp}">
-          <login class="card-face" 
+          <login class="card-face"
           @singup="inSingUp = true"/>
           <sing-up class="card-face back"
           @login="inSingUp = false"/>

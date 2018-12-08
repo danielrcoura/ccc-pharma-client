@@ -4,13 +4,16 @@
     <input ref="email" type="email" placeholder="email">
     <input type="password" placeholder="senha">
     <button>Entrar</button>
-    <div class="singup" @click="$emit('singup')">Criar conta</div>
+    <div v-if="!admin" class="singup" @click="$emit('singup')">Criar conta</div>
   </form>
 </template>
 
 <script>
 export default {
   name: 'Login',
+  props: {
+    admin: Boolean
+  },
   mounted () {
     this.$refs.email.focus()
   }

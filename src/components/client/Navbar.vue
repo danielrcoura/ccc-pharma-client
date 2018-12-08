@@ -1,8 +1,8 @@
 <template>
   <div class="navbar">
     <router-link to='/'><img src="../../assets/logo.svg" alt="" class="logo"></router-link>
-    <nav v-if="$router.currentRoute.name !== 'LoginClient'">
-      <a href="" class="admin">Acessar como admnistrador</a>
+    <nav v-if="inLoginPage">
+      <router-link class="admin" to='/admin/login'>Acessar como administrador</router-link>
       <router-link to='/login'><button>Login</button></router-link>
     </nav>
   </div>
@@ -11,8 +11,10 @@
 <script>
 export default {
   name: 'Navbar',
-  mounted () {
-    console.log(this.$router.currentRoute)
+  computed: {
+    inLoginPage () {
+      return !this.$router.currentRoute.name.match('Login')
+    }
   }
 }
 </script>

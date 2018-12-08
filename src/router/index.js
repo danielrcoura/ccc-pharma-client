@@ -6,6 +6,7 @@ import ProductsPage from '@/components/admin/pages/ProductsPage'
 import LotsPage from '@/components/admin/pages/LotsPage'
 import DashboardPage from '@/components/admin/pages/DashboardPage'
 import LoginClient from '@/views/LoginClient'
+import LoginAdmin from '@/views/LoginAdmin'
 
 Vue.use(Router)
 
@@ -20,6 +21,11 @@ export default new Router({
       path: '/login',
       name: 'LoginClient',
       component: LoginClient
+    },
+    {
+      path: '/admin/login',
+      name: 'LoginAdmin',
+      component: LoginAdmin
     },
     {
       path: '/admin/manage',
