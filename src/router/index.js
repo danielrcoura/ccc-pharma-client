@@ -5,6 +5,8 @@ import Manage from '@/views/admin/Manage'
 import ProductsPage from '@/components/admin/pages/ProductsPage'
 import LotsPage from '@/components/admin/pages/LotsPage'
 import SalesPage from '@/components/admin/pages/SalesPage'
+import DashboardPage from '@/components/admin/pages/DashboardPage'
+
 Vue.use(Router)
 
 export default new Router({
@@ -21,7 +23,8 @@ export default new Router({
       children: [
         { path: 'products', component: ProductsPage },
         { path: 'lots', component: LotsPage },
-        { path: 'sales', component: SalesPage }
+        { path: 'sales', component: SalesPage },
+        { path: 'dashboard', component: DashboardPage }
       ]
     }
   ]
