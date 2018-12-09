@@ -19,7 +19,11 @@
         </ul>      
       </div>
 
-      <div class="sale-box"></div>
+      <div class="sale-container">
+        <div class="">R$ 10,00</div>
+        <div></div>
+
+      </div>
       <form>
       <div class="btn-group">
           <button @click="$emit('close')" class="btn-cancel">Cancelar</button>
@@ -31,125 +35,21 @@
 
 <script>
 import icons from 'glyphicons'
+import { mapState } from 'vuex'
+
 export default {
   name: 'SaleForm',
   data() {
     return {
-
       icons,
       search:'',
-      produtos: [
-        {
-          nome: 'Produto2',
-          codigo: 1235,
-          fabricante: 'Fab3',
-          categoria: 'Higiene pessoal',
-          preco: 30.0
-        },
-        {
-          nome: 'Produto1',
-          codigo: 1234,
-          fabricante: 'Fab1',
-          categoria: 'Medicamentos',
-          preco: 20.0
-        },
-        {
-          nome: 'Produto3',
-          codigo: 1236,
-          fabricante: 'Fab1',
-          categoria: 'Cosméticos',
-          preco: 10.0
-        },
-        {
-          nome: 'Produto2',
-          codigo: 1235,
-          fabricante: 'Fab3',
-          categoria: 'Higiene pessoal',
-          preco: 30.0
-        },
-        {
-          nome: 'Produto1',
-          codigo: 1234,
-          fabricante: 'Fab1',
-          categoria: 'Medicamentos',
-          preco: 20.0
-        },
-        {
-          nome: 'Produto3',
-          codigo: 1236,
-          fabricante: 'Fab1',
-          categoria: 'Cosméticos',
-          preco: 10.0
-        },
-        {
-          nome: 'Produto2',
-          codigo: 1235,
-          fabricante: 'Fab3',
-          categoria: 'Higiene pessoal',
-          preco: 30.0
-        },
-        {
-          nome: 'Produto1',
-          codigo: 1234,
-          fabricante: 'Fab1',
-          categoria: 'Medicamentos',
-          preco: 20.0
-        },
-        {
-          nome: 'Produto3',
-          codigo: 1236,
-          fabricante: 'Fab1',
-          categoria: 'Cosméticos',
-          preco: 10.0
-        },
-        {
-          nome: 'Produto2',
-          codigo: 1235,
-          fabricante: 'Fab3',
-          categoria: 'Higiene pessoal',
-          preco: 30.0
-        },
-        {
-          nome: 'Produto1',
-          codigo: 1234,
-          fabricante: 'Fab1',
-          categoria: 'Medicamentos',
-          preco: 20.0
-        },
-        {
-          nome: 'Produto3',
-          codigo: 1236,
-          fabricante: 'Fab1',
-          categoria: 'Cosméticos',
-          preco: 10.0
-        },
-        {
-          nome: 'Produto2',
-          codigo: 1235,
-          fabricante: 'Fab3',
-          categoria: 'Higiene pessoal',
-          preco: 30.0
-        },
-        {
-          nome: 'Produto1',
-          codigo: 1234,
-          fabricante: 'Fab1',
-          categoria: 'Medicamentos',
-          preco: 20.0
-        },
-        {
-          nome: 'Produto3',
-          codigo: 1236,
-          fabricante: 'Fab1',
-          categoria: 'Cosméticos',
-          preco: 10.0
-        }
-      ]
     };
   },
   computed: {
+    ...mapState(['produtos']),
+
     filteredProducts () {
-      return this.produtos.filter( produto => produto.nome.includes(this.search)
+      return Object.values(this.produtos).filter( produto => produto.nome.includes(this.search)
       );
     }
   },
