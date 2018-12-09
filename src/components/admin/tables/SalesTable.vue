@@ -18,7 +18,6 @@
   </div>
 </template>
 
-
 <script>
 import SaleRow from '@/components/admin/tables/SaleRow'
 import icons from 'glyphicons'
@@ -44,7 +43,7 @@ export default {
           cpfCliente: '111.111.111-11',
           quantidadeItens: 3,
           valorTotal: 90,
-          produtos:[
+          produtos: [
             {
               nome: 'Produto1',
               codigo: 1234,
@@ -60,7 +59,7 @@ export default {
               preco: 40,
               quantidade: 2,
               subTotal: 80
-            },
+            }
           ]
         },
         {
@@ -69,7 +68,7 @@ export default {
           cpfCliente: '121.121.121-12',
           quantidadeItens: 3,
           valorTotal: 111,
-          produtos:[
+          produtos: [
             {
               nome: 'Produto6',
               codigo: 1872,
@@ -93,7 +92,7 @@ export default {
               preco: 86,
               quantidade: 1,
               subTotal: 86
-            },
+            }
 
           ]
         },
@@ -103,7 +102,7 @@ export default {
           cpfCliente: '113.113.113-13',
           quantidadeItens: 2,
           valorTotal: 60,
-          produtos:[
+          produtos: [
             {
               nome: 'Produto1',
               codigo: 1234,
@@ -136,10 +135,11 @@ export default {
       deep: true
     }
   },
+
   components: {
     SaleRow
   },
-  
+
   methods: {
     changeSort (property) {
       if (this.sortConfig.property === property) {

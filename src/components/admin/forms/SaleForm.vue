@@ -7,28 +7,25 @@
           <input type="text" v-model="search" placeholder="Pesquisar produto"/>
           <span>{{icons.magnifyingGlass}}</span>
         </div>
-        
         <ul class="product-list">
           <li v-for="(produto, id) in filteredProducts" :key="id">
-            
+
               <p class="product">{{produto.nome}}</p>
               <p class="preco">R$ {{produto.preco}}</p>
-              <p class="seta"> >> </p>
-            
+              <p class="seta">adicionar</p>
+
           </li>
-        </ul>      
+        </ul>
       </div>
 
       <div class="sale-container">
         <div class="">R$ 10,00</div>
-        <div></div>
-
+        <form>
+          <div class="btn-group">
+            <button @click="$emit('close')" class="btn-cancel">Cancelar</button>
+          </div>
+        </form>
       </div>
-      <form>
-      <div class="btn-group">
-          <button @click="$emit('close')" class="btn-cancel">Cancelar</button>
-      </div>
-      </form>
     </div>
   </div>
 </template>
@@ -39,22 +36,21 @@ import { mapState } from 'vuex'
 
 export default {
   name: 'SaleForm',
-  data() {
+  data () {
     return {
       icons,
-      search:'',
-    };
+      search: ''
+    }
   },
   computed: {
     ...mapState(['produtos']),
 
     filteredProducts () {
-      return Object.values(this.produtos).filter( produto => produto.nome.includes(this.search)
-      );
+      return Object.values(this.produtos).filter(produto => produto.nome.includes(this.search)
+      )
     }
   },
   methods: {
-    
   }
 }
 </script>
@@ -62,6 +58,16 @@ export default {
 <style lang='scss' scoped>
 @import 'src/assets/css/forms.scss';
 
+.modal-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.search-container {
+  border-right: 0.05rem solid #999;
+  padding: 2rem;
+
+}
 .search {
 
   border-radius: 15px;
@@ -77,10 +83,7 @@ export default {
     font-size: 1rem;
     width: 100%;
     color: #333;
-    
-  }
-
-
+    }
 }
 
 .product-list {
@@ -98,9 +101,8 @@ export default {
     align-items: center;
     height: 3rem;
     border-bottom: 1px solid #999;
-    
+
     cursor: pointer;
-    
     &:hover{
       background-color: #f1f1f1;
       .seta {
@@ -121,10 +123,6 @@ export default {
     .seta {
       color: white;
     }
-    
   }
 }
-
 </style>
-
-

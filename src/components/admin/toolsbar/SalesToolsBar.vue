@@ -10,7 +10,6 @@
 <script>
 import { plus } from 'glyphicons'
 
-
 export default {
   name: 'SalesToolsBar',
   data () {
@@ -20,7 +19,6 @@ export default {
   }
 }
 </script>
-
 
 <style lang="scss" scoped>
 @import 'src/assets/css/toolsbar.scss';

@@ -1,7 +1,7 @@
 <template>
   <div class="modal">
     <div class="modal-content">
-      <div class="close-button" ><span @click="$emit('close')">X</span></div> 
+      <div class="close-button" ><span @click="$emit('close')">X</span></div>
       <div class="scroll">
         <table class="table">
           <thead>
@@ -34,8 +34,7 @@
         </table>
       </div>
     <div>
-      
-    </div>   
+    </div>
     </div>
   </div>
 </template>
@@ -54,7 +53,6 @@ export default {
 @import 'src/assets/css/forms.scss';
 @import 'src/assets/css/tables.scss';
 
-
 .modal{
   .modal-content {
     width: 70vw;
@@ -63,7 +61,6 @@ export default {
   .scroll{
     max-height: 60vh;
   }
-
 
   table tfoot {
       border-top-style: double;
