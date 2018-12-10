@@ -1,0 +1,74 @@
+{
+  "produtos": [
+    {
+      "id": 1,
+      "codigo": "1234",
+      "nome": "Produto2",
+      "fabricante": "Fab3",
+      "categoria": "Higiene pessoal",
+      "preco": 30.0
+    },
+    {
+      "id": 2,
+      "codigo": "1235",
+      "nome": "Produto1",
+      "fabricante": "Fab1",
+      "categoria": "Medicamentos",
+      "preco": 20.0
+    },
+    {
+      "id": 3,
+      "codigo": "1236",
+      "nome": "Produto3",
+      "fabricante": "Fab1",
+      "categoria": "Cosméticos",
+      "preco": 10.0
+    },
+    {
+      "id": 4,
+      "codigo": "1237",
+      "nome": "Produto4",
+      "fabricante": "Fab32",
+      "categoria": "Higiene pessoal",
+      "preco": 30.0
+    }
+  ],
+  "lotes": [
+    {
+      "id": 1,
+      "idProduto": "1235",
+      "quantidade": 15,
+      "validade": "2019-01-01"
+    },
+    {
+      "id": 2,
+      "idProduto": "1234",
+      "quantidade": 5,
+      "validade": "2021-05-10"
+    },
+    {
+      "id": 3,
+      "idProduto": "1234",
+      "quantidade": 5,
+      "validade": "2020-05-10"
+    },
+    {
+      "id": 4,
+      "idProduto": "1237",
+      "quantidade": 20,
+      "validade": "2019-01-01"
+    },
+    {
+      "id": 5,
+      "idProduto": "1237",
+      "quantidade": 20,
+      "validade": "2019-03-02"
+    },
+    {
+      "id": 6,
+      "idProduto": "1237",
+      "quantidade": 20,
+      "validade": "2014-03-02"
+    }
+  ]
+}
