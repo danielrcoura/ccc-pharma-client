@@ -1,34 +1,50 @@
 <template>
   <div class="modal">
     <div class="modal-content">
-      <div class="search-container">
+      <div class="container">
         <div class="search">
           <input type="text" v-model="search" placeholder="Pesquisar produto"/>
           <span>{{icons.magnifyingGlass}}</span>
         </div>
+        
         <ul class="product-list">
           <li v-for="(produto, id) in filteredProducts" :key="id">
 
-              <p class="product">{{produto.nome}}</p>
-              <p class="preco">R$ {{produto.preco}}</p>
-              <p class="seta" @click="addProduct(produto)">adicionar</p>
+              {{produto.nome}}
+              <span>R$ {{produto.preco}}</span>
+              <button class="btn-addProduto" @click="addProduct(produto)">adicionar</button>
 
           </li>
         </ul>
       </div>
-      <div class="sale-container">
+      <div class="container">
+
         <div class="sale-value">
          <h2><small>Total</small> R$ {{totalCompra}}</h2>
         </div>
-        <ul class="product-list">
-          <li v-for="(produto, id) in selectedProducts" :key="id">
-            <p class="product">{{produto.nome}}</p>
-            <input type="number" min="1" v-model="produto.quantidade">
-            <p class="preco">R$ {{produto.total()}}</p>
-            <a href="#" @click="removeProduct(produto)" class="product">remover</a>
-          </li>
 
-        </ul>
+        <div class="sale-products">
+          <table>
+            <thead>
+              <tr>
+                <th>Produto</th>
+                <th>Quantidade</th>
+                <th>Preço</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(produto, id) in selectedProducts" :key="id">
+                <td>{{produto.nome}}</td>
+                <td>
+                  <input type="number" min="1" v-model="produto.quantidade">
+                  <a href="#" @click="removeProduct(produto)" class="product">remover</a>
+                  </td>
+                <td>R$ {{produto.total()}}</td>
+              </tr>
+            </tbody>
+
+          </table>
+        </div>
         <form>
           <div class="btn-group">
             <button @click="$emit('close')" class="btn-cancel">Cancelar</button>
@@ -96,36 +112,52 @@ export default {
 
 <style lang='scss' scoped>
 @import 'src/assets/css/forms.scss';
-
 .modal-content {
+  width: 80vw;
+  height: 80vh;
   display: grid;
-  grid-template-columns: 1fr 3fr ;
+  grid-template-columns: 1fr 2fr ;
   grid-gap: 1rem;
+  
+}
+
+@media(max-width: 600px){
+  .modal-content {
+    width: 100vh;
+    height: 100vh;
+    grid-template-columns: 1fr;
+  }
+}
+
+button, input {
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 1rem;
+}
+
+.container {
+  height: 70vh;
 }
 
 .search {
-
   border-radius: 15px;
   border: 0.05rem solid #999;
   padding: 5px;
   text-align: right;
   display: flex;
-
   input {
     margin-left: 1rem;
-    border: none;
-    outline: none;
-    font-size: 1rem;
     width: 100%;
     color: #333;
-    }
+  }
 }
 
 .product-list {
   list-style: none;
   margin-top: 10px;
   color: #333;
-  max-height: 60vh;
+  max-height: 80%;
   overflow-x: auto;
   border: 1px solid #999;
   border-radius: 10px;
@@ -137,7 +169,6 @@ export default {
     height: 3rem;
     border-bottom: 1px solid #999;
 
-    cursor: pointer;
     &:hover{
       background-color: #f1f1f1;
       .seta {
@@ -145,18 +176,56 @@ export default {
           border-radius: 10px;
       }
     }
-
-    p {
-      display: inline-block;
-      padding: 10px;
-    }
-
-    .preco {
+    span {
       color: #999;
+      font-size: .9rem;
     }
+    .btn-addProduto {
+        background-color: #36add0;
+        padding: .5rem;
+        color: #fff;
+        transition: background .3s;
+        border-radius: .2rem;
+        cursor: pointer;
+        &:hover, &:focus {
+          background: #2dc1e1;
+          
+        }
+    }
+  }
+}
 
-    .seta {
-      color: white;
+.sale-products{
+  max-height: 70%;
+  overflow-x: auto;
+}
+
+table {
+  max-height: 80%;
+  overflow-x: auto;
+  border-collapse: collapse;
+  width: 100%;
+  thead {
+    border-bottom: 1px solid #999;
+    th {
+    font-weight: normal;
+    color: #fff;
+    text-align: center;
+    padding: .4rem 1rem;
+    border-right: 1px solid #ccc;
+    background: #23aac5;
+    &:last-child {
+      border-right: none;
+    }
+  }
+  }
+  
+  td {
+    text-align: center;
+    padding: 1rem;
+    border-bottom: 0.1rem solid #999;
+    input {
+      width: 3rem;
     }
   }
 }
