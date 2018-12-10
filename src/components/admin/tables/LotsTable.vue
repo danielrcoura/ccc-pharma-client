@@ -40,20 +40,16 @@ export default {
     }
   },
   computed: {
-    ...mapState(['lotes', 'produtos']),
-    listLotes () {
-      return Object.values(this.lotes)
-    }
-  },
-  mounted () {
-    this.sort()
-  },
-  watch: {
-    sortConfig: {
-      handler () {
-        this.sort()
-      },
-      deep: true
+    ...mapState(['produtos']),
+    lotes () {
+      const lotesCopy = this.$store.state.lotes.slice()
+
+      return lotesCopy.sort((a, b) => {
+        if (this.sortConfig.order === 'desc') [a, b] = [b, a]
+
+        if (this.sortConfig.property === 'nomeProduto') return this.sortByNomeProduto(a, b)
+        else return this.generalSort(a, b)
+      })
     }
   },
   components: {
@@ -75,15 +71,6 @@ export default {
         this.sortConfig.property = property
         this.sortConfig.order = 'asc'
       }
-    },
-    sort () {
-      let property = this.sortConfig.property || 'nomeProduto'
-      this.listLotes.sort((a, b) => {
-        if (this.sortConfig.order === 'desc') [a, b] = [b, a]
-
-        if (property === 'nomeProduto') return this.sortByNomeProduto(a, b)
-        else return this.generalSort(a, b)
-      })
     },
     generalSort (a, b) {
       const property = this.sortConfig.property
@@ -108,10 +95,10 @@ export default {
     },
     getLots () {
       if (this.currentFilter === 'vencido') {
-        return this.listLotes
+        return this.lotes
           .filter(lote => moment(lote.validade).isBefore(moment()))
       } else {
-        return this.listLotes
+        return this.lotes
           .filter(lote => moment(lote.validade).isSameOrAfter(moment()))
       }
     }

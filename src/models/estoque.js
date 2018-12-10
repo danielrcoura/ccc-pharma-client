@@ -8,20 +8,14 @@ function _isEmFalta (lotesProduto) {
   return lotesProduto.length === 0
 }
 
-function isDisponivel (lotes, codigo) {
-  codigo = Number(codigo)
-  const lotesProduto = lotes.filter(lote => lote.codigoProduto === codigo)
+function isDisponivel (lotes, produto) {
+  const lotesProduto = lotes.filter(lote => lote.idProduto === produto.id)
 
   return !_isVencido(lotesProduto) && !_isEmFalta(lotesProduto)
 }
 
 function getProdutosIndisponiveis (lotes, produtos) {
-  let codProdutos = []
-  for (let codigo in produtos) {
-    !isDisponivel(lotes, codigo) && codProdutos.push(produtos[codigo])
-  }
-
-  return codProdutos
+  return produtos.filter(produto => !isDisponivel(lotes, produto))
 }
 
 function isProximoDaValidade (lote) {
