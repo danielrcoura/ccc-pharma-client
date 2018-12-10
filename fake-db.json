@@ -31,6 +31,14 @@
       "fabricante": "Fab32",
       "categoria": "Higiene pessoal",
       "preco": 30.0
+    },
+    {
+      "id": 5,
+      "codigo": "1240",
+      "nome": "Produto5",
+      "fabricante": "Fab32",
+      "categoria": "Cosméticos",
+      "preco": 5.0
     }
   ],
   "lotes": [
@@ -69,6 +77,12 @@
       "idProduto": 4,
       "quantidade": 20,
       "validade": "2014-03-02"
+    },
+    {
+      "id": 7,
+      "idProduto": 5,
+      "quantidade": 2050,
+      "validade": "2018-03-02"
     }
   ]
 }

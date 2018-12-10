@@ -19,26 +19,20 @@ export default {
   },
   computed: {
     ...mapState(['produtos', 'lotes']),
-    listLotes () {
-      return Object.values(this.lotes)
-    },
-    listProdutos () {
-      return Object.values(this.produtos)
-    },
     lotesProximosDaValidade () {
-      return this.listLotes
+      return this.lotes
         .filter(estoque.isProximoDaValidade)
         .map(this.loteToNotification)
     },
     produtosProximosDeEsgotar () {
-      return this.listProdutos
-        .filter(produto => estoque.isProximoDeEsgotar(this.listLotes, produto.codigo))
+      return this.produtos
+        .filter(produto => estoque.isProximoDeEsgotar(this.lotes, produto))
         .map(this.produtoToNotification)
     }
   },
   methods: {
     loteToNotification (lote) {
-      const titulo = `${this.produtos[lote.codigoProduto].nome} - Lote #${lote.id}`
+      const titulo = `${this.produtos.find(p => lote.idProduto === p.id).nome} - Lote #${lote.id}`
       return { titulo: titulo, mensagem: 'O lote está próximo da validade' }
     },
     produtoToNotification (produto) {

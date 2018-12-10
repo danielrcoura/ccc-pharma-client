@@ -23,11 +23,10 @@ function isProximoDaValidade (lote) {
   return intervaloEmMeses > 0 && intervaloEmMeses <= 1
 }
 
-function isProximoDeEsgotar (lotes, codigo) {
-  codigo = Number(codigo)
+function isProximoDeEsgotar (lotes, produto) {
   const lotesFiltrados = lotes.filter(lote => {
     const naValidade = moment(lote.validade).isAfter(moment())
-    return lote.codigoProduto === codigo && naValidade
+    return lote.idProduto === produto.id && naValidade
   })
   const qtdItens = lotesFiltrados
     .reduce((soma, current) => soma + current.quantidade, 0)
