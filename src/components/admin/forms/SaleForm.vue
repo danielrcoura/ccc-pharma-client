@@ -1,7 +1,6 @@
 <template>
   <div class="modal">
     <div class="modal-content">
-
       <div class="search-container">
         <div class="search">
           <input type="text" v-model="search" placeholder="Pesquisar produto"/>
@@ -12,17 +11,28 @@
 
               <p class="product">{{produto.nome}}</p>
               <p class="preco">R$ {{produto.preco}}</p>
-              <p class="seta">adicionar</p>
+              <p class="seta" @click="addProduct(produto)">adicionar</p>
 
           </li>
         </ul>
       </div>
-
       <div class="sale-container">
-        <div class="">R$ 10,00</div>
+        <div class="sale-value">
+         <h2><small>Total</small> R$ {{totalCompra}}</h2>
+        </div>
+        <ul class="product-list">
+          <li v-for="(produto, id) in selectedProducts" :key="id">
+            <p class="product">{{produto.nome}}</p>
+            <input type="number" min="1" v-model="produto.quantidade">
+            <p class="preco">R$ {{produto.total()}}</p>
+            <a href="#" @click="removeProduct(produto)" class="product">remover</a>
+          </li>
+
+        </ul>
         <form>
           <div class="btn-group">
             <button @click="$emit('close')" class="btn-cancel">Cancelar</button>
+            <button @click="registerSale()" class="btn-confirm">Concluir venda</button>
           </div>
         </form>
       </div>
@@ -39,18 +49,47 @@ export default {
   data () {
     return {
       icons,
-      search: ''
+      search: '',
+      selectedProducts: []
     }
   },
   computed: {
     ...mapState(['produtos']),
 
     filteredProducts () {
-      return Object.values(this.produtos).filter(produto => produto.nome.includes(this.search)
+      return Object.values(this.produtos).filter(produto =>
+        produto.nome.includes(this.search) && !this.conteinsProduct(produto)
       )
+    },
+
+    totalCompra () {
+      let total = 0
+      this.selectedProducts.forEach(p => {
+        total += p.total()
+      })
+      return total
     }
   },
   methods: {
+    conteinsProduct (produto) {
+      let contains = false
+      this.selectedProducts.forEach(p => {
+        if (p.nome === produto.nome) contains = true
+      })
+      return contains
+    },
+
+    addProduct (produto) {
+      this.selectedProducts.push({...produto, quantidade: 1, total: function () { return this.quantidade * this.preco }})
+    },
+    removeProduct (produto) {
+      this.selectedProducts = this.selectedProducts.filter(p => p.nome !== produto.nome)
+    },
+
+    registerSale () {
+      alert('Venda efeivada com sucesso!')
+      this.$emit('close')
+    }
   }
 }
 </script>
@@ -60,14 +99,10 @@ export default {
 
 .modal-content {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 3fr ;
+  grid-gap: 1rem;
 }
 
-.search-container {
-  border-right: 0.05rem solid #999;
-  padding: 2rem;
-
-}
 .search {
 
   border-radius: 15px;
