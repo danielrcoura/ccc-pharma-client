@@ -13,7 +13,7 @@
         </tr>
       </thead>
       <tbody v-for="(lote, index) in getLots()" :key="index">
-        <lot-row :lote="lote" :nomeProduto="produtos[lote.codigoProduto].nome"/>
+        <lot-row :lote="lote" :nomeProduto="produtos.find(p => p.id === lote.idProduto).nome"/>
       </tbody>
     </table>
   </div>
@@ -90,8 +90,8 @@ export default {
       return this.compare(a[property], b[property])
     },
     sortByNomeProduto (a, b) {
-      const nomeProdutoA = this.produtos[a.codigoProduto].nome
-      const nomeProdutoB = this.produtos[b.codigoProduto].nome
+      const nomeProdutoA = this.produtos.find(p => p.id === a.idProduto).nome
+      const nomeProdutoB = this.produtos.find(p => p.id === b.idProduto).nome
 
       return this.compare(nomeProdutoA, nomeProdutoB)
     },

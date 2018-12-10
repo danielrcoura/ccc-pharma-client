@@ -12,7 +12,7 @@
           <th>Ações</th>
         </tr>
       </thead>
-      <tbody v-for="(produto, index) in listProdutos" :key="index">
+      <tbody v-for="(produto, index) in produtos" :key="index">
         <product-row :produto="produto"/>
       </tbody>
     </table>
@@ -41,23 +41,20 @@ export default {
     }
   },
   computed: {
-    ...mapState(['lotes', 'produtos']),
-    listProdutos () {
-      return Object.values(this.produtos)
+    ...mapState(['lotes']),
+    produtos () {
+      const produtosCopy = this.$store.state.produtos.slice()
+
+      const property = this.sortConfig.property
+      return produtosCopy.sort((a, b) => {
+        if (this.sortConfig.order === 'desc') [a, b] = [b, a]
+
+        if (property === 'situacao') return this.sortBySituacao(a, b)
+        else return this.generalSort(a, b)
+      })
     },
     listLotes () {
       return Object.values(this.lotes)
-    }
-  },
-  mounted () {
-    this.sort()
-  },
-  watch: {
-    sortConfig: {
-      handler () {
-        this.sort()
-      },
-      deep: true
     }
   },
   components: {
@@ -76,15 +73,6 @@ export default {
         this.sortConfig.property = property
         this.sortConfig.order = 'asc'
       }
-    },
-    sort () {
-      let property = this.sortConfig.property
-      this.listProdutos.sort((a, b) => {
-        if (this.sortConfig.order === 'desc') [a, b] = [b, a]
-
-        if (property === 'situacao') return this.sortBySituacao(a, b)
-        else return this.generalSort(a, b)
-      })
     },
     sortBySituacao (a, b) {
       const isDisponivelA = estoque.isDisponivel(this.listLotes, a.codigo)
