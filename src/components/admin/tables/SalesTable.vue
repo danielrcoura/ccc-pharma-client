@@ -30,7 +30,6 @@ export default {
       sortProperty: 'data',
       dinamicTitles: [
         {label: 'Id', property: 'id'},
-        {label: 'Cliente', property: 'cpfCliente'},
         {label: 'Data', property: 'data'},
         {label: 'Quant. Itens', property: 'quantidadeItens'},
         {label: 'Total (R$)', property: 'valorTotal'}
@@ -40,14 +39,12 @@ export default {
         {
           id: 1,
           data: '20/10/2018',
-          cpfCliente: '111.111.111-11',
           quantidadeItens: 3,
           valorTotal: 90,
           produtos: [
             {
               nome: 'Produto1',
               codigo: 1234,
-              categoria: 'Medicamentos',
               preco: 10,
               quantidade: 1,
               subTotal: 10
@@ -55,7 +52,6 @@ export default {
             {
               nome: 'Produto2',
               codigo: 1235,
-              categoria: 'Medicamentos',
               preco: 40,
               quantidade: 2,
               subTotal: 80
@@ -65,14 +61,12 @@ export default {
         {
           id: 2,
           data: '20/10/2018',
-          cpfCliente: '121.121.121-12',
           quantidadeItens: 3,
           valorTotal: 111,
           produtos: [
             {
               nome: 'Produto6',
               codigo: 1872,
-              categoria: 'Medicamentos',
               preco: 5,
               quantidade: 1,
               subTotal: 5
@@ -80,7 +74,6 @@ export default {
             {
               nome: 'Produto4',
               codigo: 1235,
-              categoria: 'Medicamentos',
               preco: 10,
               quantidade: 2,
               subTotal: 20
@@ -88,25 +81,21 @@ export default {
             {
               nome: 'Produto3',
               codigo: 4238,
-              categoria: 'Medicamentos',
               preco: 86,
               quantidade: 1,
               subTotal: 86
             }
-
           ]
         },
         {
           id: 3,
           data: '18/10/2018',
-          cpfCliente: '113.113.113-13',
           quantidadeItens: 2,
           valorTotal: 60,
           produtos: [
             {
               nome: 'Produto1',
               codigo: 1234,
-              categoria: 'Medicamentos',
               preco: 10,
               quantidade: 5,
               subTotal: 50
@@ -114,7 +103,6 @@ export default {
             {
               nome: 'Produto4',
               codigo: 1235,
-              categoria: 'Medicamentos',
               preco: 10,
               quantidade: 1,
               subTotal: 10

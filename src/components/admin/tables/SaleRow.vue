@@ -1,13 +1,10 @@
 <template>
   <tr>
     <td>{{ venda.id }}</td>
-    <td>{{ venda.cpfCliente }}</td>
     <td>{{ venda.data }}</td>
     <td>{{ venda.quantidadeItens }}</td>
     <td>{{ venda.valorTotal }}</td>
     <td class="small">
-      <span class="btn edit" >{{ icons.edit }}</span>
-      <span class="btn remove">{{ icons.cancel }}</span>
       <span class="btn edit" @click="showDetails = true">{{ icons.clipboard }}</span>
     </td>
     <transition name="modal">

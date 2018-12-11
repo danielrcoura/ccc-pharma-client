@@ -6,7 +6,7 @@
         <table class="table">
           <thead>
             <tr>
-              <th>Codigo</th>
+              <th>#</th>
               <th>Nome</th>
               <th>Preço</th>
               <th>Quantidade</th>
