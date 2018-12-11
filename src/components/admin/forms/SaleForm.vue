@@ -6,7 +6,6 @@
           <input type="text" v-model="search" placeholder="Pesquisar produto"/>
           <span>{{icons.magnifyingGlass}}</span>
         </div>
-        
         <ul class="product-list">
           <li v-for="(produto, id) in filteredProducts" :key="id">
 
@@ -18,23 +17,20 @@
         </ul>
       </div>
       <div class="container">
-
-        <div class="sale-value">
-         <h2><small>Total</small> R$ {{totalCompra}}</h2>
-        </div>
-
         <div class="sale-products">
           <table>
             <thead>
               <tr>
                 <th>Produto</th>
-                <th>Quantidade</th>
                 <th>Preço</th>
+                <th>Quantidade</th>
+                <th>Subtotal</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="(produto, id) in selectedProducts" :key="id">
                 <td>{{produto.nome}}</td>
+                <td>R$ {{produto.preco}}</td>
                 <td>
                   <input type="number" min="1" v-model="produto.quantidade">
                   <a href="#" @click="removeProduct(produto)" class="product">remover</a>
@@ -42,6 +38,14 @@
                 <td>R$ {{produto.total()}}</td>
               </tr>
             </tbody>
+            <tfoot>
+            <tr>
+              <td></td>
+              <td></td>
+              <td>Total</td>
+              <td>R$ {{ totalCompra }}</td>
+            </tr>
+          </tfoot>
 
           </table>
         </div>
@@ -118,15 +122,6 @@ export default {
   display: grid;
   grid-template-columns: 1fr 2fr ;
   grid-gap: 1rem;
-  
-}
-
-@media(max-width: 600px){
-  .modal-content {
-    width: 100vh;
-    height: 100vh;
-    grid-template-columns: 1fr;
-  }
 }
 
 button, input {
@@ -156,7 +151,7 @@ button, input {
 .product-list {
   list-style: none;
   margin-top: 10px;
-  color: #333;
+  color: #777;
   max-height: 80%;
   overflow-x: auto;
   border: 1px solid #999;
@@ -189,7 +184,6 @@ button, input {
         cursor: pointer;
         &:hover, &:focus {
           background: #2dc1e1;
-          
         }
     }
   }
@@ -208,24 +202,40 @@ table {
   thead {
     border-bottom: 1px solid #999;
     th {
-    font-weight: normal;
-    color: #fff;
-    text-align: center;
-    padding: .4rem 1rem;
-    border-right: 1px solid #ccc;
-    background: #23aac5;
-    &:last-child {
-      border-right: none;
+      font-weight: normal;
+      color: #fff;
+      text-align: center;
+      padding: .4rem 1rem;
+      border-right: 1px solid #ccc;
+      background: #23aac5;
+      &:last-child {
+        border-right: none;
+      }
     }
   }
-  }
-  
   td {
+    color: #777;
     text-align: center;
     padding: 1rem;
     border-bottom: 0.1rem solid #999;
     input {
-      width: 3rem;
+      width: 2.5rem;
+      height: 2.5rem;
+      text-align: center;
+      border: 1px solid #eee;
+    }
+    a {
+      font-size: .8rem;
+      text-decoration: none;
+      color: #777;
+    }
+  }
+
+  tfoot tr td {
+    border-bottom: none;
+    &:last-child {
+      color: #444;
+      font-size: 1.5rem;
     }
   }
 }
