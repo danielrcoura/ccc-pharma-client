@@ -33,7 +33,7 @@ export default {
   computed: {
     ...mapState(['lotes']),
     isDisponivel () {
-      return estoque.isDisponivel(Object.values(this.lotes), this.produto.codigo)
+      return estoque.isDisponivel(this.lotes, this.produto)
     }
   },
   props: {

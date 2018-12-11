@@ -13,7 +13,7 @@
         </tr>
       </thead>
       <tbody v-for="(lote, index) in getLots()" :key="index">
-        <lot-row :lote="lote" :nomeProduto="produtos[lote.codigoProduto].nome"/>
+        <lot-row :lote="lote" :nomeProduto="produtos.find(p => p.id === lote.idProduto).nome"/>
       </tbody>
     </table>
   </div>
@@ -40,20 +40,16 @@ export default {
     }
   },
   computed: {
-    ...mapState(['lotes', 'produtos']),
-    listLotes () {
-      return Object.values(this.lotes)
-    }
-  },
-  mounted () {
-    this.sort()
-  },
-  watch: {
-    sortConfig: {
-      handler () {
-        this.sort()
-      },
-      deep: true
+    ...mapState(['produtos']),
+    lotes () {
+      const lotesCopy = this.$store.state.lotes.slice()
+
+      return lotesCopy.sort((a, b) => {
+        if (this.sortConfig.order === 'desc') [a, b] = [b, a]
+
+        if (this.sortConfig.property === 'nomeProduto') return this.sortByNomeProduto(a, b)
+        else return this.generalSort(a, b)
+      })
     }
   },
   components: {
@@ -76,22 +72,13 @@ export default {
         this.sortConfig.order = 'asc'
       }
     },
-    sort () {
-      let property = this.sortConfig.property || 'nomeProduto'
-      this.listLotes.sort((a, b) => {
-        if (this.sortConfig.order === 'desc') [a, b] = [b, a]
-
-        if (property === 'nomeProduto') return this.sortByNomeProduto(a, b)
-        else return this.generalSort(a, b)
-      })
-    },
     generalSort (a, b) {
       const property = this.sortConfig.property
       return this.compare(a[property], b[property])
     },
     sortByNomeProduto (a, b) {
-      const nomeProdutoA = this.produtos[a.codigoProduto].nome
-      const nomeProdutoB = this.produtos[b.codigoProduto].nome
+      const nomeProdutoA = this.produtos.find(p => p.id === a.idProduto).nome
+      const nomeProdutoB = this.produtos.find(p => p.id === b.idProduto).nome
 
       return this.compare(nomeProdutoA, nomeProdutoB)
     },
@@ -108,10 +95,10 @@ export default {
     },
     getLots () {
       if (this.currentFilter === 'vencido') {
-        return this.listLotes
+        return this.lotes
           .filter(lote => moment(lote.validade).isBefore(moment()))
       } else {
-        return this.listLotes
+        return this.lotes
           .filter(lote => moment(lote.validade).isSameOrAfter(moment()))
       }
     }

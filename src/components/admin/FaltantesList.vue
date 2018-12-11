@@ -2,13 +2,10 @@
   <div class="faltantes-list">
     <div class="title">Produtos indisponíveis</div>
     <ul>
-      <li v-for="produto in faltantes" :key="produto.codigo">
-        <span>{{ produto.nome }}</span> <button @click="callForm(produto.codigo)"><b>+</b> Lote</button>
+      <li v-for="produto in faltantes" :key="produto.id">
+        <span>{{ produto.nome }}</span>
       </li>
     </ul>
-    <transition name="modal">
-      <lot-form v-if="showForm" @close="showForm = false" :lote="formData"/>
-    </transition>
   </div>
 </template>
 
@@ -29,17 +26,8 @@ export default {
   },
   computed: {
     ...mapState(['lotes', 'produtos']),
-    listLotes () {
-      return Object.values(this.lotes)
-    },
     faltantes () {
-      return estoque.getProdutosIndisponiveis(this.listLotes, this.produtos)
-    }
-  },
-  methods: {
-    callForm (codigoProduto) {
-      this.formData = { codigoProduto }
-      this.showForm = true
+      return estoque.getProdutosIndisponiveis(this.lotes, this.produtos)
     }
   },
   components: {
@@ -74,13 +62,6 @@ li {
   padding: 1rem 6px;
   border-top: 1px solid #ddd;
   color: #777;
-  button {
-    border: none;
-    background: none;
-    color: #2d9932;
-    font-size: .9rem;
-    cursor: pointer;
-  }
   &:last-child {
     border-bottom: 1px solid #ddd;
   }
