@@ -4,6 +4,7 @@ import ProdutosCliente from '@/views/ProdutosCliente'
 import Manage from '@/views/admin/Manage'
 import ProductsPage from '@/components/admin/pages/ProductsPage'
 import LotsPage from '@/components/admin/pages/LotsPage'
+import SalesPage from '@/components/admin/pages/SalesPage'
 import DashboardPage from '@/components/admin/pages/DashboardPage'
 import LoginClient from '@/views/LoginClient'
 import LoginAdmin from '@/views/LoginAdmin'
@@ -35,7 +36,8 @@ export default new Router({
       children: [
         { path: 'produtos', name: 'Produtos', component: ProductsPage },
         { path: 'estoque', name: 'Estoque', component: LotsPage },
-        { path: 'dashboard', name: 'Dashboard', component: DashboardPage }
+        { path: 'dashboard', name: 'Dashboard', component: DashboardPage },
+        { path: 'vendas', name: 'Vendas', component: SalesPage }
       ]
     }
   ]
