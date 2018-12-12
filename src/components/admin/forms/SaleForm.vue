@@ -1,22 +1,19 @@
 <template>
   <div class="modal">
     <div class="modal-content">
-      <div class="container">
+      <div class="container-search">
         <div class="search">
-          <input type="text" v-model="search" placeholder="Pesquisar produto"/>
+          <input type="text" v-model="search" placeholder="Pesquisar produto" autofocus/>
           <span>{{icons.magnifyingGlass}}</span>
         </div>
         <ul class="product-list">
           <li v-for="(produto, id) in filteredProducts" :key="id">
-
-              {{produto.nome}}
-              <span>R$ {{produto.preco}}</span>
-              <button class="btn-addProduto" @click="addProduct(produto)">adicionar</button>
-
+            <span>{{produto.nome}}</span>
+            <button class="btn-addProduto" @click="addProduct(produto)">+</button>
           </li>
         </ul>
       </div>
-      <div class="container">
+      <div class="container-table">
         <div class="sale-products">
           <table>
             <thead>
@@ -25,6 +22,7 @@
                 <th>Preço</th>
                 <th>Quantidade</th>
                 <th>Subtotal</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
@@ -33,28 +31,23 @@
                 <td>R$ {{produto.preco}}</td>
                 <td>
                   <input type="number" min="1" v-model="produto.quantidade">
-                  <a href="#" @click="removeProduct(produto)" class="product">remover</a>
                   </td>
                 <td>R$ {{produto.total()}}</td>
+                <td href="#" @click="removeProduct(produto)" class="remove-icon">{{icons.cross}}</td>
               </tr>
             </tbody>
-            <tfoot>
-            <tr>
-              <td></td>
-              <td></td>
-              <td>Total</td>
-              <td>R$ {{ totalCompra }}</td>
-            </tr>
-          </tfoot>
-
           </table>
         </div>
-        <form>
-          <div class="btn-group">
-            <button @click="$emit('close')" class="btn-cancel">Cancelar</button>
-            <button @click="registerSale()" class="btn-confirm">Concluir venda</button>
-          </div>
-        </form>
+
+        <div class="footer">
+          <div class="total">Total <span>R$ {{totalCompra}}</span></div>
+          <form>
+            <div class="btn-group">
+              <button @click="$emit('close')" class="btn-cancel">Cancelar</button>
+              <button @click="registerSale()" class="btn-confirm">Concluir venda</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
@@ -117,28 +110,46 @@ export default {
 <style lang='scss' scoped>
 @import 'src/assets/css/forms.scss';
 .modal-content {
-  width: 80vw;
-  height: 80vh;
   display: grid;
   grid-template-columns: 1fr 2fr ;
-  grid-gap: 1rem;
+  grid-gap: 2rem;
 }
-
 button, input {
   border: none;
   outline: none;
   background: none;
   font-size: 1rem;
 }
-
-.container {
+.container-search {
+  height: 65vh;
+}
+.container-table {
+  position: relative;
   height: 70vh;
+  display: flex;
+  flex-direction: column;
+  .footer {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    .total {
+      text-align: right;
+      color: #777;
+      display: flex;
+      flex-direction: column;
+      font-size: 1.1rem;
+      span {
+        margin-left: 2rem;
+        color: #36d050;
+        font-size: 1.5rem;
+      }
+    }
+  }
 }
 
 .search {
-  border-radius: 15px;
-  border: 0.05rem solid #999;
-  padding: 5px;
+  border: 1px solid #ddd;
+  padding: .7rem 1.5rem .7rem 0;
   text-align: right;
   display: flex;
   input {
@@ -146,26 +157,29 @@ button, input {
     width: 100%;
     color: #333;
   }
+  span {
+    color: #656565;
+  }
 }
 
 .product-list {
   list-style: none;
-  margin-top: 10px;
   color: #777;
   max-height: 80%;
   overflow-x: auto;
-  border: 1px solid #999;
-  border-radius: 10px;
+  box-shadow: 0 2px 5px #aaa;
+  margin-top: 1rem;
   li {
-
+    padding: .5rem 1rem;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
     height: 3rem;
-    border-bottom: 1px solid #999;
-
+    &:last-child {
+      border-bottom: none;
+    }
     &:hover{
-      background-color: #f1f1f1;
+      background-color: #dfdfdf;
       .seta {
           background-color: #06b1d3;
           border-radius: 10px;
@@ -176,15 +190,12 @@ button, input {
       font-size: .9rem;
     }
     .btn-addProduto {
-        background-color: #36add0;
+        font-size: 1.7rem;
         padding: .5rem;
-        color: #fff;
+        color: #36d050;
         transition: background .3s;
         border-radius: .2rem;
         cursor: pointer;
-        &:hover, &:focus {
-          background: #2dc1e1;
-        }
     }
   }
 }
@@ -199,38 +210,29 @@ table {
   overflow-x: auto;
   border-collapse: collapse;
   width: 100%;
+  margin-top: .1rem;
   thead {
-    border-bottom: 1px solid #999;
+    border-bottom: 1px solid #ddd;
     th {
-      font-weight: normal;
-      color: #fff;
+      text-align: left;
+      color: #999;
       text-align: center;
-      padding: .4rem 1rem;
-      border-right: 1px solid #ccc;
-      background: #23aac5;
-      &:last-child {
-        border-right: none;
-      }
+      padding: .7rem 1rem;
     }
   }
   td {
+    text-align: left;
     color: #777;
     text-align: center;
-    padding: 1rem;
-    border-bottom: 0.1rem solid #999;
+    padding: .4rem;
     input {
       width: 2.5rem;
       height: 2.5rem;
       text-align: center;
       border: 1px solid #eee;
-    }
-    a {
-      font-size: .8rem;
-      text-decoration: none;
       color: #777;
     }
   }
-
   tfoot tr td {
     border-bottom: none;
     &:last-child {
@@ -238,5 +240,15 @@ table {
       font-size: 1.5rem;
     }
   }
+  .remove-icon {
+    font-size: 1.3rem;
+    color: #ca3636;
+    cursor: pointer;
+  }
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  opacity: 1;
 }
 </style>
