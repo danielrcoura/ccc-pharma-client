@@ -21,6 +21,7 @@
 <script>
 import SaleRow from '@/components/admin/tables/SaleRow'
 import icons from 'glyphicons'
+import { mapState } from 'vuex'
 
 export default {
   name: 'SalesTable',
@@ -34,82 +35,7 @@ export default {
         {label: 'Quant. Itens', property: 'quantidadeItens'},
         {label: 'Total (R$)', property: 'valorTotal'}
       ],
-      sortConfig: { property: null, order: null },
-      vendas: [
-        {
-          id: 1,
-          data: '20/10/2018',
-          quantidadeItens: 3,
-          valorTotal: 90,
-          produtos: [
-            {
-              nome: 'Produto1',
-              codigo: 1234,
-              preco: 10,
-              quantidade: 1,
-              subTotal: 10
-            },
-            {
-              nome: 'Produto2',
-              codigo: 1235,
-              preco: 40,
-              quantidade: 2,
-              subTotal: 80
-            }
-          ]
-        },
-        {
-          id: 2,
-          data: '20/10/2018',
-          quantidadeItens: 3,
-          valorTotal: 111,
-          produtos: [
-            {
-              nome: 'Produto6',
-              codigo: 1872,
-              preco: 5,
-              quantidade: 1,
-              subTotal: 5
-            },
-            {
-              nome: 'Produto4',
-              codigo: 1235,
-              preco: 10,
-              quantidade: 2,
-              subTotal: 20
-            },
-            {
-              nome: 'Produto3',
-              codigo: 4238,
-              preco: 86,
-              quantidade: 1,
-              subTotal: 86
-            }
-          ]
-        },
-        {
-          id: 3,
-          data: '18/10/2018',
-          quantidadeItens: 2,
-          valorTotal: 60,
-          produtos: [
-            {
-              nome: 'Produto1',
-              codigo: 1234,
-              preco: 10,
-              quantidade: 5,
-              subTotal: 50
-            },
-            {
-              nome: 'Produto4',
-              codigo: 1235,
-              preco: 10,
-              quantidade: 1,
-              subTotal: 10
-            }
-          ]
-        }
-      ]
+      sortConfig: { property: null, order: null }
     }
   },
   mounted () {
@@ -127,7 +53,13 @@ export default {
   components: {
     SaleRow
   },
-
+  computed: {
+    ...mapState(['vendas']),
+    vendas () {
+      const vendasCopy = this.$store.state.vendas.slice()
+      return vendasCopy
+    }
+  },
   methods: {
     changeSort (property) {
       if (this.sortConfig.property === property) {

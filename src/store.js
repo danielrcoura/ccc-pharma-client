@@ -7,7 +7,8 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
   state: {
     produtos: [],
-    lotes: []
+    lotes: [],
+    vendas: []
   },
   mutations: {
     updateProdutos (state, produtos) {
@@ -15,6 +16,9 @@ const store = new Vuex.Store({
     },
     updateLotes (state, lotes) {
       state.lotes = lotes
+    },
+    updateVendas (state, vendas) {
+      state.vendas = vendas
     }
   },
   actions: {
@@ -28,6 +32,12 @@ const store = new Vuex.Store({
       axios.get('/lotes')
         .then(lotes => {
           commit('updateLotes', lotes.data)
+        })
+    },
+    getVendas ({ commit }) {
+      axios.get('/vendas')
+        .then(vendas => {
+          commit('updateVendas', vendas.data)
         })
     }
   }
