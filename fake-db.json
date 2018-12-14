@@ -111,7 +111,7 @@
     {
       "id": 2,
       "data": "20/10/2018",
-      "quantidadeItens": 3,
+      "quantidadeItens": 4,
       "valorTotal": 111,
       "produtos": [
         {
@@ -140,7 +140,7 @@
     {
       "id": 3,
       "data": "22/10/2018",
-      "quantidadeItens": 4,
+      "quantidadeItens": 7,
       "valorTotal": 180,
       "produtos": [
         {
