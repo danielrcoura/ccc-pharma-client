@@ -24,7 +24,7 @@
             </tbody>
           </table>
         </div>
-        
+
         <div class="footer">
           <div class="flex">
             <div class="total">Quantidade de itens <span>{{venda.quantidadeItens}}</span></div>

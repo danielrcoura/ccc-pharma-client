@@ -13,7 +13,7 @@
         </tr>
       </thead>
       <tbody v-for="(lote, index) in getLots()" :key="index">
-        <lot-row :lote="lote" :nomeProduto="produtos.find(p => p.id === lote.idProduto).nome"/>
+        <lot-row :lote="lote" :nomeProduto="produtos.find(p => p.id === lote.produto.id).nome"/>
       </tbody>
     </table>
   </div>

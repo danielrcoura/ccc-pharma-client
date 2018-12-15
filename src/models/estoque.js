@@ -9,7 +9,7 @@ function _isEmFalta (lotesProduto) {
 }
 
 function isDisponivel (lotes, produto) {
-  const lotesProduto = lotes.filter(lote => lote.idProduto === produto.id)
+  const lotesProduto = lotes.filter(lote => lote.produto.id === produto.id)
 
   return !_isVencido(lotesProduto) && !_isEmFalta(lotesProduto)
 }
@@ -26,7 +26,7 @@ function isProximoDaValidade (lote) {
 function isProximoDeEsgotar (lotes, produto) {
   const lotesFiltrados = lotes.filter(lote => {
     const naValidade = moment(lote.validade).isAfter(moment())
-    return lote.idProduto === produto.id && naValidade
+    return lote.produto.id === produto.id && naValidade
   })
   const qtdItens = lotesFiltrados
     .reduce((soma, current) => soma + current.quantidade, 0)
