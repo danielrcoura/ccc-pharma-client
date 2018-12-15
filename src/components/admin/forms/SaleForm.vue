@@ -56,6 +56,7 @@
 <script>
 import icons from 'glyphicons'
 import { mapState } from 'vuex'
+import moment from 'moment'
 
 export default {
   name: 'SaleForm',
@@ -100,7 +101,18 @@ export default {
     },
 
     registerSale () {
-      alert('Venda efeivada com sucesso!')
+      const data = moment().format('YYYY-MM-DD')
+      const venda = {data: data, id: 1}
+      console.log(venda)
+      this.selectedProducts.forEach(produto => {
+        const vendaPro = {
+          id_venda: venda.id,
+          id_produto: produto.id,
+          quantidade: parseInt(produto.quantidade)
+        }
+        console.log('cadastrando vendaProduto')
+        console.log(vendaPro)
+      })
       this.$emit('close')
     }
   }
