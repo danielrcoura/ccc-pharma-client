@@ -13,9 +13,10 @@ export default {
     this.getProdutos()
     this.getLotes()
     this.getVendas()
+    this.getVendaProdutos()
   },
   methods: {
-    ...mapActions(['getProdutos', 'getLotes', 'getVendas'])
+    ...mapActions(['getProdutos', 'getLotes', 'getVendas', 'getVendaProdutos'])
   }
 }
 </script>
