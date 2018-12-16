@@ -1,15 +1,18 @@
 <template>
   <div class="modal">
     <div class="modal-content">
-      <form>
-        <input class="title" ref="codigo" type="number" :value="lote.codigoProduto" placeholder="Código do Produto"/>
+      <form @submit.prevent="cadastrar()">
+        <select v-model="lote.produto.id">
+          <option v-for="produto in produtos" :value="produto.id" :key="produto.id">{{produto.nome}}</option>
+        </select>
         <label>Data de validade</label>
-        <input type="date" :value="lote.validade"/>
+        <input type="text" name="input" placeholder="dd/mm/yyyy" v-model="lote.validade"
+        pattern="(?:30))|(?:(?:0[13578]|1[02])-31))/(?:0[1-9]|1[0-9]|2[0-9])|(?:(?!02)(?:0[1-9]|1[0-2])/(?:19|20)[0-9]{2}-(?:(?:0[1-9]|1[0-2])"/>
         <label>Quantidade de itens</label>
-        <input type="number" :value="lote.quantidade"/>
+        <input type="number" v-model="lote.quantidade"/>
         <div class="btn-group">
           <button @click="$emit('close')" class="btn-cancel">Cancelar</button>
-          <button @click="registerProduct()" class="btn-confirm">Cadastrar lote</button>
+          <button type="submit" class="btn-confirm">Cadastrar lote</button>
         </div>
       </form>
     </div>
@@ -17,15 +20,24 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
+
 export default {
   name: 'LotForm',
-  methods: {
-    registerLot () {
-      alert('Cadastrado com sucesso')
+  data () {
+    return {
+      lote: { produto: {} }
     }
   },
-  props: {
-    lote: {}
+  computed: {
+    ...mapState(['produtos'])
+  },
+  methods: {
+    ...mapActions(['createLote']),
+    cadastrar () {
+      this.createLote(this.lote)
+      this.$emit('close')
+    }
   },
   mounted () {
     this.$refs.codigo.focus()
