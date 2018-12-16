@@ -3,7 +3,7 @@
     <navbar class="navbar"/>
     <div class="login">
       <div class="login-box">
-        <login :admin="true"/>
+        <login :admin="true" @success="fetchData()"/>
       </div>
     </div>
   </div>
@@ -12,6 +12,7 @@
 <script>
 import Login from '@/components/Login'
 import Navbar from '@/components/client/Navbar'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'LoginAdmin',
@@ -23,6 +24,14 @@ export default {
   components: {
     Login,
     Navbar
+  },
+  methods: {
+    ...mapActions(['getProdutos', 'getLotes']),
+    fetchData () {
+      this.getProdutos()
+      this.getLotes()
+      this.$router.push('/admin/manage')
+    }
   }
 }
 </script>

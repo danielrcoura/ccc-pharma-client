@@ -1,20 +1,36 @@
 <template>
   <form>
     <div class="title">Cadastre-se</div>
-    <label for="email">Email</label>
-    <input ref="email" id="email" type="email" placeholder="user@email.com">
-    <label for="senha">Senha</label>
-    <input id="senha" type="password" placeholder="senha123">
-    <button>Cadastrar</button>
+    <label for="login">Nome de usuário</label>
+    <input ref="login" id="login" type="text" v-model="user.login" placeholder="usuario123">
+    <label for="password">Senha</label>
+    <input id="password" type="password" v-model="user.password" placeholder="password123">
+    <button @click="submit()">Cadastrar</button>
     <div class="singup" @click="$emit('login')">Voltar para login</div>
   </form>
 </template>
 
 <script>
+import axios from '@/axios'
+
 export default {
   name: 'SingUp',
+  data () {
+    return {
+      user: {
+        login: '',
+        password: ''
+      }
+    }
+  },
   mounted () {
-    this.$refs.email.focus()
+    this.$refs.login.focus()
+  },
+  methods: {
+    submit () {
+      axios.post('/usuarios/', this.user)
+        .then(res => { console.log(res.data) })
+    }
   }
 }
 </script>
