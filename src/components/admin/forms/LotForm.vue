@@ -2,8 +2,8 @@
   <div class="modal">
     <div class="modal-content">
       <form @submit.prevent="cadastrar()">
-        <select v-model="lote.produto.id">
-          <option v-for="produto in produtos" :value="produto.id" :key="produto.id">{{produto.nome}}</option>
+        <select v-model="lote.produto">
+          <option v-for="produto in produtos" :value="produto" :key="produto.id">{{produto.nome}}</option>
         </select>
         <label>Data de validade</label>
         <input type="text" name="input" placeholder="dd/mm/yyyy" v-model="lote.validade"/>

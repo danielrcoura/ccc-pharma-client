@@ -41,10 +41,10 @@
 
         <div class="footer">
           <div class="total">Total <span>R$ {{totalCompra}}</span></div>
-          <form>
+          <form @submit.prevent="cadastrar()">
             <div class="btn-group">
               <button @click="$emit('close')" class="btn-cancel">Cancelar</button>
-              <button @click="registerSale()" class="btn-confirm">Concluir venda</button>
+              <button type="submit" class="btn-confirm">Concluir venda</button>
             </div>
           </form>
         </div>
@@ -115,7 +115,6 @@ export default {
         vendaprod.produto.nome !== venda.produto.nome
       )
     },
-
     registerSale () {
       const data = moment().format('DD/MM/YYYY')
       const valorTotal = this.totalCompra
