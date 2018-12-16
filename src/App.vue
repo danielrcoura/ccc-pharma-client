@@ -11,9 +11,10 @@ export default {
   name: 'App',
   mounted () {
     this.getProdutos()
+    this.getLotes()
   },
   methods: {
-    ...mapActions(['getProdutos'])
+    ...mapActions(['getProdutos', 'getLotes'])
   }
 }
 </script>
