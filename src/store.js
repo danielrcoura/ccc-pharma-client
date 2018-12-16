@@ -45,15 +45,14 @@ const store = new Vuex.Store({
         .then()
     },
     createLote ({ commit }, lote) {
-      axios.post('/estoque/', lote)
+      axios.post('/estoques/', lote)
         .then(res => {
           commit('addLote', res.data)
         })
     },
     getLotes ({ commit }) {
-      axios.get('/estoque/')
+      axios.get('/estoques/')
         .then(lotes => {
-          console.log(lotes.data)
           commit('fetchLotes', lotes.data)
         })
     },

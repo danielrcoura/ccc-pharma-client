@@ -4,6 +4,6 @@ import config from '@/config'
 export default axios.create({
   baseURL: config.apiURL,
   headers: {
-    authorization: localStorage.cccToken || ''
+    Authorization: localStorage.cccToken || ''
   }
 })
