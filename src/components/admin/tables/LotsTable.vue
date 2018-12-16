@@ -9,11 +9,10 @@
             <span>{{ title.label }}</span>
             <span class="sort-arrow" :class="arrowDirection(title.property)"></span>
           </th>
-          <th>Ações</th>
         </tr>
       </thead>
-      <tbody v-for="(lote, index) in getLots()" :key="index">
-        <lot-row :lote="lote" :nomeProduto="produtos.find(p => p.id === lote.idProduto).nome"/>
+      <tbody v-for="(lote, index) in filteredLotes()" :key="index">
+        <lot-row :lote="lote"/>
       </tbody>
     </table>
   </div>
@@ -77,10 +76,7 @@ export default {
       return this.compare(a[property], b[property])
     },
     sortByNomeProduto (a, b) {
-      const nomeProdutoA = this.produtos.find(p => p.id === a.idProduto).nome
-      const nomeProdutoB = this.produtos.find(p => p.id === b.idProduto).nome
-
-      return this.compare(nomeProdutoA, nomeProdutoB)
+      return this.compare(a.produto.nome, b.produto.nome)
     },
     compare (a, b) {
       if (a < b) return -1
@@ -93,13 +89,13 @@ export default {
         'arrow-up': this.sortConfig.property === property && this.sortConfig.order === 'asc'
       }
     },
-    getLots () {
+    filteredLotes () {
       if (this.currentFilter === 'vencido') {
         return this.lotes
-          .filter(lote => moment(lote.validade).isBefore(moment()))
+          .filter(lote => moment(lote.validade, 'DD/MM/YYYY').isBefore(moment()))
       } else {
         return this.lotes
-          .filter(lote => moment(lote.validade).isSameOrAfter(moment()))
+          .filter(lote => moment(lote.validade, 'DD/MM/YYYY').isSameOrAfter(moment()))
       }
     }
   }
