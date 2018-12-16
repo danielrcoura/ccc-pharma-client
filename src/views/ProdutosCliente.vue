@@ -29,8 +29,8 @@ export default {
     Navbar
   },
   methods: {
-    isDisponivel (codigoProduto) {
-      return !this.produtosIndisponiveis.find(produto => produto.codigo === codigoProduto)
+    isDisponivel (id) {
+      return !this.produtosIndisponiveis.find(produto => produto.id === id)
     }
   }
 }
