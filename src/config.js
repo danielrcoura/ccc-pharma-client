@@ -1,3 +1,3 @@
 export default {
-  apiURL: 'http://ccc-pharma-spring.herokuapp.com/'
+  apiURL: 'https://cors-anywhere.herokuapp.com/http://ccc-pharma-api.herokuapp.com/'
 }

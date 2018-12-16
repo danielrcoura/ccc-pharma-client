@@ -19,7 +19,7 @@
         </select>
         <div class="btn-group">
           <button @click="$emit('close')" class="btn-cancel">Cancelar</button>
-          <button @click="submit()" class="btn-confirm">{{ isCreate ? 'Cadastrar produto' : 'Atualizar produto' }}</button>
+          <button @click="submit()" class="btn-confirm">Cadastrar produto</button>
         </div>
       </form>
     </div>
@@ -31,18 +31,17 @@ import { mapActions } from 'vuex'
 
 export default {
   name: 'ProductForm',
+  data () {
+    return {
+      produto: {}
+    }
+  },
   methods: {
     ...mapActions(['updateProduto', 'createProduto']),
     submit () {
-      if (this.isCreate) this.createProduto(this.produto)
-      else this.updateProduto(this.produto)
-
+      this.createProduto(this.produto)
       this.$emit('close')
     }
-  },
-  props: {
-    produto: Object,
-    isCreate: Boolean
   },
   mounted () {
     this.$refs.name.focus()
