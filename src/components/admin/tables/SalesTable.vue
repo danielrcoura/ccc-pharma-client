@@ -55,7 +55,7 @@ export default {
     SaleRow
   },
   computed: {
-    ...mapState([ 'vendas', 'vendaProdutos']),
+    ...mapState(['vendas', 'vendaProdutos']),
     vendas () {
       const vendasCopy = this.$store.state.vendas.slice()
       const vendaProdutosCopy = this.$store.state.vendaProdutos.slice()

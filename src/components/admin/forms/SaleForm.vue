@@ -98,8 +98,8 @@ export default {
       this.vendaProdutos.push(
         { produto,
           quantidade: 1,
-          subTotal: function () { 
-            let total = this.quantidade * this.produto.preco 
+          subTotal: function () {
+            let total = this.quantidade * this.produto.preco
             return total
           }
         }
