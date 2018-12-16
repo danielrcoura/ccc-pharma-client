@@ -50,7 +50,7 @@ export default {
 .title {
   font-weight: bold;
   font-size: 1rem;
-  padding: 1rem 0;
+  padding: 1rem 2rem;
   margin-bottom: .2rem;
   color: #777;
   text-align: center;
