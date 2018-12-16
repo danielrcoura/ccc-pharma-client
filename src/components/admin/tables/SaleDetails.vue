@@ -19,7 +19,7 @@
                 <td>{{produto.nome}}</td>
                 <td>{{produto.preco}}</td>
                 <td>{{produto.quantidade}}</td>
-                <td>{{produto.subTotal}}</td>
+                <td>{{produto.subTotal.toFixed(2)}}</td>
               </tr>
             </tbody>
           </table>
