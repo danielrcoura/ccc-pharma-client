@@ -1,9 +1,13 @@
 import axios from 'axios'
 import config from '@/config'
 
-export default axios.create({
+const axiosConfig = {
   baseURL: config.apiURL,
-  headers: {
-    Authorization: localStorage.cccToken || ''
-  }
-})
+  headers: {}
+}
+
+if (localStorage.cccToken) {
+  axiosConfig.headers.Authorization = localStorage.cccToken
+}
+
+export default axios.create(axiosConfig)
