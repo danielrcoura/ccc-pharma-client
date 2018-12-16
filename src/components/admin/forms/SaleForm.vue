@@ -30,7 +30,7 @@
                 <td>{{vendaProduto.produto.nome}}</td>
                 <td>R$ {{vendaProduto.produto.preco}}</td>
                 <td>
-                  <input type="number" min="1" v-model="vendaProduto.quantidade">
+                  <input type="number" min="1" max="maxItens" v-model="vendaProduto.quantidade">
                   </td>
                 <td>R$ {{vendaProduto.subTotal().toFixed(2)}}</td>
                 <td href="#" @click="removeProduct(vendaProduto)" class="remove-icon">{{icons.cross}}</td>
@@ -56,6 +56,7 @@
 <script>
 import icons from 'glyphicons'
 import { mapState, mapActions } from 'vuex'
+import estoques from '@/models/estoque'
 import moment from 'moment'
 
 export default {
@@ -68,7 +69,11 @@ export default {
     }
   },
   computed: {
-    ...mapState(['produtos']),
+    ...mapState(['produtos', 'lotes']),
+
+    maxItens (produto) {
+      return estoques.getQtdProdutos(produto, Object.values(this.produtos))
+    },
 
     filteredProducts () {
       return Object.values(this.produtos).filter(produto =>
@@ -123,8 +128,32 @@ export default {
           subTotal: vendap.subTotal()
         }
       })
+      this.decrementaEstoque(produtos)
       this.createVendaProduto({venda, produtos})
       this.$emit('close')
+    },
+
+    decrementaEstoque (vendaprodutos) {
+      vendaprodutos.forEach(prod => {
+        const lotes = estoques.getLotesValidosProduto(prod.produto)
+        let qtdItens = prod.quantidade
+        let i = 0
+        while (qtdItens > 0) {
+          let lote = lotes[i]
+          let diff = lote.quantidade - qtdItens
+
+          if (diff > 0) {
+            lote.quantidade -= qtdItens
+            qtdItens = 0
+          } else {
+            qtdItens -= lote.quantidade
+            lote.quantidade = 0
+          }
+
+          // updateLote(lotes[i])
+          i++
+        }
+      })
     }
   }
 }

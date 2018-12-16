@@ -24,6 +24,11 @@ const store = new Vuex.Store({
     addLote (state, lote) {
       state.lotes.push(lote)
     },
+    updateLotes (state, newLote) {
+      state.lotes = state.lotes.map(lote => {
+        return lote.id === newLote.id ? newLote : lote
+      })
+    },
     updateVendas (state, vendas) {
       state.vendas = vendas
     },
@@ -62,6 +67,12 @@ const store = new Vuex.Store({
       axios.get('/estoques/')
         .then(lotes => {
           commit('fetchLotes', lotes.data)
+        })
+    },
+    updateLote ({ commit }, lote) {
+      axios.put('/estoques/', lote)
+        .then(res => {
+          commit('updateLotes', res.data)
         })
     },
     getVendas ({ commit }) {
