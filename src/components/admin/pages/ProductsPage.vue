@@ -4,7 +4,7 @@
     <tools-bar @create="showForm = true"/>
     <products-table/>
     <transition name="modal">
-      <product-form :produto="{}" :isCreate="true" @close="showForm = false" v-if="showForm"/>
+      <product-form  @close="showForm = false" v-if="showForm"/>
     </transition>
   </div>
 </template>

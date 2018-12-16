@@ -1,3 +1,3 @@
 export default {
-  apiURL: 'http://localhost:3000'
+  apiURL: 'https://cors-anywhere.herokuapp.com/http://ccc-pharma-api.herokuapp.com/'
 }

@@ -12,14 +12,14 @@
         <label>Categoria</label>
         <select class="select-field" v-model="produto.categoria">
           <option selected disabled hidden></option>
-          <option :selected="produto.categoria === 'Medicamentos'" value="medicamento">Medicamentos</option>
-          <option :selected="produto.categoria === 'Higiene pessoal'" value="higiene">Higiene pessoal</option>
-          <option :selected="produto.categoria === 'Cosméticos'" value="cosmetico">Cosméticos</option>
-          <option :selected="produto.categoria === 'Alimentos'" value="alimento">Alimentos</option>
+          <option :selected="produto.categoria === 'Medicamentos'" value="medicamentos">Medicamentos</option>
+          <option :selected="produto.categoria === 'Higiene pessoal'" value="higiene-pessoal">Higiene pessoal</option>
+          <option :selected="produto.categoria === 'Cosméticos'" value="cosmeticos">Cosméticos</option>
+          <option :selected="produto.categoria === 'Alimentos'" value="alimentos">Alimentos</option>
         </select>
         <div class="btn-group">
           <button @click="$emit('close')" class="btn-cancel">Cancelar</button>
-          <button @click="submit()" class="btn-confirm">{{ isCreate ? 'Cadastrar produto' : 'Atualizar produto' }}</button>
+          <button @click="submit()" class="btn-confirm">Cadastrar produto</button>
         </div>
       </form>
     </div>
@@ -31,18 +31,17 @@ import { mapActions } from 'vuex'
 
 export default {
   name: 'ProductForm',
+  data () {
+    return {
+      produto: {}
+    }
+  },
   methods: {
     ...mapActions(['updateProduto', 'createProduto']),
     submit () {
-      if (this.isCreate) this.createProduto(this.produto)
-      else this.updateProduto(this.produto)
-
+      this.createProduto(this.produto)
       this.$emit('close')
     }
-  },
-  props: {
-    produto: Object,
-    isCreate: Boolean
   },
   mounted () {
     this.$refs.name.focus()

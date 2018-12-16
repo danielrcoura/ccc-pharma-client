@@ -17,10 +17,7 @@ export default {
   },
   computed: {
     categoriaImage () {
-      if (this.produto.categoria === 'Medicamentos') return require('../../assets/medicamentos.png')
-      if (this.produto.categoria === 'Cosméticos') return require('../../assets/cosmeticos.png')
-      if (this.produto.categoria === 'Alimentos') return require('../../assets/alimentos.png')
-      if (this.produto.categoria === 'Higiene pessoal') return require('../../assets/higiene-pessoal.png')
+      return require(`../../assets/${this.produto.categoria}.png`)
     }
   }
 }
