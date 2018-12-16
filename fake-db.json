@@ -87,91 +87,70 @@
   ],
   "vendas": [
     {
+      "vendaId": 1,
+      "valorTotal": 20,
+      "data": "11/12/2018"
+    },
+    {
+      "vendaId": 2,
+      "valorTotal": 30,
+      "data": "11/12/2018"
+    }
+  ],
+  "vendaprodutos": [
+    {
       "id": 1,
-      "data": "20/10/2018",
-      "quantidadeItens": 3,
-      "valorTotal": 90,
-      "produtos": [
-        {
-          "nome": "Produto1",
-          "codigo": 1234,
-          "preco": 10,
-          "quantidade": 1,
-          "subTotal": 10
-        },
-        {
-          "nome": "Produto2",
-          "codigo": 1235,
-          "preco": 40,
-          "quantidade": 2,
-          "subTotal": 80
-        }
-      ]
+      "venda": {
+        "vendaId": 1,
+        "valorTotal": 20,
+        "data": "11/12/2018"
+      },
+      "produto": {
+        "id": 1,
+        "codigo": "1234",
+        "nome": "Produto2",
+        "fabricante": "Fab3",
+        "categoria": "Higiene pessoal",
+        "preco": 10.0
+      },
+      "quantidade": 1,
+      "subTotal": 10
     },
     {
       "id": 2,
-      "data": "20/10/2018",
-      "quantidadeItens": 4,
-      "valorTotal": 111,
-      "produtos": [
-        {
-          "nome": "Produto6",
-          "codigo": 1872,
-          "preco": 5,
-          "quantidade": 1,
-          "subTotal": 5
-        },
-        {
-          "nome": "Produto4",
-          "codigo": 1235,
-          "preco": 10,
-          "quantidade": 2,
-          "subTotal": 20
-        },
-        {
-          "nome": "Produto3",
-          "codigo": 4238,
-          "preco": 86,
-          "quantidade": 1,
-          "subTotal": 86
-        }
-      ]
+      "venda": {
+        "vendaId": 1,
+        "valorTotal": 20,
+        "data": "11/12/2018"
+      },
+      "produto": {
+        "id": 2,
+        "codigo": "1232",
+        "nome": "Produto2",
+        "fabricante": "Fab2",
+        "categoria": "Higiene pessoal",
+        "preco": 20.0
+      },
+      "quantidade": 1,
+      "subTotal": 20
     },
     {
       "id": 3,
-      "data": "22/10/2018",
-      "quantidadeItens": 7,
-      "valorTotal": 180,
-      "produtos": [
-        {
-          "nome": "Produto6",
-          "codigo": 1872,
-          "preco": 25,
-          "quantidade": 3,
-          "subTotal": 75
-        },
-        {
-          "nome": "Produto8",
-          "codigo": 1235,
-          "preco": 10,
-          "quantidade": 2,
-          "subTotal": 20
-        },
-        {
-          "nome": "Produto11",
-          "codigo": 42365,
-          "preco": 15,
-          "quantidade": 1,
-          "subTotal": 15
-        },
-        {
-          "nome": "Produto22",
-          "codigo": 13131,
-          "preco": 70,
-          "quantidade": 1,
-          "subTotal": 70
-        }
-      ]
+      "venda": {
+        "vendaId": 2,
+        "valorTotal": 20,
+        "data": "11/12/2018"
+      },
+      "produto": {
+        "id": 1,
+        "codigo": "1234",
+        "nome": "Produto2",
+        "fabricante": "Fab3",
+        "categoria": "Higiene pessoal",
+        "preco": 30.0
+      },
+      "quantidade": 1,
+      "subTotal": 30
     }
   ]
 }

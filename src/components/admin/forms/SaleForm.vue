@@ -32,7 +32,7 @@
                 <td>
                   <input type="number" min="1" v-model="vendaProduto.quantidade">
                   </td>
-                <td>R$ {{vendaProduto.subTotal()}}</td>
+                <td>R$ {{vendaProduto.subTotal().toFixed(2)}}</td>
                 <td href="#" @click="removeProduct(vendaProduto)" class="remove-icon">{{icons.cross}}</td>
               </tr>
             </tbody>
@@ -81,7 +81,7 @@ export default {
       this.vendaProdutos.forEach(compra => {
         total += compra.subTotal()
       })
-      return total
+      return total.toFixed(2)
     }
   },
   methods: {
@@ -98,7 +98,10 @@ export default {
       this.vendaProdutos.push(
         { produto,
           quantidade: 1,
-          subTotal: function () { return this.quantidade * this.produto.preco }
+          subTotal: function () { 
+            let total = this.quantidade * this.produto.preco 
+            return total
+          }
         }
       )
     },
