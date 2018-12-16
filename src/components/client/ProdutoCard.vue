@@ -3,7 +3,7 @@
     <img :src="categoriaImage" :alt="produto.categoria" :title="produto.categoria" class="logo">
     <div class="title">{{produto.nome}}</div>
     <div class="subtitle">by {{produto.fabricante}}</div>
-    <div v-if="disponivel" class="footer">{{`R$ ${produto.preco.toFixed(2)}`}}</div>
+    <div v-if="disponivel" class="footer">{{`R$ ${produto.preco}`}}</div>
     <div v-else class="footer discreet">Produto não disponível</div>
   </div>
 </template>

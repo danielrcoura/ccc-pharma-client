@@ -14,6 +14,12 @@ const store = new Vuex.Store({
     updateProdutos (state, produtos) {
       state.produtos = produtos
     },
+    addProduto (state, produto) {
+      state.produtos.push(produto)
+    },
+    removeProduto (state, id) {
+      state.produtos = state.produtos.filter(produto => produto._id !== id)
+    },
     updateLotes (state, lotes) {
       state.lotes = lotes
     },
@@ -27,6 +33,19 @@ const store = new Vuex.Store({
         .then(produtos => {
           commit('updateProdutos', produtos.data)
         })
+    },
+    createProduto ({ commit }) {
+      axios.post('/produtos')
+        .then(res => commit('addProduto', res.data))
+    },
+    updateProduto (context, produto) {
+      console.log(produto)
+      axios.put(`/produtos/${produto._id}`, produto)
+        .then()
+    },
+    deleteProduto ({ commit }, produto) {
+      axios.delete(`/produtos/${produto._id}`)
+        .then(res => commit('removeProduto', produto._id))
     },
     getLotes ({ commit }) {
       axios.get('/lotes')

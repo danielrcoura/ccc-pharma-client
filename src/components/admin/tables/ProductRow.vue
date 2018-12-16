@@ -4,14 +4,14 @@
     <td>{{ produto.nome }}</td>
     <td>{{ produto.fabricante }}</td>
     <td>{{ produto.categoria }}</td>
-    <td>{{ produto.preco.toFixed(2) }}</td>
+    <td>{{ produto.preco }}</td>
     <td>{{ isDisponivel ? 'Disponível' : 'Indisponível' }}</td>
     <td class="small">
       <span class="btn edit" @click="showForm = true">{{ icons.edit }}</span>
       <span class="btn remove">{{ icons.cancel }}</span>
     </td>
     <transition name="modal">
-      <product-form :produto="produto" @close="showForm = false" v-if="showForm"/>
+      <product-form :produto="produto" :isCreate="false" @close="showForm = false" v-if="showForm"/>
     </transition>
   </tr>
 </template>
