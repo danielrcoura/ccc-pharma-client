@@ -26,7 +26,7 @@ function isProximoDaValidade (lote) {
 function isProximoDeEsgotar (lotes, produto) {
   const lotesFiltrados = lotes.filter(lote => {
     const naValidade = moment(lote.validade, 'DD/MM/YYYY').isAfter(moment())
-    return lote.idProduto === produto.id && naValidade
+    return lote.produto.id === produto.id && naValidade
   })
   const qtdItens = lotesFiltrados
     .reduce((soma, current) => soma + current.quantidade, 0)
