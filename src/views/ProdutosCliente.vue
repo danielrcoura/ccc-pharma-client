@@ -4,8 +4,8 @@
       <navbar/>
     </header>
     <main class="produtos">
-      <produto-card v-for="produto in produtos" :key="produto.codigo"
-      :produto="produto" :disponivel="isDisponivel(produto.codigo)"/>
+      <produto-card v-for="produto in produtos" :key="produto.id"
+      :produto="produto" :disponivel="isDisponivel(produto.id)"/>
     </main>
   </div>
 </template>
