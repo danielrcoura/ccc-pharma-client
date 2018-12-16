@@ -1,21 +1,40 @@
 <template>
-  <form>
+  <form @submit.prevent="login()">
     <img src="../assets/logo-short.svg" alt="Logo do sistema" class="logo">
-    <input ref="email" type="email" placeholder="email">
-    <input type="password" placeholder="senha">
-    <button>Entrar</button>
+    <input ref="username" type="username" v-model="user.username" placeholder="username">
+    <input type="password" v-model="user.password" placeholder="senha">
+    <button type="submit">Entrar</button>
     <div v-if="!admin" class="singup" @click="$emit('singup')">Criar conta</div>
   </form>
 </template>
 
 <script>
+import axios from '@/axios'
+
 export default {
   name: 'Login',
+  data () {
+    return {
+      user: {
+        username: '',
+        password: ''
+      }
+    }
+  },
   props: {
     admin: Boolean
   },
+  methods: {
+    login () {
+      axios.post('/login', this.user).then(res => {
+        const token = res.headers.authorization.split(' ')[1]
+        localStorage.cccToken = token
+        this.$emit('success')
+      })
+    }
+  },
   mounted () {
-    this.$refs.email.focus()
+    this.$refs.username.focus()
   }
 }
 </script>
@@ -36,7 +55,7 @@ form {
     margin-bottom: 5px;
     color: #333;
     &:focus {
-      border: 1px solid #62dcf5;
+      border: 1px solid s#62dcf5;
     }
   }
   button {

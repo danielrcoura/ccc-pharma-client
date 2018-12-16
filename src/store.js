@@ -18,8 +18,11 @@ const store = new Vuex.Store({
     addProduto (state, produto) {
       state.produtos.push(produto)
     },
-    updateLotes (state, lotes) {
+    fetchLotes (state, lotes) {
       state.lotes = lotes
+    },
+    addLote (state, lote) {
+      state.lotes.push(lote)
     },
     updateVendas (state, vendas) {
       state.vendas = vendas
@@ -49,10 +52,16 @@ const store = new Vuex.Store({
       axios.put(`/produtos/`, produto)
         .then()
     },
+    createLote ({ commit }, lote) {
+      axios.post('/estoques/', lote)
+        .then(res => {
+          commit('addLote', res.data)
+        })
+    },
     getLotes ({ commit }) {
-      axios.get('/estoque/')
+      axios.get('/estoques/')
         .then(lotes => {
-          commit('updateLotes', lotes.data)
+          commit('fetchLotes', lotes.data)
         })
     },
     getVendas ({ commit }) {

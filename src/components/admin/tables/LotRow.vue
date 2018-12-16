@@ -1,13 +1,9 @@
 <template>
   <tr>
     <td>{{ lote.id }}</td>
-    <td>{{ nomeProduto }}</td>
+    <td>{{ lote.produto.nome }}</td>
     <td>{{ lote.quantidade }}</td>
     <td>{{ lote.validade }}</td>
-    <td class="small">
-      <span class="btn edit" @click="showForm = true">{{ icons.edit }}</span>
-      <span class="btn remove">{{ icons.cancel }}</span>
-    </td>
     <transition name="modal">
       <lot-form :lote="lote" @close="showForm = false" v-if="showForm"/>
     </transition>
@@ -27,8 +23,7 @@ export default {
     }
   },
   props: {
-    lote: Object,
-    nomeProduto: String
+    lote: Object
   },
   components: {
     LotForm

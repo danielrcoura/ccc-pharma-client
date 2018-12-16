@@ -12,11 +12,9 @@ export default {
   mounted () {
     this.getProdutos()
     this.getLotes()
-    this.getVendas()
-    this.getVendaProdutos()
   },
   methods: {
-    ...mapActions(['getProdutos', 'getLotes', 'getVendas', 'getVendaProdutos'])
+    ...mapActions(['getProdutos', 'getLotes'])
   }
 }
 </script>
