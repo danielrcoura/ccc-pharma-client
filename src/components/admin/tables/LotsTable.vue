@@ -92,10 +92,10 @@ export default {
     filteredLotes () {
       if (this.currentFilter === 'vencido') {
         return this.lotes
-          .filter(lote => moment(lote.validade).isBefore(moment()))
+          .filter(lote => moment(lote.validade, 'DD/MM/YYYY').isBefore(moment()))
       } else {
         return this.lotes
-          .filter(lote => moment(lote.validade).isSameOrAfter(moment()))
+          .filter(lote => moment(lote.validade, 'DD/MM/YYYY').isSameOrAfter(moment()))
       }
     }
   }
