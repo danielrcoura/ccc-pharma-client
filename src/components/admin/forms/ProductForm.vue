@@ -1,7 +1,7 @@
 <template>
   <div class="modal">
     <div class="modal-content">
-      <form>
+      <form @submit.prevent="cadastrar()">
         <input class="title" ref="name" type="text" v-model="produto.nome" placeholder="Nome"/>
         <label>Código de barras</label>
         <input type="number" v-model="produto.codigo"/>
@@ -19,7 +19,7 @@
         </select>
         <div class="btn-group">
           <button @click="$emit('close')" class="btn-cancel">Cancelar</button>
-          <button @click="submit()" class="btn-confirm">Cadastrar produto</button>
+          <button type="submit" class="btn-confirm">Cadastrar produto</button>
         </div>
       </form>
     </div>
@@ -38,7 +38,7 @@ export default {
   },
   methods: {
     ...mapActions(['updateProduto', 'createProduto']),
-    submit () {
+    cadastrar () {
       this.createProduto(this.produto)
       this.$emit('close')
     }

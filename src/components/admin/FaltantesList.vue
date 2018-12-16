@@ -48,8 +48,8 @@ export default {
   }
 }
 .title {
-  font-family: sans-serif;
   font-weight: bold;
+  font-size: 1rem;
   padding: 1rem 0;
   margin-bottom: .2rem;
   color: #777;

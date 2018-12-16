@@ -32,7 +32,7 @@ export default {
   },
   methods: {
     loteToNotification (lote) {
-      const titulo = `${this.produtos.find(p => lote.idProduto === p.id).nome} - Lote #${lote.id}`
+      const titulo = `${this.produtos.find(p => lote.produto.id === p.id).nome} - Lote #${lote.id}`
       return { titulo: titulo, mensagem: 'O lote está próximo da validade' }
     },
     produtoToNotification (produto) {

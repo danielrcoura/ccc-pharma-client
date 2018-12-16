@@ -1,13 +1,13 @@
 <template>
   <div class="modal">
     <div class="modal-content">
-      <form>
+      <form @submit.prevent="atualizar()">
         <header class="title">{{produto.nome}}</header>
         <label>Preço</label>
         <input type="number" ref="preco" v-model="preco" step="0.01"/>
         <div class="btn-group">
           <button @click="$emit('close')" class="btn-cancel">Cancelar</button>
-          <button @click="submit()" class="btn-confirm">Atualizar Preço</button>
+          <button type="submit" class="btn-confirm">Atualizar Preço</button>
         </div>
       </form>
     </div>
@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     ...mapActions(['updateProduto']),
-    submit () {
+    atualizar () {
       this.produto.preco = this.preco
       this.updateProduto(this.produto)
       this.$emit('close')
