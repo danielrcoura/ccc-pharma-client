@@ -26,14 +26,14 @@
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(produto, id) in selectedProducts" :key="id">
-                <td>{{produto.nome}}</td>
-                <td>R$ {{produto.preco}}</td>
+              <tr v-for="(vendaProduto, id) in vendaProdutos" :key="id">
+                <td>{{vendaProduto.produto.nome}}</td>
+                <td>R$ {{vendaProduto.produto.preco}}</td>
                 <td>
-                  <input type="number" min="1" v-model="produto.quantidade">
+                  <input type="number" min="1" v-model="vendaProduto.quantidade">
                   </td>
-                <td>R$ {{produto.total()}}</td>
-                <td href="#" @click="removeProduct(produto)" class="remove-icon">{{icons.cross}}</td>
+                <td>R$ {{vendaProduto.subTotal()}}</td>
+                <td href="#" @click="removeProduct(vendaProduto)" class="remove-icon">{{icons.cross}}</td>
               </tr>
             </tbody>
           </table>
@@ -55,7 +55,8 @@
 
 <script>
 import icons from 'glyphicons'
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
+import moment from 'moment'
 
 export default {
   name: 'SaleForm',
@@ -63,7 +64,7 @@ export default {
     return {
       icons,
       search: '',
-      selectedProducts: []
+      vendaProdutos: []
     }
   },
   computed: {
@@ -77,30 +78,49 @@ export default {
 
     totalCompra () {
       let total = 0
-      this.selectedProducts.forEach(p => {
-        total += p.total()
+      this.vendaProdutos.forEach(compra => {
+        total += compra.subTotal()
       })
       return total
     }
   },
   methods: {
+    ...mapActions(['createVendaProduto']),
     conteinsProduct (produto) {
       let contains = false
-      this.selectedProducts.forEach(p => {
-        if (p.nome === produto.nome) contains = true
+      this.vendaProdutos.forEach(vendaproduto => {
+        if (vendaproduto.produto.nome === produto.nome) contains = true
       })
       return contains
     },
 
     addProduct (produto) {
-      this.selectedProducts.push({...produto, quantidade: 1, total: function () { return this.quantidade * this.preco }})
+      this.vendaProdutos.push(
+        { produto,
+          quantidade: 1,
+          subTotal: function () { return this.quantidade * this.produto.preco }
+        }
+      )
     },
-    removeProduct (produto) {
-      this.selectedProducts = this.selectedProducts.filter(p => p.nome !== produto.nome)
+    removeProduct (venda) {
+      this.vendaProdutos = this.vendaProdutos.filter(vendaprod =>
+        vendaprod.produto.nome !== venda.produto.nome
+      )
     },
 
     registerSale () {
-      alert('Venda efeivada com sucesso!')
+      const data = moment().format('DD/MM/YYYY')
+      const valorTotal = this.totalCompra
+      const venda = {data, valorTotal}
+      const produtos = this.vendaProdutos.map(vendap => {
+        const { produto, quantidade } = vendap
+        return {
+          produto,
+          quantidade,
+          subTotal: vendap.subTotal()
+        }
+      })
+      this.createVendaProduto({venda, produtos})
       this.$emit('close')
     }
   }

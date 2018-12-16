@@ -67,6 +67,21 @@ const store = new Vuex.Store({
         .then(vendaprodutos => {
           commit('updateVendaProdutos', vendaprodutos.data)
         })
+    },
+    createVendaProduto ({ commit }, vendaProdutos) {
+      axios.post('/vendas', vendaProdutos.venda)
+        .then(venda => {
+          commit('updateVendas', venda.data)
+          return venda.data
+        })
+        .then(venda => {
+          vendaProdutos.produtos.forEach(produto => {
+            axios.post('/vendaprodutos', {venda, ...produto})
+              .then(vendaprod => {
+                commit('updateVendaProdutos', vendaprod.data)
+              })
+          })
+        })
     }
   }
 })

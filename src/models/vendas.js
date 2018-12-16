@@ -1,3 +1,4 @@
+import moment from 'moment'
 
 function getProdutosVenda (venda, vendaprodutos) {
   const vendaProdutos = vendaprodutos.filter(vendaprod => vendaprod.venda.vendaId === venda.vendaId)
@@ -31,12 +32,25 @@ function joinVendaProdutos (vendas, vendaprodutos) {
   })
 }
 
-function receitaArrecadada (vendas, vendaprodutos) {
-  return joinVendaProdutos(vendas, vendaprodutos).reduce((acc, current) =>
+function receitaArrecadada (vendas) {
+  return vendas.reduce((acc, current) =>
     acc + current.valorTotal, 0)
+}
+
+function receitaPorMes (vendas) {
+  let vendaspormes = []
+  for (let i = 0; i < 12; i++) {
+    vendaspormes[i] = 0
+  }
+  vendas.forEach(venda => {
+    let data = moment(venda.data).format('DD/MM/YYYY')
+    vendaspormes[moment(data).month()] += venda.valorTotal
+  })
+  return vendaspormes
 }
 
 export default {
   joinVendaProdutos,
-  receitaArrecadada
+  receitaArrecadada,
+  receitaPorMes
 }
