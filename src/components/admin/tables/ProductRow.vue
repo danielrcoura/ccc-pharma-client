@@ -8,7 +8,7 @@
     <td>{{ isDisponivel ? 'Disponível' : 'Indisponível' }}</td>
     <td class="small">
       <span class="btn edit" @click="showForm = true">{{ icons.edit }}</span>
-      <span class="btn remove">{{ icons.cancel }}</span>
+      <span class="btn remove" @click="deleteProduto(produto)">{{ icons.cancel }}</span>
     </td>
     <transition name="modal">
       <product-form :produto="produto" :isCreate="false" @close="showForm = false" v-if="showForm"/>
@@ -20,7 +20,7 @@
 import ProductForm from '@/components/admin/forms/ProductForm'
 import estoque from '@/models/estoque'
 import icons from 'glyphicons'
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'ProductRow',
@@ -35,6 +35,9 @@ export default {
     isDisponivel () {
       return estoque.isDisponivel(this.lotes, this.produto)
     }
+  },
+  methods: {
+    ...mapActions(['deleteProduto'])
   },
   props: {
     produto: Object

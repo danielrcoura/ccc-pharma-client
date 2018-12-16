@@ -41,7 +41,7 @@ export default {
     }
   },
   props: {
-    produto: {},
+    produto: Object,
     isCreate: Boolean
   },
   mounted () {

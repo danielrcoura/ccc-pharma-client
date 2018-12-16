@@ -34,12 +34,11 @@ const store = new Vuex.Store({
           commit('updateProdutos', produtos.data)
         })
     },
-    createProduto ({ commit }) {
-      axios.post('/produtos')
+    createProduto ({ commit }, produto) {
+      axios.post('/produtos', produto)
         .then(res => commit('addProduto', res.data))
     },
     updateProduto (context, produto) {
-      console.log(produto)
       axios.put(`/produtos/${produto._id}`, produto)
         .then()
     },
