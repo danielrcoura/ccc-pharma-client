@@ -1,3 +1,3 @@
 export default {
-  apiURL: 'http://ccc-pharma-api.herokuapp.com/'
+  apiURL: 'https://ccc-pharma-api.herokuapp.com/'
 }
