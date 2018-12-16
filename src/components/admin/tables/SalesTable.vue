@@ -20,6 +20,7 @@
 
 <script>
 import SaleRow from '@/components/admin/tables/SaleRow'
+import vendasModel from '@/models/vendas'
 import icons from 'glyphicons'
 import { mapState } from 'vuex'
 
@@ -54,10 +55,11 @@ export default {
     SaleRow
   },
   computed: {
-    ...mapState(['vendas']),
+    ...mapState(['vendas', 'vendaProdutos']),
     vendas () {
       const vendasCopy = this.$store.state.vendas.slice()
-      return vendasCopy
+      const vendaProdutosCopy = this.$store.state.vendaProdutos.slice()
+      return vendasModel.joinVendaProdutos(vendasCopy, vendaProdutosCopy)
     }
   },
   methods: {

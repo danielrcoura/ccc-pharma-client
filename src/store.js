@@ -63,7 +63,7 @@ const store = new Vuex.Store({
         })
     },
     getVendaProdutos ({ commit }) {
-      axios.get('/vendaproduto')
+      axios.get('/vendaprodutos')
         .then(vendaprodutos => {
           commit('updateVendaProdutos', vendaprodutos.data)
         })
