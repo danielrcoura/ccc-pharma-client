@@ -15,8 +15,7 @@ export default {
     lotesInfo () {
       let numLotes = 0
       let numItems = 0
-      const listLotes = Object.values(this.lotes)
-      listLotes.forEach(lote => {
+      this.lotes.forEach(lote => {
         const loteDate = new Date(lote.validade)
         if (lote.quantidade > 0 && loteDate >= Date.now()) {
           numLotes++
