@@ -7,6 +7,10 @@ import Chart from 'chart.js'
 
 export default {
   name: 'VendasGraphic',
+  props: {
+    dados: Array
+  },
+
   mounted () {
     // eslint-disable-next-line
     new Chart(this.$refs.chart, {
@@ -17,7 +21,7 @@ export default {
           {
             label: 'Arrecadado (R$)',
             backgroundColor: Array(12).fill('#e6b252'),
-            data: [2478, 1000, 734, 1000, 433, 1000, 433, 1000, 433, 433, 1000, 433]
+            data: this.dados
           }
         ]
       },

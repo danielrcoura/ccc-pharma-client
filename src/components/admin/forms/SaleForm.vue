@@ -117,14 +117,14 @@ export default {
     },
     cadastrar () {
       const data = moment().format('DD/MM/YYYY')
-      const valorTotal = this.totalCompra
+      const valorTotal = parseInt(this.totalCompra)
       const venda = {data, valorTotal}
       const produtos = this.vendaProdutos.map(vendap => {
         const { produto, quantidade } = vendap
         return {
           produto,
-          quantidade,
-          subTotal: vendap.subTotal()
+          quantidade: parseInt(quantidade),
+          subTotal: parseInt(vendap.subTotal())
         }
       })
       this.decrementaEstoque(produtos)

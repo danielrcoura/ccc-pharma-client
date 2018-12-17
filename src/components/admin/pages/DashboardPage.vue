@@ -5,8 +5,7 @@
       <div class="receita">
         <header>Receita Arrecadada</header>
         <div class="content">
-          <div class="valor">R$ 19.000,00</div>
-          <div class="descricao">A média mensal é R$ 29.000,00</div>
+          <div class="valor">R$ {{ receita }}</div>
         </div>
       </div>
       <div class="estoque">
@@ -19,7 +18,7 @@
       </div>
       <div class="vendas">
         <header>Registro de Vendas</header>
-        <vendas-graphic class="graphic"/>
+        <vendas-graphic class="graphic" :dados="receitapormes"/>
       </div>
     </div>
   </div>
@@ -30,6 +29,8 @@ import PageTitle from '@/components/admin/PageTitle'
 import VendasGraphic from '@/components/admin/VendasGraphic'
 import NotificationContainer from '@/components/admin/NotificationContainer'
 import EstoqueInfo from '@/components/admin/EstoqueInfo'
+import { mapState } from 'vuex'
+import vendasModel from '@/models/vendas'
 
 export default {
   name: 'DashboardPage',
@@ -38,6 +39,19 @@ export default {
     VendasGraphic,
     NotificationContainer,
     EstoqueInfo
+  },
+  computed: {
+    ...mapState['vendas'],
+    receita () {
+      const vendasCopy = this.$store.state.vendas.slice()
+      return vendasModel.receitaArrecadada(vendasCopy)
+    },
+
+    receitapormes () {
+      const vendasCopy = this.$store.state.vendas.slice()
+      return vendasModel.receitaPorMes(vendasCopy)
+    }
+
   }
 }
 </script>

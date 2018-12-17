@@ -43,8 +43,8 @@ function receitaPorMes (vendas) {
     vendaspormes[i] = 0
   }
   vendas.forEach(venda => {
-    let data = moment(venda.data).format('DD/MM/YYYY')
-    vendaspormes[moment(data).month()] += venda.valorTotal
+    let index = moment(venda.data, 'DD/MM/YYYY').month()
+    vendaspormes[index] += venda.valorTotal
   })
   return vendaspormes
 }

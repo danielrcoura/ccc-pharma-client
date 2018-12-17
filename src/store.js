@@ -82,7 +82,7 @@ const store = new Vuex.Store({
         })
     },
     getVendaProdutos ({ commit }) {
-      axios.get('/vendaproduto/')
+      axios.get('/vendaprodutos/')
         .then(vendaprodutos => {
           commit('updateVendaProdutos', vendaprodutos.data)
         })
@@ -91,7 +91,7 @@ const store = new Vuex.Store({
       const venda = (await axios.post('/vendas/', vendaProdutos.venda)).data
       commit('addVenda', venda)
       vendaProdutos.produtos.forEach(async (produto) => {
-        const vendaProduto = (await axios.post('/vendaproduto/', {venda, ...produto})).data
+        const vendaProduto = (await axios.post('/vendaprodutos/', {venda, ...produto})).data
         commit('addVendaProduto', vendaProduto)
       })
     }
