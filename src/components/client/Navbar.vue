@@ -1,7 +1,11 @@
 <template>
   <div class="navbar">
     <router-link to='/'><img src="../../assets/logo.svg" alt="" class="logo"></router-link>
-    <nav v-if="inLoginPage">
+    <nav v-if="user" class="user">
+      <span>{{ user }}</span>
+      <span @click="logout">Logout</span>
+    </nav>
+    <nav v-else-if="notInLoginPage">
       <router-link class="admin" to='/admin/login'>Acessar como administrador</router-link>
       <router-link to='/login'><button>Login</button></router-link>
     </nav>
@@ -11,9 +15,20 @@
 <script>
 export default {
   name: 'Navbar',
+  data () {
+    return {
+      user: localStorage.cccUser
+    }
+  },
   computed: {
-    inLoginPage () {
+    notInLoginPage () {
       return !this.$router.currentRoute.name.match('Login')
+    }
+  },
+  methods: {
+    logout () {
+      this.user = undefined
+      localStorage.removeItem('cccUser')
     }
   }
 }
@@ -46,6 +61,17 @@ nav button {
   cursor: pointer;
   &:hover {
     text-decoration: underline;
+  }
+}
+.user {
+  * {
+    margin: 0 7px;
+    color: #06b1d3;
+    font-size: 1.3rem;
+    &:last-child {
+      color: #999;
+      cursor: pointer;
+    }
   }
 }
 </style>

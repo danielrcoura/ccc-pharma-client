@@ -6,6 +6,7 @@
         <div class="card" :class="{'is-flipped': inSingUp}">
           <login class="card-face"
           :successSingUp="successSingUp"
+          @success="redirect()"
           @singup="inSingUp = true"
           v-if="!inSingUp"/>
           <sing-up class="card-face back"
@@ -28,6 +29,11 @@ export default {
     return {
       successSingUp: false,
       inSingUp: false
+    }
+  },
+  methods: {
+    redirect () {
+      this.$router.push('/')
     }
   },
   components: {

@@ -3,8 +3,8 @@
     <div v-if="loginFail" class="login-fail">Usuário ou senha incorretos</div>
     <div v-else-if="successSingUp" class="singup-success">Cadastro realizado!</div>
     <img src="../assets/logo-short.svg" alt="Logo do sistema" class="logo">
-    <input ref="username" type="username" v-model="user.username" placeholder="username" required>
-    <input type="password" v-model="user.password" placeholder="senha" required>
+    <input ref="username" type="username" minlength="5" v-model="user.username" placeholder="username" required>
+    <input type="password" minlength="5" v-model="user.password" placeholder="senha" required>
     <button type="submit" :disabled="!btnEnable" :class="{disabled: !btnEnable}">Entrar</button>
     <div v-if="!admin" class="singup" @click="$emit('singup')">Criar conta</div>
   </form>
@@ -32,16 +32,25 @@ export default {
   methods: {
     login () {
       this.btnEnable = false
-      axios.post('/login', this.user)
-        .then(res => {
-          const token = res.headers.authorization.split(' ')[1]
-          localStorage.cccToken = token
-          this.$emit('success')
-        })
-        .catch(() => {
-          this.btnEnable = true
-          this.loginFail = true
-        })
+      if (this.admin) {
+        axios.post('/login', this.user)
+          .then(res => {
+            const token = res.headers.authorization.split(' ')[1]
+            localStorage.cccToken = token
+            this.$emit('success')
+          })
+          .catch(() => {
+            this.btnEnable = this.loginFail = true
+          })
+      } else {
+        axios.post('/usuarios/login', this.user)
+          .then(res => {
+            if (res.data) {
+              localStorage.cccUser = this.user.username
+              this.$emit('success')
+            } else this.btnEnable = this.loginFail = true
+          })
+      }
     }
   },
   mounted () {
