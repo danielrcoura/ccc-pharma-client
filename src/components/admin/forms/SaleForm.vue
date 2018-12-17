@@ -41,10 +41,10 @@
 
         <div class="footer">
           <div class="total">Total <span>R$ {{totalCompra}}</span></div>
-          <form @submit.prevent="cadastrar()">
+          <form >
             <div class="btn-group">
               <button @click="$emit('close')" class="btn-cancel">Cancelar</button>
-              <button type="submit" class="btn-confirm">Concluir venda</button>
+              <button type="button" @click="cadastrar" class="btn-confirm">Concluir venda</button>
             </div>
           </form>
         </div>
@@ -116,20 +116,24 @@ export default {
       )
     },
     cadastrar () {
-      const data = moment().format('DD/MM/YYYY')
-      const valorTotal = parseInt(this.totalCompra)
-      const venda = {data, valorTotal}
-      const produtos = this.vendaProdutos.map(vendap => {
-        const { produto, quantidade } = vendap
-        return {
-          produto,
-          quantidade: parseInt(quantidade),
-          subTotal: parseInt(vendap.subTotal())
-        }
-      })
-      this.decrementaEstoque(produtos)
-      this.createVendaProduto({venda, produtos})
-      this.$emit('close')
+      if (this.vendaProdutos.length === 0) {
+        alert('Adicione pelo menos um item na venda')
+      } else {
+        const data = moment().format('DD/MM/YYYY')
+        const valorTotal = parseInt(this.totalCompra)
+        const venda = {data, valorTotal}
+        const produtos = this.vendaProdutos.map(vendap => {
+          const { produto, quantidade } = vendap
+          return {
+            produto,
+            quantidade: parseInt(quantidade),
+            subTotal: parseInt(vendap.subTotal())
+          }
+        })
+        this.decrementaEstoque(produtos)
+        this.createVendaProduto({venda, produtos})
+        this.$emit('close')
+      }
     },
 
     decrementaEstoque (vendaprodutos) {
