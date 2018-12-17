@@ -37,7 +37,7 @@ function isProximoDeEsgotar (lotes, produto) {
 function getQtdProdutos (lotes, produto) {
   const lotesFiltrados = lotes.filter(lote => {
     const naValidade = moment(lote.validade, 'DD/MM/YYYY').isAfter(moment())
-    return lote.idProduto === produto.id && naValidade
+    return lote.produto.id === produto.id && naValidade
   })
   const qtdItens = lotesFiltrados
     .reduce((soma, current) => soma + current.quantidade, 0)
@@ -48,7 +48,7 @@ function getQtdProdutos (lotes, produto) {
 function getLotesValidosProduto (lotes, produto) {
   const lotesFiltrados = lotes.filter(lote => {
     const naValidade = moment(lote.validade, 'DD/MM/YYYY').isAfter(moment())
-    return lote.idProduto === produto.id && naValidade
+    return lote.produto.id === produto.id && naValidade
   })
   return lotesFiltrados.sort((a, b) => moment(a.validade, 'DD/MM/YYYY').isBefore(b.validade, 'DD/MM/YYYY'))
 }

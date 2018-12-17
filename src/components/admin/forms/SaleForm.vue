@@ -30,7 +30,7 @@
                 <td>{{vendaProduto.produto.nome}}</td>
                 <td>R$ {{vendaProduto.produto.preco}}</td>
                 <td>
-                  <input type="number" min="1" max="maxItens" v-model="vendaProduto.quantidade">
+                  <input type="number" min="1" :max="maxItens(vendaProduto.produto)" v-model="vendaProduto.quantidade">
                   </td>
                 <td>R$ {{vendaProduto.subTotal().toFixed(2)}}</td>
                 <td href="#" @click="removeProduct(vendaProduto)" class="remove-icon">{{icons.cross}}</td>
@@ -71,13 +71,10 @@ export default {
   computed: {
     ...mapState(['produtos', 'lotes']),
 
-    maxItens (produto) {
-      return estoques.getQtdProdutos(produto, Object.values(this.produtos))
-    },
-
     filteredProducts () {
       return Object.values(this.produtos).filter(produto =>
-        produto.nome.includes(this.search) && !this.conteinsProduct(produto)
+        produto.nome.includes(this.search) && !this.conteinsProduct(produto) &&
+        estoques.isDisponivel(Object.values(this.lotes), produto)
       )
     },
 
@@ -90,7 +87,10 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['createVendaProduto']),
+    ...mapActions(['createVendaProduto', 'updateLote']),
+    maxItens (produto) {
+      return estoques.getQtdProdutos(Object.values(this.lotes), produto)
+    },
     conteinsProduct (produto) {
       let contains = false
       this.vendaProdutos.forEach(vendaproduto => {
@@ -115,7 +115,7 @@ export default {
         vendaprod.produto.nome !== venda.produto.nome
       )
     },
-    registerSale () {
+    cadastrar () {
       const data = moment().format('DD/MM/YYYY')
       const valorTotal = this.totalCompra
       const venda = {data, valorTotal}
@@ -134,7 +134,7 @@ export default {
 
     decrementaEstoque (vendaprodutos) {
       vendaprodutos.forEach(prod => {
-        const lotes = estoques.getLotesValidosProduto(prod.produto)
+        const lotes = estoques.getLotesValidosProduto(Object.values(this.lotes), prod.produto)
         let qtdItens = prod.quantidade
         let i = 0
         while (qtdItens > 0) {
@@ -149,7 +149,7 @@ export default {
             lote.quantidade = 0
           }
 
-          // updateLote(lotes[i])
+          this.updateLote(lote)
           i++
         }
       })
