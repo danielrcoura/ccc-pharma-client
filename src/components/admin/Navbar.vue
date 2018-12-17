@@ -15,6 +15,7 @@
         <router-link to='/admin/manage/vendas'>
           <li @click="active = 'vendas'" :class="{active: active === 'vendas'}">Vendas</li>
         </router-link>
+        <li @click="logout()" class="logout">Logout</li>
       </ul>
     </nav>
   </div>
@@ -26,6 +27,12 @@ export default {
   data () {
     return {
       active: this.$router.currentRoute.name
+    }
+  },
+  methods: {
+    logout () {
+      localStorage.removeItem('cccToken')
+      this.$router.push('/')
     }
   }
 }
@@ -54,5 +61,8 @@ export default {
 .active {
   background: #fff;
   color: #0395b3;
+}
+.logout {
+  color: #bcf5ff;
 }
 </style>

@@ -5,10 +5,11 @@
       <div class="login-box">
         <div class="card" :class="{'is-flipped': inSingUp}">
           <login class="card-face"
+          :successSingUp="successSingUp"
           @singup="inSingUp = true"
           v-if="!inSingUp"/>
           <sing-up class="card-face back"
-          @login="inSingUp = false"
+          @login="inSingUp = false" @success="inSingUp = false; successSingUp = true"
           v-else/>
         </div>
       </div>
@@ -25,6 +26,7 @@ export default {
   name: 'LoginClient',
   data () {
     return {
+      successSingUp: false,
       inSingUp: false
     }
   },

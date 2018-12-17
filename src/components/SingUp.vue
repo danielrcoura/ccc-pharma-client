@@ -1,11 +1,11 @@
 <template>
-  <form>
+  <form @submit.prevent="cadastrar()">
     <div class="title">Cadastre-se</div>
-    <label for="login">Nome de usuário</label>
-    <input ref="login" id="login" type="text" v-model="user.login" placeholder="usuario123">
+    <label for="username">Nome de usuário</label>
+    <input ref="username" id="username" type="text" v-model="user.username" placeholder="usuario123">
     <label for="password">Senha</label>
     <input id="password" type="password" v-model="user.password" placeholder="password123">
-    <button @click="submit()">Cadastrar</button>
+    <button type="submit" :disabled="!btnEnable" :class="{disabled: !btnEnable}">Cadastrar</button>
     <div class="singup" @click="$emit('login')">Voltar para login</div>
   </form>
 </template>
@@ -17,19 +17,27 @@ export default {
   name: 'SingUp',
   data () {
     return {
+      btnEnable: true,
       user: {
-        login: '',
+        username: '',
         password: ''
       }
     }
   },
   mounted () {
-    this.$refs.login.focus()
+    this.$refs.username.focus()
   },
   methods: {
-    submit () {
+    cadastrar () {
+      this.btnEnable = false
       axios.post('/usuarios/', this.user)
-        .then(res => { console.log(res.data) })
+        .then(res => {
+          this.$emit('success')
+        })
+        .catch(err => {
+          this.btnEnable = true
+          console.log(err)
+        })
     }
   }
 }
@@ -69,6 +77,10 @@ form {
     cursor: pointer;
     &:hover, &:focus {
       background: #2fd1f1;
+    }
+    &.disabled {
+      background: #999;
+      box-shadow: none;
     }
   }
 }
