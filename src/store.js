@@ -40,6 +40,12 @@ const store = new Vuex.Store({
     },
     updateVendaProdutos (state, vendaprodutos) {
       state.vendaProdutos = vendaprodutos
+    },
+    reset (state) {
+      const privateStates = ['vendas', 'vendaProdutos']
+      privateStates.forEach(key => {
+        state[key] = []
+      })
     }
   },
   actions: {

@@ -31,6 +31,7 @@ export default {
   },
   methods: {
     logout () {
+      this.$store.commit('reset')
       localStorage.removeItem('cccToken')
       this.$router.push('/')
     }
