@@ -26,10 +26,10 @@ export default {
     Navbar
   },
   methods: {
-    ...mapActions(['getProdutos', 'getLotes']),
+    ...mapActions(['getVendas', 'getVendaProdutos']),
     fetchData () {
-      this.getProdutos()
-      this.getLotes()
+      this.getVendas()
+      this.getVendaProdutos()
       this.$router.push('/admin/manage')
     }
   }

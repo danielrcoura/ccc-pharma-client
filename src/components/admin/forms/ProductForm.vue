@@ -2,15 +2,15 @@
   <div class="modal">
     <div class="modal-content">
       <form @submit.prevent="cadastrar()">
-        <input class="title" ref="name" type="text" v-model="produto.nome" placeholder="Nome"/>
+        <input class="title" ref="name" type="text" v-model="produto.nome" placeholder="Nome" required/>
         <label>Código de barras</label>
-        <input type="number" v-model="produto.codigo"/>
+        <input type="number" v-model="produto.codigo" required/>
         <label>Fabricante</label>
-        <input type="text" v-model="produto.fabricante"/>
+        <input type="text" v-model="produto.fabricante" required/>
         <label>Preço</label>
-        <input type="number" v-model="produto.preco" step="0.01"/>
+        <input type="number" v-model="produto.preco" step="0.01" required/>
         <label>Categoria</label>
-        <select class="select-field" v-model="produto.categoria">
+        <select class="select-field" v-model="produto.categoria" required>
           <option selected disabled hidden></option>
           <option :selected="produto.categoria === 'Medicamentos'" value="medicamentos">Medicamentos</option>
           <option :selected="produto.categoria === 'Higiene pessoal'" value="higiene-pessoal">Higiene pessoal</option>
