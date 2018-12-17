@@ -2,9 +2,9 @@
   <form @submit.prevent="cadastrar()">
     <div class="title">Cadastre-se</div>
     <label for="username">Nome de usuário</label>
-    <input ref="username" id="username" type="text" v-model="user.username" placeholder="usuario123">
+    <input ref="username" id="username" type="text" v-model="user.username" placeholder="usuario123" required>
     <label for="password">Senha</label>
-    <input id="password" type="password" v-model="user.password" placeholder="password123">
+    <input id="password" type="password" v-model="user.password" placeholder="password123" required>
     <button type="submit" :disabled="!btnEnable" :class="{disabled: !btnEnable}">Cadastrar</button>
     <div class="singup" @click="$emit('login')">Voltar para login</div>
   </form>

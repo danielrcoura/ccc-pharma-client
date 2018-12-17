@@ -3,8 +3,8 @@
     <div v-if="loginFail" class="login-fail">Usuário ou senha incorretos</div>
     <div v-else-if="successSingUp" class="singup-success">Cadastro realizado!</div>
     <img src="../assets/logo-short.svg" alt="Logo do sistema" class="logo">
-    <input ref="username" type="username" v-model="user.username" placeholder="username">
-    <input type="password" v-model="user.password" placeholder="senha">
+    <input ref="username" type="username" v-model="user.username" placeholder="username" required>
+    <input type="password" v-model="user.password" placeholder="senha" required>
     <button type="submit" :disabled="!btnEnable" :class="{disabled: !btnEnable}">Entrar</button>
     <div v-if="!admin" class="singup" @click="$emit('singup')">Criar conta</div>
   </form>
