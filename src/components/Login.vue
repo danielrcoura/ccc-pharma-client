@@ -1,9 +1,11 @@
 <template>
   <form @submit.prevent="login()">
+    <div v-if="loginFail" class="login-fail">Usuário ou senha incorretos</div>
+    <div v-else-if="successSingUp" class="singup-success">Cadastro realizado!</div>
     <img src="../assets/logo-short.svg" alt="Logo do sistema" class="logo">
     <input ref="username" type="username" v-model="user.username" placeholder="username">
     <input type="password" v-model="user.password" placeholder="senha">
-    <button type="submit">Entrar</button>
+    <button type="submit" :disabled="!btnEnable" :class="{disabled: !btnEnable}">Entrar</button>
     <div v-if="!admin" class="singup" @click="$emit('singup')">Criar conta</div>
   </form>
 </template>
@@ -15,6 +17,8 @@ export default {
   name: 'Login',
   data () {
     return {
+      btnEnable: true,
+      loginFail: false,
       user: {
         username: '',
         password: ''
@@ -22,15 +26,22 @@ export default {
     }
   },
   props: {
+    successSingUp: Boolean,
     admin: Boolean
   },
   methods: {
     login () {
-      axios.post('/login', this.user).then(res => {
-        const token = res.headers.authorization.split(' ')[1]
-        localStorage.cccToken = token
-        this.$emit('success')
-      })
+      this.btnEnable = false
+      axios.post('/login', this.user)
+        .then(res => {
+          const token = res.headers.authorization.split(' ')[1]
+          localStorage.cccToken = token
+          this.$emit('success')
+        })
+        .catch(() => {
+          this.btnEnable = true
+          this.loginFail = true
+        })
     }
   },
   mounted () {
@@ -69,6 +80,10 @@ form {
     &:hover, &:focus {
       background: #2fd1f1;
     }
+    &.disabled {
+      background: #999;
+      box-shadow: none;
+    }
   }
 }
 .logo {
@@ -82,5 +97,16 @@ form {
   cursor: pointer;
   text-decoration: underline;
   margin-top: 1.2rem;
+}
+.singup-success, .login-fail {
+  font-size: 1.2rem;
+  text-align: center;
+  color: #35b846;
+  position: absolute;
+  top: -50px;
+  width: 70%;
+}
+.login-fail {
+  color: #b83535;
 }
 </style>
