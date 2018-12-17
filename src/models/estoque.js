@@ -1,17 +1,9 @@
 import moment from 'moment'
 
-function _isVencido (lotesProduto) {
-  return lotesProduto.every(lote => moment(lote.validade, 'DD/MM/YYYY').isBefore(moment()))
-}
-
-function _isEmFalta (lotesProduto) {
-  return lotesProduto.every(lote => lote.quantidade === 0)
-}
-
 function isDisponivel (lotes, produto) {
   const lotesProduto = lotes.filter(lote => lote.produto.id === produto.id)
 
-  return !_isVencido(lotesProduto) && !_isEmFalta(lotesProduto)
+  return lotesProduto.some(lote => lote.quantidade > 0 && moment(lote.validade, 'DD/MM/YYYY').isSameOrAfter(moment()))
 }
 
 function getProdutosIndisponiveis (lotes, produtos) {
